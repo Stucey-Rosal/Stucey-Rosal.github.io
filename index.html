@@ -1,382 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Stucey Rosal — AI Automation · IT Specialist · Virtual Assistant · Prompt Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stucey Rosal — AI Automation · VA · Prompt Engineer · IT Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --border: #1e1e2e;
-    --accent: #00f5c4;
-    --accent2: #7c6bff;
-    --accent3: #ff6b9d;
-    --text: #e8e8f0;
-    --muted: #666680;
-    --card: #13131c;
-  }
+:root {
+  --bg:      #08080e;
+  --surface: #0f0f18;
+  --card:    #12121c;
+  --border:  #1c1c2e;
+  --text:    #e4e4f0;
+  --muted:   #5a5a78;
+  --soft:    #9898b8;
+  --teal:    #00e5b4;
+  --pink:    #ff5f96;
+  --purple:  #7c6bff;
+  --gold:    #f5c542;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;font-size:14px;line-height:1.75;overflow-x:hidden}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Mono', monospace;
-    font-size: 14px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  opacity:.35}
 
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 9999; opacity: 0.4;
-  }
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 56px;height:64px;
+  background:rgba(8,8,14,0.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--teal);letter-spacing:-.5px}
+.nav-links{display:flex;gap:32px}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:10px;letter-spacing:1.8px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-status{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal)}
+.nav-status::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 48px;
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: var(--accent); letter-spacing: -0.5px; }
-  .nav-links { display: flex; gap: 32px; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-tri-badge {
-    display: flex; gap: 8px; align-items: center;
-  }
-  .nav-badge-dot {
-    font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
-    padding: 4px 10px; border-radius: 2px; display: flex; align-items: center; gap: 5px;
-  }
-  .nav-badge-dot.teal { background: rgba(0,245,196,0.1); border: 1px solid rgba(0,245,196,0.3); color: var(--accent); }
-  .nav-badge-dot.purple { background: rgba(124,107,255,0.1); border: 1px solid rgba(124,107,255,0.3); color: var(--accent2); }
-  .nav-badge-dot.pink { background: rgba(255,107,157,0.1); border: 1px solid rgba(255,107,157,0.3); color: var(--accent3); }
-  .nav-badge-dot::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: blink 2s infinite; }
+/* LAYOUT */
+section{padding:100px 56px}
+.section-eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px}
+.section-eyebrow.teal{color:var(--teal)}
+.section-eyebrow.teal::after{content:'';width:32px;height:1px;background:var(--teal)}
+.section-eyebrow.pink{color:var(--pink)}
+.section-eyebrow.pink::after{content:'';width:32px;height:1px;background:var(--pink)}
+.section-eyebrow.purple{color:var(--purple)}
+.section-eyebrow.purple::after{content:'';width:32px;height:1px;background:var(--purple)}
+h2{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,50px);font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:14px}
+.section-lead{color:var(--soft);max-width:520px;margin-bottom:52px;line-height:1.9;font-size:13px}
+.divider{border:none;border-top:1px solid var(--border);margin:0}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
 
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 120px 48px 100px;
-    position: relative; overflow: hidden;
-  }
+/* HERO */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:120px 56px 80px;position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,229,180,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,180,.03) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 80% at 48% 40%,black 20%,transparent 100%);
+}
+.g1{position:absolute;top:-10%;left:0;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,180,.09) 0%,transparent 65%);pointer-events:none;animation:gfloat 14s ease-in-out infinite}
+.g2{position:absolute;top:10%;right:-5%;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(255,95,150,.08) 0%,transparent 65%);pointer-events:none;animation:gfloat 18s ease-in-out infinite reverse}
+.g3{position:absolute;bottom:-10%;left:35%;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(124,107,255,.08) 0%,transparent 65%);pointer-events:none;animation:gfloat 12s ease-in-out infinite 3s}
+@keyframes gfloat{0%,100%{transform:translate(0,0)}50%{transform:translate(24px,-18px)}}
 
-  /* Tri-color animated grid */
-  .hero-grid-bg {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(0,245,196,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,245,196,0.035) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%);
-  }
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--teal);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .6s .15s forwards}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--teal)}
 
-  /* Three distinct glow zones — one per skill pillar */
-  .glow-ai {
-    position: absolute; top: -15%; left: 5%;
-    width: 550px; height: 550px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,245,196,0.10) 0%, transparent 65%);
-    pointer-events: none; animation: driftA 12s ease-in-out infinite;
-  }
-  .glow-va {
-    position: absolute; top: 20%; right: -5%;
-    width: 480px; height: 480px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,107,157,0.10) 0%, transparent 65%);
-    pointer-events: none; animation: driftB 14s ease-in-out infinite;
-  }
-  .glow-pe {
-    position: absolute; bottom: -10%; left: 35%;
-    width: 420px; height: 420px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,107,255,0.10) 0%, transparent 65%);
-    pointer-events: none; animation: driftC 16s ease-in-out infinite;
-  }
-  @keyframes driftA { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-20px)} }
-  @keyframes driftB { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,30px)} }
-  @keyframes driftC { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,15px)} }
+h1{font-family:'Syne',sans-serif;font-size:clamp(52px,8.5vw,104px);font-weight:800;line-height:.9;letter-spacing:-4px;margin-bottom:36px;opacity:0;animation:fadeUp .6s .3s forwards}
+h1 .dim{color:var(--muted)}
+h1 .accent{color:var(--teal)}
 
-  .hero-tag { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
-  .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+.role-strip{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;opacity:0;animation:fadeUp .6s .45s forwards}
+.role-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:3px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:400}
+.role-pill.t{background:rgba(0,229,180,.07);border:1px solid rgba(0,229,180,.2);color:var(--teal)}
+.role-pill.p{background:rgba(255,95,150,.08);border:1px solid rgba(255,95,150,.22);color:var(--pink)}
+.role-pill.v{background:rgba(124,107,255,.08);border:1px solid rgba(124,107,255,.22);color:var(--purple)}
+.role-pill.it{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--soft)}
 
-  h1 { font-family: 'Syne', sans-serif; font-size: clamp(52px, 8vw, 100px); font-weight: 800; line-height: 0.95; letter-spacing: -3px; margin-bottom: 32px; opacity: 0; animation: fadeUp 0.6s 0.35s forwards; }
-  h1 .line-dim { color: var(--muted); }
-  h1 .line-accent { color: var(--accent); }
+.hero-bio{max-width:540px;color:var(--soft);font-size:13px;line-height:1.9;margin-bottom:44px;opacity:0;animation:fadeUp .6s .58s forwards}
+.hero-bio b.t{font-weight:400;color:var(--teal)}
+.hero-bio b.p{font-weight:400;color:var(--pink)}
+.hero-bio b.v{font-weight:400;color:var(--purple)}
 
-  /* ── TRI-PILLAR CARDS ── new hero centrepiece */
-  .hero-pillars {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-    background: var(--border); border: 1px solid var(--border);
-    max-width: 780px;
-    margin-bottom: 36px;
-    opacity: 0; animation: fadeUp 0.6s 0.45s forwards;
-  }
-  .pillar-card {
-    background: var(--card); padding: 24px 22px; position: relative; overflow: hidden;
-    transition: background 0.3s;
-  }
-  .pillar-card:hover { background: #161622; }
-  .pillar-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  }
-  .pillar-card.teal::before { background: var(--accent); }
-  .pillar-card.pink::before { background: var(--accent3); }
-  .pillar-card.purple::before { background: var(--accent2); }
-  .pillar-label {
-    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-    margin-bottom: 10px; font-family: 'DM Mono', monospace;
-  }
-  .pillar-card.teal .pillar-label { color: var(--accent); }
-  .pillar-card.pink .pillar-label { color: var(--accent3); }
-  .pillar-card.purple .pillar-label { color: var(--accent2); }
-  .pillar-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-  .pillar-desc { color: var(--muted); font-size: 11px; line-height: 1.7; }
-  .pillar-chips { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 5px; }
-  .pchip {
-    font-size: 9px; padding: 2px 7px; border-radius: 2px; letter-spacing: 1px; text-transform: uppercase;
-  }
-  .pchip.teal { background: rgba(0,245,196,0.08); border: 1px solid rgba(0,245,196,0.2); color: var(--accent); }
-  .pchip.pink { background: rgba(255,107,157,0.08); border: 1px solid rgba(255,107,157,0.2); color: var(--accent3); }
-  .pchip.purple { background: rgba(124,107,255,0.08); border: 1px solid rgba(124,107,255,0.2); color: var(--accent2); }
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .6s .7s forwards}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all .2s;border:none}
+.btn-t{background:var(--teal);color:#08080e;font-weight:600}
+.btn-t:hover{background:#00ccA0;transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,229,180,.28)}
+.btn-p{background:var(--pink);color:#fff;font-weight:600}
+.btn-p:hover{background:#e8457e;transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,95,150,.3)}
+.btn-v{background:var(--purple);color:#fff;font-weight:600}
+.btn-v:hover{background:#6a58e8;transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,107,255,.3)}
+.btn-ghost{background:transparent;color:var(--soft);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
 
-  .hero-sub { max-width: 580px; color: var(--muted); font-size: 14px; line-height: 1.8; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.6s 0.55s forwards; }
-  .hero-sub strong { font-weight: normal; }
-  .hero-sub strong.t { color: var(--accent); }
-  .hero-sub strong.p { color: var(--accent3); }
-  .hero-sub strong.v { color: var(--accent2); }
+.hero-foot{position:absolute;bottom:44px;left:56px;right:56px;display:flex;justify-content:space-between;align-items:center;opacity:0;animation:fadeUp .6s .85s forwards}
+.hero-contacts{display:flex;gap:28px}
+.hero-contacts a{color:var(--muted);text-decoration:none;font-size:11px;transition:color .2s}
+.hero-contacts a:hover{color:var(--teal)}
+.scroll-label{color:var(--muted);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.scroll-label::after{content:'↓';animation:bob 1.6s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 
-  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.65s forwards; }
-  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; }
-  .btn-ai { background: var(--accent); color: #0a0a0f; font-weight: 600; }
-  .btn-ai:hover { background: #00ddb0; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,245,196,0.3); }
-  .btn-va { background: var(--accent3); color: #0a0a0f; font-weight: 600; }
-  .btn-va:hover { background: #ff5090; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,107,157,0.35); }
-  .btn-pe { background: var(--accent2); color: #fff; font-weight: 600; }
-  .btn-pe:hover { background: #6a5af5; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,107,255,0.35); }
-  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+/* STATS BAR */
+#overview{
+  background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:0;display:grid;grid-template-columns:repeat(4,1fr);
+}
+.ov-stat{padding:36px 40px;border-right:1px solid var(--border)}
+.ov-stat:last-child{border-right:none}
+.ov-num{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;line-height:1}
+.ov-num.t{color:var(--teal)}
+.ov-num.p{color:var(--pink)}
+.ov-num.v{color:var(--purple)}
+.ov-label{color:var(--muted);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;margin-top:6px}
 
-  .hero-meta { position: absolute; bottom: 48px; left: 48px; right: 48px; display: flex; justify-content: space-between; align-items: center; opacity: 0; animation: fadeUp 0.6s 0.8s forwards; }
-  .hero-contact { display: flex; gap: 32px; }
-  .hero-contact a { color: var(--muted); text-decoration: none; font-size: 12px; transition: color 0.2s; }
-  .hero-contact a:hover { color: var(--accent); }
-  .scroll-hint { color: var(--muted); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
-  .scroll-hint::after { content: '↓'; animation: bounce 1.5s infinite; display: inline-block; }
+/* ABOUT */
+#about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-text p{color:var(--soft);margin-bottom:18px;line-height:1.9;font-size:13px}
+.about-text b{font-weight:400;color:var(--text)}
+.info-table{width:100%;border-collapse:collapse}
+.info-table tr{border-bottom:1px solid var(--border)}
+.info-table tr:last-child{border-bottom:none}
+.info-table td{padding:14px 0;font-size:12px;vertical-align:top}
+.info-table td:first-child{color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;font-size:10px;width:140px;padding-top:15px}
+.info-table td:last-child{color:var(--text)}
 
-  /* ── STAT BAR ── tri-color quick stats under hero */
-  .hero-stat-bar {
-    display: grid; grid-template-columns: repeat(4,1fr);
-    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-  }
-  .hstat { padding: 28px 32px; border-right: 1px solid var(--border); }
-  .hstat:last-child { border-right: none; }
-  .hstat-num { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; line-height: 1; }
-  .hstat-num.t { color: var(--accent); }
-  .hstat-num.p { color: var(--accent3); }
-  .hstat-num.v { color: var(--accent2); }
-  .hstat-label { color: var(--muted); font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; margin-top: 4px; }
+/* THREE PILLARS */
+#pillars{background:var(--surface);border-top:1px solid var(--border)}
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.pillar{background:var(--card);padding:40px 36px;position:relative;overflow:hidden;transition:background .3s}
+.pillar:hover{background:#161624}
+.pillar-bar{position:absolute;top:0;left:0;right:0;height:3px}
+.pillar-bar.t{background:var(--teal)}
+.pillar-bar.p{background:var(--pink)}
+.pillar-bar.v{background:var(--purple)}
+.pillar-num{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;margin-bottom:20px}
+.pillar-num.t{color:var(--teal)}
+.pillar-num.p{color:var(--pink)}
+.pillar-num.v{color:var(--purple)}
+.pillar-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:14px;letter-spacing:-.5px}
+.pillar-body{color:var(--soft);font-size:12px;line-height:1.85;margin-bottom:24px}
+.pillar-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:9px;padding:4px 10px;border-radius:2px;letter-spacing:1.5px;text-transform:uppercase}
+.tag.t{background:rgba(0,229,180,.07);border:1px solid rgba(0,229,180,.18);color:var(--teal)}
+.tag.p{background:rgba(255,95,150,.07);border:1px solid rgba(255,95,150,.18);color:var(--pink)}
+.tag.v{background:rgba(124,107,255,.07);border:1px solid rgba(124,107,255,.18);color:var(--purple)}
+.tag.n{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted)}
 
-  /* ── VA SECTION ── */
-  #va {
-    padding: 100px 48px;
-    background: var(--bg);
-    position: relative; overflow: hidden;
-    border-top: 1px solid var(--border);
-  }
-  .va-bg-accent {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, rgba(255,107,157,0.03) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .va-glow { position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(255,107,157,0.07) 0%, transparent 70%); pointer-events: none; }
-  .section-label { display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
-  .section-label.pink { color: var(--accent3); }
-  .section-label.pink::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent3); }
-  .section-label.green { color: var(--accent); }
-  .section-label.green::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); }
-  .section-label.purple { color: var(--accent2); }
-  .section-label.purple::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent2); }
-  h2 { font-family: 'Syne', sans-serif; font-size: clamp(32px, 5vw, 56px); font-weight: 800; letter-spacing: -2px; margin-bottom: 16px; line-height: 1; }
-  .section-sub { color: var(--muted); max-width: 540px; margin-bottom: 60px; line-height: 1.9; }
+/* EXPERIENCE */
+#experience{background:var(--bg);border-top:1px solid var(--border)}
+.exp-item{border:1px solid var(--border);background:var(--card);padding:40px;margin-bottom:20px;position:relative;overflow:hidden;transition:border-color .3s}
+.exp-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.exp-item.teal::before{background:var(--teal)}
+.exp-item.pink::before{background:linear-gradient(to bottom,var(--pink),var(--purple))}
+.exp-item:hover{border-color:rgba(255,255,255,.12)}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:20px;flex-wrap:wrap}
+.exp-role{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.5px}
+.exp-badge{font-size:10px;letter-spacing:1.2px;padding:5px 12px;border-radius:2px;white-space:nowrap;text-transform:uppercase}
+.exp-badge.teal{background:rgba(0,229,180,.08);border:1px solid rgba(0,229,180,.2);color:var(--teal)}
+.exp-badge.pink{background:rgba(255,95,150,.08);border:1px solid rgba(255,95,150,.2);color:var(--pink)}
+.exp-org{font-size:12px;color:var(--teal);margin-bottom:2px}
+.exp-org.pink{color:var(--pink)}
+.exp-period{font-size:11px;color:var(--muted);margin-bottom:24px}
+.exp-list{list-style:none}
+.exp-list li{color:var(--soft);font-size:12px;line-height:1.8;padding:5px 0;display:flex;gap:12px;border-bottom:1px solid rgba(255,255,255,.03)}
+.exp-list li:last-child{border-bottom:none}
+.exp-list.t li::before{content:'→';flex-shrink:0;color:var(--teal)}
+.exp-list.p li::before{content:'→';flex-shrink:0;color:var(--pink)}
 
-  .va-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-bottom: 60px; }
-  .va-intro-left p { color: var(--muted); line-height: 1.9; margin-bottom: 14px; }
-  .va-intro-left p strong { color: var(--text); font-weight: normal; }
+/* PROJECTS */
+#projects{background:var(--surface);border-top:1px solid var(--border)}
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.project{background:var(--card);padding:36px;position:relative;overflow:hidden;transition:background .3s}
+.project:hover{background:#161624}
+.project-n{position:absolute;top:16px;right:20px;font-family:'Syne',sans-serif;font-size:52px;font-weight:800;color:var(--border);line-height:1;transition:color .3s;pointer-events:none}
+.project:hover .project-n{color:rgba(0,229,180,.06)}
+.project.pk:hover .project-n{color:rgba(255,95,150,.07)}
+.project.pu:hover .project-n{color:rgba(124,107,255,.07)}
+.project-icon{font-size:26px;margin-bottom:18px;display:block}
+.project-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:10px;letter-spacing:-.3px}
+.project-desc{color:var(--soft);font-size:12px;line-height:1.8;margin-bottom:20px}
+.project-footer{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
 
-  .va-highlight-box {
-    border: 1px solid rgba(255,107,157,0.3);
-    background: rgba(255,107,157,0.05);
-    padding: 28px 32px; position: relative; margin-top: 28px;
-  }
-  .va-highlight-box::before { content: '// why hire a VA + AI specialist'; position: absolute; top: -10px; left: 20px; background: var(--bg); padding: 0 8px; color: var(--accent3); font-size: 10px; letter-spacing: 1px; }
-  .va-highlight-box p { color: var(--muted); font-size: 13px; line-height: 1.9; }
-  .va-highlight-box p strong { color: var(--accent3); font-weight: normal; }
+/* SKILLS */
+#skills{background:var(--bg);border-top:1px solid var(--border)}
+.skills-outer{display:grid;grid-template-columns:repeat(3,1fr);gap:56px}
+.skill-col-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.skill-col-title.t{color:var(--teal);border-color:rgba(0,229,180,.18)}
+.skill-col-title.p{color:var(--pink);border-color:rgba(255,95,150,.18)}
+.skill-col-title.v{color:var(--purple);border-color:rgba(124,107,255,.18)}
+.skill-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.skill-name{font-size:11px;color:var(--text);min-width:148px;flex-shrink:0}
+.skill-track{flex:1;height:2px;background:var(--border);border-radius:2px;overflow:hidden}
+.skill-fill{height:100%;border-radius:2px;transform-origin:left;transform:scaleX(0);transition:transform 1.1s cubic-bezier(.4,0,.2,1)}
+.skill-fill.t{background:linear-gradient(90deg,var(--teal),var(--purple))}
+.skill-fill.p{background:linear-gradient(90deg,var(--pink),var(--purple))}
+.skill-fill.v{background:linear-gradient(90deg,var(--purple),var(--pink))}
 
-  .va-services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 60px; }
-  .va-service-card { background: var(--card); padding: 32px 28px; position: relative; overflow: hidden; transition: background 0.3s; }
-  .va-service-card:hover { background: #161622; }
-  .va-service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent3), var(--accent2)); opacity: 0; transition: opacity 0.3s; }
-  .va-service-card:hover::before { opacity: 1; }
-  .va-service-icon { font-size: 26px; margin-bottom: 16px; display: block; }
-  .va-service-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 10px; }
-  .va-service-desc { color: var(--muted); font-size: 12px; line-height: 1.8; }
-  .va-service-tools { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
-  .tool-chip { background: rgba(255,107,157,0.08); border: 1px solid rgba(255,107,157,0.2); color: var(--accent3); font-size: 10px; padding: 3px 8px; letter-spacing: 1px; border-radius: 2px; }
-  .tool-chip.purple { background: rgba(124,107,255,0.08); border-color: rgba(124,107,255,0.2); color: var(--accent2); }
-  .tool-chip.green { background: rgba(0,245,196,0.08); border-color: rgba(0,245,196,0.2); color: var(--accent); }
+/* ══════════════════════════════════════════ SERVICES — THREE EQUAL SECTIONS */
+#services{background:var(--bg);border-top:1px solid var(--border);padding:0}
 
-  .va-workflow { margin-bottom: 0; }
-  .va-workflow-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--accent3); margin-bottom: 28px; letter-spacing: -0.5px; }
-  .workflow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
-  .workflow-steps::before { content: ''; position: absolute; top: 28px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, var(--accent3), var(--accent2)); opacity: 0.4; z-index: 0; }
-  .workflow-step { text-align: center; position: relative; z-index: 1; padding: 0 12px; }
-  .step-num { width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; }
-  .step-num.pink { background: rgba(255,107,157,0.1); border: 1px solid rgba(255,107,157,0.4); color: var(--accent3); }
-  .step-num.purple { background: rgba(124,107,255,0.1); border: 1px solid rgba(124,107,255,0.4); color: var(--accent2); }
-  .step-num.teal { background: rgba(0,245,196,0.1); border: 1px solid rgba(0,245,196,0.4); color: var(--accent); }
-  .step-label { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-  .step-desc { color: var(--muted); font-size: 11px; line-height: 1.7; }
+/* service section tab nav */
+.svc-nav{
+  display:flex;border-bottom:1px solid var(--border);
+  background:var(--surface);position:sticky;top:64px;z-index:100;
+}
+.svc-tab{
+  flex:1;padding:20px 10px;text-align:center;cursor:pointer;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);border-bottom:2px solid transparent;
+  transition:all .25s;background:transparent;border-top:none;border-left:none;border-right:none;
+  font-family:'DM Mono',monospace;
+}
+.svc-tab:hover{color:var(--text)}
+.svc-tab.active-t{color:var(--teal);border-bottom-color:var(--teal)}
+.svc-tab.active-p{color:var(--pink);border-bottom-color:var(--pink)}
+.svc-tab.active-v{color:var(--purple);border-bottom-color:var(--purple)}
 
-  /* ── ABOUT ── */
-  #about { background: var(--surface); border-top: 1px solid var(--border); padding: 100px 48px; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-  .about-text p { color: var(--muted); margin-bottom: 16px; line-height: 1.9; }
-  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 40px; }
-  .stat { background: var(--surface); padding: 28px 24px; }
-  .stat-num { font-family: 'Syne', sans-serif; font-size: 40px; font-weight: 800; line-height: 1; }
-  .stat-num.green { color: var(--accent); }
-  .stat-num.pink { color: var(--accent3); }
-  .stat-num.purple { color: var(--accent2); }
-  .stat-label { color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; }
-  .info-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-  .info-row:last-child { border-bottom: none; }
-  .info-key { color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+/* each service section */
+.svc-section{padding:80px 56px;display:none}
+.svc-section.active{display:block}
 
-  /* ── EXPERIENCE ── */
-  #experience { padding: 100px 48px; }
-  .exp-card { border: 1px solid var(--border); padding: 40px; margin-bottom: 24px; background: var(--card); position: relative; overflow: hidden; transition: border-color 0.3s; }
-  .exp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--accent), var(--accent2)); }
-  .exp-card:hover { border-color: var(--accent); }
-  .exp-card.va-card::before { background: linear-gradient(to bottom, var(--accent3), var(--accent2)); }
-  .exp-card.va-card:hover { border-color: var(--accent3); }
-  .exp-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
-  .exp-role { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; }
-  .exp-company { font-size: 13px; margin-top: 4px; }
-  .exp-company.green { color: var(--accent); }
-  .exp-company.pink { color: var(--accent3); }
-  .exp-period { background: var(--border); padding: 6px 12px; border-radius: 2px; font-size: 11px; letter-spacing: 1px; color: var(--muted); white-space: nowrap; }
-  .exp-bullets { list-style: none; }
-  .exp-bullets li { color: var(--muted); padding: 6px 0; font-size: 13px; line-height: 1.7; display: flex; gap: 12px; }
-  .exp-bullets li::before { content: '→'; flex-shrink: 0; }
-  .exp-bullets.green li::before { color: var(--accent); }
-  .exp-bullets.pink li::before { color: var(--accent3); }
-  .exp-va-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,107,157,0.1); border: 1px solid rgba(255,107,157,0.3); color: var(--accent3); font-size: 10px; letter-spacing: 1.5px; padding: 4px 10px; border-radius: 2px; margin-top: 12px; text-transform: uppercase; }
+/* AI AUTOMATION */
+.ai-hero{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;margin-bottom:60px}
+.ai-hero-text p{color:var(--soft);font-size:13px;line-height:1.9;margin-bottom:16px}
+.ai-hero-text b{font-weight:400;color:var(--text)}
+.ai-highlight-box{border:1px solid rgba(0,229,180,.22);background:rgba(0,229,180,.04);padding:26px 30px;position:relative}
+.ai-highlight-box::before{content:'// the edge';position:absolute;top:-10px;left:18px;background:var(--bg);padding:0 8px;color:var(--teal);font-size:10px;letter-spacing:1.5px}
+.ai-highlight-box p{color:var(--soft);font-size:12px;line-height:1.95}
+.ai-highlight-box b{font-weight:400;color:var(--teal)}
+.ai-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:20px}
+.ai-stat{background:var(--card);padding:18px 20px}
+.ai-stat-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800}
+.ai-stat-num.t{color:var(--teal)}
+.ai-stat-num.v{color:var(--purple)}
+.ai-stat-label{color:var(--muted);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
 
-  /* ── PROJECTS ── */
-  #projects { background: var(--surface); border-top: 1px solid var(--border); padding: 100px 48px; }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .project-card { background: var(--card); padding: 36px; position: relative; overflow: hidden; transition: background 0.3s; }
-  .project-card:hover { background: #161622; }
-  .project-card:hover .project-icon { transform: scale(1.1); }
-  .project-num { font-family: 'Syne', sans-serif; font-size: 60px; font-weight: 800; color: var(--border); position: absolute; top: 20px; right: 24px; line-height: 1; pointer-events: none; transition: color 0.3s; }
-  .project-card:hover .project-num { color: rgba(0,245,196,0.07); }
-  .project-card.va-project:hover .project-num { color: rgba(255,107,157,0.07); }
-  .project-icon { font-size: 28px; margin-bottom: 20px; display: block; transition: transform 0.3s; }
-  .project-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; }
-  .project-desc { color: var(--muted); font-size: 13px; line-height: 1.8; }
-  .project-tag { display: inline-block; margin-top: 20px; padding: 4px 10px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 2px; }
-  .project-tag.green { background: rgba(0,245,196,0.08); color: var(--accent); }
-  .project-tag.pink { background: rgba(255,107,157,0.1); color: var(--accent3); }
-  .project-tag.purple { background: rgba(124,107,255,0.1); color: var(--accent2); }
+.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:56px}
+.ai-card{background:var(--card);padding:30px 26px;transition:background .3s;position:relative;overflow:hidden}
+.ai-card:hover{background:#161624}
+.ai-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--purple));opacity:0;transition:opacity .3s}
+.ai-card:hover::after{opacity:1}
+.ai-card-icon{font-size:22px;margin-bottom:14px;display:block}
+.ai-card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px;letter-spacing:-.2px}
+.ai-card-body{color:var(--soft);font-size:11px;line-height:1.85;margin-bottom:16px}
 
-  /* ── SKILLS ── */
-  #skills { padding: 100px 48px; }
-  .skills-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
-  .skill-group-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-  .skill-group-title.green { color: var(--accent); border-color: rgba(0,245,196,0.2); }
-  .skill-group-title.pink { color: var(--accent3); border-color: rgba(255,107,157,0.2); }
-  .skill-group-title.purple { color: var(--accent2); border-color: rgba(124,107,255,0.2); }
-  .skill-item { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-  .skill-name { font-size: 12px; color: var(--text); min-width: 160px; }
-  .skill-bar-wrap { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
-  .skill-bar { height: 100%; border-radius: 2px; }
-  .skill-bar.green { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-  .skill-bar.pink { background: linear-gradient(90deg, var(--accent3), var(--accent2)); }
-  .skill-bar.purple { background: linear-gradient(90deg, var(--accent2), var(--accent3)); }
+.ai-workflow-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--teal);margin-bottom:24px}
+.ai-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-bottom:20px}
+.ai-steps::before{content:'';position:absolute;top:27px;left:9%;right:9%;height:1px;background:linear-gradient(90deg,var(--teal),var(--purple));opacity:.3;z-index:0}
+.ai-step{text-align:center;position:relative;z-index:1;padding:0 10px}
+.step-circle{width:54px;height:54px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:16px;font-weight:800}
+.step-circle.t{background:rgba(0,229,180,.08);border:1px solid rgba(0,229,180,.3);color:var(--teal)}
+.step-circle.v{background:rgba(124,107,255,.08);border:1px solid rgba(124,107,255,.3);color:var(--purple)}
+.step-circle.p{background:rgba(255,95,150,.08);border:1px solid rgba(255,95,150,.3);color:var(--pink)}
+.step-label{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;margin-bottom:6px}
+.step-desc{color:var(--muted);font-size:11px;line-height:1.7}
 
-  /* ── EDUCATION ── */
-  #education { background: var(--surface); border-top: 1px solid var(--border); padding: 100px 48px; }
-  .edu-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .edu-card { border: 1px solid var(--border); padding: 32px; background: var(--card); }
-  .edu-deg { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; }
-  .edu-school { color: var(--accent); font-size: 13px; margin-bottom: 4px; }
-  .edu-year { color: var(--muted); font-size: 12px; letter-spacing: 1px; }
-  .cert-list { list-style: none; }
-  .cert-list li { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted); }
-  .cert-list li:last-child { border-bottom: none; }
-  .cert-list li::before { content: '✓'; color: var(--accent); flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+/* PROMPT ENGINEERING */
+.pe-philosophy{border:1px solid rgba(124,107,255,.22);background:rgba(124,107,255,.04);padding:32px 36px;margin-bottom:52px;position:relative}
+.pe-philosophy::before{content:'// philosophy';position:absolute;top:-10px;left:20px;background:var(--bg);padding:0 8px;color:var(--purple);font-size:10px;letter-spacing:1.5px}
+.pe-philosophy p{color:var(--soft);font-size:13px;line-height:1.95;max-width:740px}
+.pe-philosophy span.t{color:var(--teal)}
+.pe-philosophy span.v{color:var(--purple)}
+.pe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:48px}
+.pe-card{background:var(--card);padding:28px 24px;transition:background .3s;position:relative;overflow:hidden}
+.pe-card:hover{background:#161624}
+.pe-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--pink));opacity:0;transition:opacity .3s}
+.pe-card:hover::after{opacity:1}
+.pe-icon{font-size:20px;margin-bottom:12px}
+.pe-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px}
+.pe-body{color:var(--soft);font-size:11px;line-height:1.85}
+.pe-tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:5px}
 
-  /* ── CONTACT ── */
-  #contact { text-align: center; padding: 100px 48px; }
-  .contact-inner { max-width: 600px; margin: 0 auto; }
-  #contact h2 { margin-bottom: 16px; }
-  .contact-sub { color: var(--muted); margin-bottom: 48px; }
-  .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin-bottom: 48px; }
-  .contact-link { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); padding: 14px 24px; color: var(--text); text-decoration: none; font-size: 13px; transition: all 0.2s; background: var(--card); }
-  .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-  .contact-link.va-link:hover { border-color: var(--accent3); color: var(--accent3); }
-  .contact-email-big { font-family: 'Syne', sans-serif; font-size: clamp(18px, 3vw, 28px); font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: -1px; display: inline-block; transition: opacity 0.2s; }
-  .contact-email-big:hover { opacity: 0.7; }
-  .contact-va-note { margin-top: 40px; padding: 24px 32px; border: 1px solid rgba(255,107,157,0.25); background: rgba(255,107,157,0.04); font-size: 13px; color: var(--muted); line-height: 1.8; }
-  .contact-va-note strong { color: var(--accent3); font-weight: normal; }
+.pe-examples{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px}
+.pe-ex{border:1px solid var(--border);background:var(--card);overflow:hidden}
+.pe-ex-head{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.pe-ex-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700}
+.pe-ex-label{font-size:9px;letter-spacing:1.5px;padding:3px 8px;border-radius:2px;text-transform:uppercase}
+.pe-ex-label.v{background:rgba(124,107,255,.1);border:1px solid rgba(124,107,255,.25);color:var(--purple)}
+.pe-ex-label.t{background:rgba(0,229,180,.08);border:1px solid rgba(0,229,180,.22);color:var(--teal)}
+.pe-ex-label.p{background:rgba(255,95,150,.08);border:1px solid rgba(255,95,150,.22);color:var(--pink)}
+.pe-ex-body{padding:18px;font-size:11px;color:var(--muted);line-height:1.9}
+.pe-ex-body .hl-v{color:var(--purple)}
+.pe-ex-body .hl-t{color:var(--teal)}
+.pe-ex-body .hl-p{color:var(--pink)}
 
-  /* ── FOOTER ── */
-  footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; }
+.pe-platforms{border:1px solid var(--border);background:var(--card);padding:24px 28px}
+.pe-platforms-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.pe-platforms-row{display:flex;flex-wrap:wrap;gap:8px}
 
-  /* ── PROMPT ENGINEERING SECTION ── */
-  #prompt-engineering { background: var(--bg); border-top: 1px solid var(--border); padding: 100px 48px; position: relative; overflow: hidden; }
-  .pe-bg-purple { position: absolute; top: -120px; left: -80px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(124,107,255,0.07) 0%, transparent 70%); pointer-events: none; }
-  .pe-bg-teal { position: absolute; bottom: -80px; right: -60px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(0,245,196,0.05) 0%, transparent 70%); pointer-events: none; }
+/* VA */
+.va-glow{position:absolute;top:-80px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,95,150,.07) 0%,transparent 70%);pointer-events:none}
+.va-intro{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;margin-bottom:56px}
+.va-intro-text p{color:var(--soft);font-size:13px;line-height:1.9;margin-bottom:16px}
+.va-intro-text b{font-weight:400;color:var(--text)}
+.va-highlight{border:1px solid rgba(255,95,150,.22);background:rgba(255,95,150,.04);padding:26px 30px;position:relative;margin-bottom:24px}
+.va-highlight::before{content:'// the ai difference';position:absolute;top:-10px;left:18px;background:var(--bg);padding:0 8px;color:var(--pink);font-size:10px;letter-spacing:1.5px}
+.va-highlight p{color:var(--soft);font-size:12px;line-height:1.95}
+.va-highlight b{font-weight:400;color:var(--pink)}
+.va-mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.va-mini-stat{background:var(--card);padding:18px 20px}
+.va-mini-stat-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800}
+.va-mini-stat-num.p{color:var(--pink)}
+.va-mini-stat-num.v{color:var(--purple)}
+.va-mini-stat-num.t{color:var(--teal)}
+.va-mini-stat-label{color:var(--muted);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
+.va-services{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:56px}
+.va-svc{background:var(--card);padding:30px 26px;transition:background .3s;position:relative;overflow:hidden}
+.va-svc:hover{background:#161624}
+.va-svc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--purple));opacity:0;transition:opacity .3s}
+.va-svc:hover::after{opacity:1}
+.va-svc-icon{font-size:22px;margin-bottom:14px;display:block}
+.va-svc-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px;letter-spacing:-.2px}
+.va-svc-body{color:var(--soft);font-size:11px;line-height:1.85;margin-bottom:16px}
+.va-workflow-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--pink);margin-bottom:24px}
+.va-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.va-steps::before{content:'';position:absolute;top:27px;left:9%;right:9%;height:1px;background:linear-gradient(90deg,var(--pink),var(--purple));opacity:.3;z-index:0}
+.va-step{text-align:center;position:relative;z-index:1;padding:0 10px}
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
-  @keyframes blink { 50% { opacity: 0.3; } }
-  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+/* EDUCATION */
+#education{background:var(--surface);border-top:1px solid var(--border)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.edu-card{border:1px solid var(--border);background:var(--card);padding:32px}
+.edu-deg{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-.3px}
+.edu-school{color:var(--teal);font-size:12px;margin-bottom:4px}
+.edu-year{color:var(--muted);font-size:11px;letter-spacing:1px}
+.cert-list{list-style:none;margin-top:0}
+.cert-list li{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--soft)}
+.cert-list li:last-child{border-bottom:none}
+.cert-list li::before{content:'✓';color:var(--teal);flex-shrink:0;font-size:11px;margin-top:1px}
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .skills-grid { grid-template-columns: 1fr; }
-    .va-services-grid { grid-template-columns: 1fr; }
-    .workflow-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
-    .workflow-steps::before { display: none; }
-    .va-intro-grid { grid-template-columns: 1fr; gap: 40px; }
-    .hero-pillars { grid-template-columns: 1fr; }
-    .hero-stat-bar { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .nav-tri-badge { display: none; }
-    section, #about, #experience, #projects, #skills, #education, #contact, #va, #prompt-engineering { padding: 80px 24px; }
-    #hero { padding: 100px 24px 80px; }
-    h1 { letter-spacing: -2px; }
-    .about-grid, .edu-cert-grid { grid-template-columns: 1fr; gap: 40px; }
-    .hero-meta { flex-direction: column; align-items: flex-start; gap: 16px; }
-    footer { flex-direction: column; gap: 8px; text-align: center; }
-    .workflow-steps { grid-template-columns: 1fr; }
-    .pe-examples-grid { grid-template-columns: 1fr !important; }
-    .pe-techniques-grid { grid-template-columns: 1fr !important; }
-    .hero-stat-bar { grid-template-columns: 1fr 1fr; }
-    .hstat { border-right: none; border-bottom: 1px solid var(--border); }
-  }
+/* CONTACT */
+#contact{background:var(--bg);border-top:1px solid var(--border);text-align:center}
+.contact-inner{max-width:580px;margin:0 auto}
+.contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-bottom:44px}
+.contact-link{display:flex;align-items:center;gap:10px;border:1px solid var(--border);padding:13px 22px;color:var(--text);text-decoration:none;font-size:12px;background:var(--card);transition:all .2s;letter-spacing:.5px}
+.contact-link:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.contact-link.p:hover{border-color:var(--pink);color:var(--pink)}
+.contact-email{font-family:'Syne',sans-serif;font-size:clamp(16px,2.5vw,26px);font-weight:800;letter-spacing:-1px;color:var(--teal);text-decoration:none;display:inline-block;transition:opacity .2s}
+.contact-email:hover{opacity:.7}
+.contact-note{margin-top:40px;padding:22px 28px;border:1px solid rgba(255,95,150,.2);background:rgba(255,95,150,.04);font-size:12px;color:var(--soft);line-height:1.9;text-align:left}
+.contact-note b{font-weight:400;color:var(--pink)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 56px;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px;flex-wrap:wrap;gap:12px}
+.footer-roles span{margin:0 6px}
+
+/* CHATBOT */
+.chat-fab{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.fab-btn{width:58px;height:58px;border-radius:50%;background:var(--pink);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;transition:transform .2s;animation:fabpulse 2.5s infinite}
+.fab-btn:hover{transform:scale(1.07)}
+.fab-btn svg{width:24px;height:24px;fill:#08080e}
+.fab-dot{position:absolute;top:-2px;right:-2px;width:17px;height:17px;background:var(--purple);border-radius:50%;border:2px solid var(--bg);font-size:10px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center}
+.fab-tip{background:var(--card);color:var(--text);padding:7px 13px;border-radius:8px;font-size:11px;white-space:nowrap;border:1px solid var(--pink);animation:tipbob 2.5s ease-in-out infinite}
+@keyframes fabpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,95,150,.4)}50%{box-shadow:0 0 0 14px rgba(255,95,150,0)}}
+@keyframes tipbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.chat-panel{position:fixed;bottom:100px;right:28px;z-index:9998;width:354px;max-height:560px;border-radius:18px;background:#111111;border:1px solid #2a2a2a;box-shadow:0 24px 64px rgba(0,0,0,.6);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right;transition:transform .25s cubic-bezier(.34,1.56,.64,1),opacity .2s}
+.chat-panel.hidden{transform:scale(.75);opacity:0;pointer-events:none}
+.chat-head{background:#1a1a1a;padding:13px 15px;display:flex;align-items:center;gap:11px;border-bottom:1px solid #2a2a2a;flex-shrink:0}
+.chat-avatar{width:38px;height:38px;border-radius:10px;background:rgba(255,95,150,.12);border:1.5px solid var(--pink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--pink)}
+.chat-head-text h3{color:#fff;font-size:13px;font-weight:700}
+.chat-head-text p{color:#666;font-size:10px;display:flex;align-items:center;gap:4px;margin-top:1px}
+.chat-dot{width:5px;height:5px;background:var(--pink);border-radius:50%;animation:pulse 2s infinite}
+.chat-close{margin-left:auto;background:#2a2a2a;border:none;color:#888;width:26px;height:26px;border-radius:7px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center}
+.chat-chips{display:flex;flex-wrap:wrap;gap:5px;padding:9px 11px 8px;background:#1a1a1a;border-bottom:1px solid #2a2a2a;flex-shrink:0}
+.chip{background:transparent;border:1px solid #2a2a2a;color:#666;font-size:10px;padding:3px 9px;border-radius:5px;cursor:pointer;transition:border-color .2s,color .2s;font-family:'DM Mono',monospace}
+.chip:hover{border-color:var(--pink);color:var(--pink)}
+.chat-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:9px;scroll-behavior:smooth}
+.msg{display:flex;gap:7px;align-items:flex-end}
+.msg.user{flex-direction:row-reverse}
+.msg-ico{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;background:rgba(255,95,150,.1);color:var(--pink);border:1px solid var(--pink)}
+.msg.user .msg-ico{background:#2a2a2a;color:#888;border-color:#2a2a2a}
+.bubble{max-width:80%;padding:9px 12px;border-radius:13px;font-size:12px;line-height:1.6}
+.msg.bot .bubble{background:#1a1a1a;color:#fff;border:1px solid #2a2a2a}
+.msg.user .bubble{background:var(--pink);color:#08080e;font-weight:700}
+.typing{display:flex;gap:4px;padding:11px 13px;background:#1a1a1a;border-radius:13px;border:1px solid #2a2a2a}
+.typing span{width:5px;height:5px;background:var(--pink);border-radius:50%;animation:td 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+.chat-input-row{padding:9px 11px;background:#1a1a1a;border-top:1px solid #2a2a2a;display:flex;gap:7px;align-items:center;flex-shrink:0}
+.chat-input{flex:1;border:1px solid #2a2a2a;border-radius:9px;padding:8px 13px;font-size:12px;color:#fff;background:#0a0a0a;outline:none;font-family:'DM Mono',monospace}
+.chat-input:focus{border-color:var(--pink)}
+.chat-send{width:36px;height:36px;border-radius:9px;background:var(--pink);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chat-send svg{width:14px;height:14px;fill:#08080e}
+.chat-powered{text-align:center;font-size:10px;color:#333;padding:5px 0 6px;background:#1a1a1a}
+.chat-powered span{color:var(--pink)}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .pillars-grid,.skills-outer,.va-services,.pe-grid,.ai-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr 1fr}
+  .ai-steps,.va-steps{grid-template-columns:1fr 1fr;gap:28px}
+  .ai-steps::before,.va-steps::before{display:none}
+  .va-intro,.ai-hero,.about-grid,.edu-grid{grid-template-columns:1fr;gap:40px}
+  #overview{grid-template-columns:1fr 1fr}
+  .ov-stat{border-bottom:1px solid var(--border)}
+  .pe-examples{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .nav-status{display:none}
+  section,.svc-section{padding:60px 20px}
+  #hero{padding:100px 20px 72px}
+  h1{letter-spacing:-2.5px}
+  .projects-grid{grid-template-columns:1fr}
+  .hero-foot{flex-direction:column;align-items:flex-start;gap:12px}
+  footer{padding:24px 20px;flex-direction:column;align-items:flex-start}
+  #overview{grid-template-columns:1fr 1fr}
+  .ai-steps,.va-steps{grid-template-columns:1fr}
+  .svc-tab{font-size:9px;padding:16px 6px;letter-spacing:1px}
+}
 </style>
 </head>
 <body>
@@ -385,501 +433,584 @@
 <nav>
   <div class="nav-logo">SR_</div>
   <div class="nav-links">
-    <a href="#va">VA Services</a>
     <a href="#about">About</a>
+    <a href="#pillars">Disciplines</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
-    <a href="#prompt-engineering">Prompts</a>
+    <a href="#services">Services</a>
+    <a href="#education">Education</a>
     <a href="#contact">Contact</a>
   </div>
-  <div class="nav-tri-badge">
-    <span class="nav-badge-dot teal">AI Auto</span>
-    <span class="nav-badge-dot pink">VA</span>
-    <span class="nav-badge-dot purple">Prompt Eng</span>
-  </div>
+  <div class="nav-status">Available for hire</div>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-grid-bg"></div>
-  <div class="glow-ai"></div>
-  <div class="glow-va"></div>
-  <div class="glow-pe"></div>
+  <div class="hero-grid"></div>
+  <div class="g1"></div><div class="g2"></div><div class="g3"></div>
 
-  <div class="hero-tag">Available for hire · Remote-ready · 3 specializations</div>
+  <div class="hero-eyebrow">Remote-ready · Philippines · Open to work</div>
+
   <h1>
-    <span class="line-dim">STUCEY</span><br>
-    <span class="line-dim">ROSAL</span><br>
-    <span class="line-accent">._</span>
+    <span class="dim">STUCEY</span><br>
+    <span class="dim">ROSAL</span><br>
+    <span class="accent">._</span>
   </h1>
 
-  <!-- Three equal-weight pillar cards -->
-  <div class="hero-pillars">
-    <div class="pillar-card teal">
-      <div class="pillar-label">Pillar 01</div>
-      <div class="pillar-title">AI Automation</div>
-      <p class="pillar-desc">Building intelligent workflows that eliminate manual work and scale operations using cutting-edge AI tools.</p>
-      <div class="pillar-chips">
-        <span class="pchip teal">Claude</span>
-        <span class="pchip teal">Make.com</span>
-        <span class="pchip teal">ChatGPT</span>
-        <span class="pchip teal">IoT</span>
-      </div>
-    </div>
-    <div class="pillar-card pink">
-      <div class="pillar-label">Pillar 02</div>
-      <div class="pillar-title">Virtual Assistant</div>
-      <p class="pillar-desc">Executive-level admin support — calendar, inbox, research, reports — with the technical edge most VAs can't offer.</p>
-      <div class="pillar-chips">
-        <span class="pchip pink">M365</span>
-        <span class="pchip pink">Calendly</span>
-        <span class="pchip pink">Notion</span>
-        <span class="pchip pink">SOPs</span>
-      </div>
-    </div>
-    <div class="pillar-card purple">
-      <div class="pillar-label">Pillar 03</div>
-      <div class="pillar-title">Prompt Engineering</div>
-      <p class="pillar-desc">Designing precise system prompts that turn AI models into reliable, consistent, production-ready tools.</p>
-      <div class="pillar-chips">
-        <span class="pchip purple">CoT</span>
-        <span class="pchip purple">JSON Output</span>
-        <span class="pchip purple">Guardrails</span>
-        <span class="pchip purple">Few-Shot</span>
-      </div>
-    </div>
+  <div class="role-strip">
+    <span class="role-pill t">⚙ AI Automation Specialist</span>
+    <span class="role-pill p">🤝 Virtual Assistant</span>
+    <span class="role-pill v">✍ Prompt Engineer</span>
+    <span class="role-pill it">💻 IT Support Specialist</span>
   </div>
 
-  <p class="hero-sub">
-    IT Support professional &amp; 2025 graduate combining <strong class="t">AI automation</strong>, <strong class="p">virtual assistant</strong> expertise, and <strong class="v">prompt engineering</strong> into one remote-ready skill set. I don't just do the tasks — I build the systems that make them disappear.
+  <p class="hero-bio">
+    2025 BS Industrial Technology graduate with 1 year of hands-on IT experience.<br>
+    I combine <b class="t">AI automation</b>, <b class="p">virtual assistant</b> expertise, and <b class="v">prompt engineering</b> into one remote-ready skill set — building systems that make work faster, smarter, and more scalable.
   </p>
 
   <div class="hero-cta">
-    <a href="#va" class="btn btn-va">🤝 VA Services</a>
-    <a href="#prompt-engineering" class="btn btn-pe">✍ Prompt Eng</a>
-    <a href="#projects" class="btn btn-ai">🤖 AI Projects →</a>
-    <a href="#contact" class="btn btn-ghost">Contact</a>
+    <a href="#services" onclick="showTab('ai')" class="btn btn-t">⚙ AI Automation</a>
+    <a href="#services" onclick="showTab('va')" class="btn btn-p">🤝 VA Services</a>
+    <a href="#services" onclick="showTab('pe')" class="btn btn-v">✍ Prompt Engineering</a>
+    <a href="#contact" class="btn btn-ghost">Get In Touch</a>
   </div>
 
-  <div class="hero-meta">
-    <div class="hero-contact">
+  <div class="hero-foot">
+    <div class="hero-contacts">
       <a href="mailto:Stuceyrosal15@gmail.com">Stuceyrosal15@gmail.com</a>
       <a href="tel:+639507536207">+63 950 753 6207</a>
-      <span style="color:var(--muted)">San Juan, Palauig, Zambales · Remote</span>
+      <span style="color:var(--muted);font-size:11px">San Juan, Palauig, Zambales</span>
     </div>
-    <div class="scroll-hint">Scroll</div>
+    <div class="scroll-label">Scroll to explore</div>
   </div>
 </section>
 
-<!-- TRI-COLOR STAT BAR -->
-<div class="hero-stat-bar">
-  <div class="hstat">
-    <div class="hstat-num t">4+</div>
-    <div class="hstat-label">AI Projects Built</div>
-  </div>
-  <div class="hstat">
-    <div class="hstat-num p">6+</div>
-    <div class="hstat-label">VA Services Offered</div>
-  </div>
-  <div class="hstat">
-    <div class="hstat-num v">4+</div>
-    <div class="hstat-label">Prompt Systems Deployed</div>
-  </div>
-  <div class="hstat">
-    <div class="hstat-num t">3+</div>
-    <div class="hstat-label">Certifications</div>
-  </div>
+<!-- STATS BAR -->
+<div id="overview">
+  <div class="ov-stat reveal"><div class="ov-num t">4+</div><div class="ov-label">AI Projects Built</div></div>
+  <div class="ov-stat reveal"><div class="ov-num p">6+</div><div class="ov-label">VA Services Offered</div></div>
+  <div class="ov-stat reveal"><div class="ov-num v">4+</div><div class="ov-label">Prompt Systems Deployed</div></div>
+  <div class="ov-stat reveal"><div class="ov-num t">1yr</div><div class="ov-label">IT Field Experience</div></div>
 </div>
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-label green">About</div>
+  <div class="section-eyebrow teal">About</div>
   <h2>Who I Am</h2>
-  <div class="about-grid">
+  <div class="about-grid reveal">
     <div class="about-text">
-      <p>Fresh graduate in Industrial Technology (Computer Technology) with 1 year of hands-on IT experience, a strong self-driven background in <span style="color:var(--accent)">AI automation</span>, and a growing portfolio of <span style="color:var(--accent3)">Virtual Assistant skills</span> built through real work — plus deep expertise in <span style="color:var(--accent2)">prompt engineering</span> for production AI systems.</p>
-      <p>Proficient in building practical automation systems using AI tools including Claude and ChatGPT. I help teams adopt new technology with confidence — and handle the day-to-day admin tasks that keep operations running smoothly.</p>
-      <div class="about-stats">
-        <div class="stat"><div class="stat-num green">4+</div><div class="stat-label">AI Projects Built</div></div>
-        <div class="stat"><div class="stat-num pink">6+</div><div class="stat-label">VA Services Offered</div></div>
-        <div class="stat"><div class="stat-num purple">3+</div><div class="stat-label">Certifications</div></div>
-        <div class="stat"><div class="stat-num green">2025</div><div class="stat-label">Graduate</div></div>
-      </div>
+      <p>I'm a fresh 2025 graduate in <b>Industrial Technology (Computer Technology)</b> from President Ramon Magsaysay State University. With one year of professional IT experience and a self-built portfolio in AI automation, I bring both technical depth and practical execution to every role.</p>
+      <p>My work sits at the intersection of <b>IT infrastructure</b>, <b>AI-powered workflows</b>, and <b>administrative support</b>. I'm not a generalist — I'm a specialist who covers three complementary disciplines that most professionals keep separate.</p>
+      <p>I'm remote-ready, self-directed, and comfortable handling both the technical and operational sides of a business. Whether it's fixing a network, automating a workflow, or managing a client's inbox — I show up and get it done.</p>
     </div>
     <div>
-      <div class="info-row"><span class="info-key">Name</span><span style="color:var(--text)">Stucey Huggy Bear Rosal</span></div>
-      <div class="info-row"><span class="info-key">Primary Roles</span><span style="color:var(--accent)">AI Auto · </span><span style="color:var(--accent3)">VA · </span><span style="color:var(--accent2)">Prompt Eng</span></div>
-      <div class="info-row"><span class="info-key">Degree</span><span style="color:var(--text)">BS Industrial Technology — CompTech</span></div>
-      <div class="info-row"><span class="info-key">University</span><span style="color:var(--text)">President Ramon Magsaysay State University</span></div>
-      <div class="info-row"><span class="info-key">Location</span><span style="color:var(--text)">San Juan, Palauig, Zambales, PH</span></div>
-      <div class="info-row"><span class="info-key">Work Setup</span><span style="color:var(--accent)">Remote-Ready · Flexible Hours</span></div>
-      <div class="info-row"><span class="info-key">Core Strengths</span><span style="color:var(--text)">Self-directed · Problem Solver · Communicator</span></div>
+      <table class="info-table">
+        <tr><td>Full Name</td><td>Stucey Rosal</td></tr>
+        <tr><td>Degree</td><td>BS Industrial Technology — Computer Technology</td></tr>
+        <tr><td>University</td><td>President Ramon Magsaysay State University</td></tr>
+        <tr><td>Graduated</td><td>2025</td></tr>
+        <tr><td>Location</td><td>San Juan, Palauig, Zambales, Philippines</td></tr>
+        <tr><td>Work Setup</td><td><span style="color:var(--teal)">Remote · Flexible Hours · Open to On-site</span></td></tr>
+        <tr><td>Primary Roles</td><td><span style="color:var(--teal)">AI Automation</span> · <span style="color:var(--pink)">Virtual Assistant</span> · <span style="color:var(--purple)">Prompt Engineer</span></td></tr>
+        <tr><td>Also Available</td><td>IT Support · Technical Documentation · Helpdesk</td></tr>
+        <tr><td>Core Traits</td><td>Self-directed · Detail-oriented · Fast learner · Communicative</td></tr>
+      </table>
     </div>
   </div>
 </section>
 
-<!-- VA SECTION -->
-<section id="va">
-  <div class="va-bg-accent"></div>
-  <div class="va-glow"></div>
-  <div class="section-label pink">Virtual Assistant</div>
-  <h2>VA <span style="color:var(--accent3)">Services</span></h2>
-  <p class="section-sub">I don't just support systems — I support people. As a VA, I combine traditional executive support skills with AI-powered workflows to get more done, faster.</p>
-
-  <div class="va-intro-grid reveal">
-    <div class="va-intro-left">
-      <p>With a background in IT support and AI automation, I bring a <strong>unique edge as a Virtual Assistant</strong>: I can handle your day-to-day administrative tasks while also building the tools and automations that make those tasks disappear.</p>
-      <p>Whether it's managing your inbox, organizing your calendar, doing research, preparing reports, or coordinating projects — I handle it with precision and keep you updated without being asked.</p>
-      <p>My IT foundation means I can also <strong>troubleshoot tools, set up systems, onboard software</strong>, and handle technical tasks that most VAs can't touch.</p>
-    </div>
-    <div>
-      <div class="va-highlight-box">
-        <p>Most VAs do the tasks. I <strong>also automate the tasks</strong> — so you're not paying for the same work twice. When something repeats, I build a workflow. When something is manual, I find an AI solution.</p>
-      </div>
-      <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border);">
-        <div style="background: var(--card); padding: 20px;"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent3)">100%</div><div style="color:var(--muted);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Remote Ready</div></div>
-        <div style="background: var(--card); padding: 20px;"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent3)">AI+</div><div style="color:var(--muted);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Powered Workflows</div></div>
-        <div style="background: var(--card); padding: 20px;"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent2)">M365</div><div style="color:var(--muted);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Certified</div></div>
-        <div style="background: var(--card); padding: 20px;"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent)">Fast</div><div style="color:var(--muted);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Turnaround</div></div>
+<!-- THREE PILLARS -->
+<section id="pillars" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div class="section-eyebrow teal">Specializations</div>
+  <h2>Three Core <span style="color:var(--teal)">Disciplines</span></h2>
+  <p class="section-lead">My skill set is built around three complementary areas that work together to deliver faster, smarter, and more scalable outcomes for clients and employers.</p>
+  <div class="pillars-grid reveal">
+    <div class="pillar">
+      <div class="pillar-bar t"></div>
+      <div class="pillar-num t">DISCIPLINE 01</div>
+      <div class="pillar-title">AI Automation</div>
+      <p class="pillar-body">Building intelligent systems that replace manual, repetitive work. From network automation to full AI-powered task pipelines, I design workflows that run reliably without constant human input — freeing teams to focus on higher-value work.</p>
+      <div class="pillar-tags">
+        <span class="tag t">Claude</span>
+        <span class="tag t">ChatGPT</span>
+        <span class="tag t">Make.com</span>
+        <span class="tag t">IoT</span>
+        <span class="tag t">Webhooks</span>
+        <span class="tag t">AI Agents</span>
       </div>
     </div>
-  </div>
-
-  <div class="va-services-grid reveal">
-    <div class="va-service-card">
-      <span class="va-service-icon">📅</span>
-      <div class="va-service-title">Calendar & Schedule Management</div>
-      <p class="va-service-desc">Meeting scheduling, time zone coordination, reminders, follow-ups, and keeping your day organized so you never miss a beat.</p>
-      <div class="va-service-tools"><span class="tool-chip">Google Calendar</span><span class="tool-chip purple">Outlook</span><span class="tool-chip green">Calendly</span></div>
+    <div class="pillar">
+      <div class="pillar-bar p"></div>
+      <div class="pillar-num p">DISCIPLINE 02</div>
+      <div class="pillar-title">Virtual Assistant</div>
+      <p class="pillar-body">Executive-level administrative support with a technical edge. Calendar management, inbox handling, research, reporting, and documentation — done with precision and minimal friction. My IT background means I can also handle the tools that most VAs can't.</p>
+      <div class="pillar-tags">
+        <span class="tag p">Microsoft 365</span>
+        <span class="tag p">Google Workspace</span>
+        <span class="tag p">Notion</span>
+        <span class="tag p">Calendly</span>
+        <span class="tag p">Excel</span>
+        <span class="tag p">SOPs</span>
+      </div>
     </div>
-    <div class="va-service-card">
-      <span class="va-service-icon">📧</span>
-      <div class="va-service-title">Email & Inbox Management</div>
-      <p class="va-service-desc">Inbox organization, drafting responses, filtering, labeling, and ensuring important messages never get missed.</p>
-      <div class="va-service-tools"><span class="tool-chip green">Gmail</span><span class="tool-chip purple">Microsoft 365</span><span class="tool-chip">Outlook</span></div>
-    </div>
-    <div class="va-service-card">
-      <span class="va-service-icon">🔍</span>
-      <div class="va-service-title">Research & Data Entry</div>
-      <p class="va-service-desc">Market research, competitor analysis, lead gathering, data cleaning, and organizing information into clear, usable formats.</p>
-      <div class="va-service-tools"><span class="tool-chip green">Excel</span><span class="tool-chip purple">Sheets</span><span class="tool-chip">Notion</span></div>
-    </div>
-    <div class="va-service-card">
-      <span class="va-service-icon">🤖</span>
-      <div class="va-service-title">AI-Powered Task Automation</div>
-      <p class="va-service-desc">Building AI workflows that automate repetitive tasks — so you stop doing the same thing manually and start scaling your time.</p>
-      <div class="va-service-tools"><span class="tool-chip green">Claude</span><span class="tool-chip purple">ChatGPT</span><span class="tool-chip">Make.com</span></div>
-    </div>
-    <div class="va-service-card">
-      <span class="va-service-icon">📊</span>
-      <div class="va-service-title">Reporting & Documentation</div>
-      <p class="va-service-desc">Creating reports, SOPs, trackers, dashboards, and written documentation that keeps teams aligned and processes clear.</p>
-      <div class="va-service-tools"><span class="tool-chip green">Excel</span><span class="tool-chip purple">Word</span><span class="tool-chip">PowerPoint</span></div>
-    </div>
-    <div class="va-service-card">
-      <span class="va-service-icon">🛠</span>
-      <div class="va-service-title">Tech Support & Tool Setup</div>
-      <p class="va-service-desc">Software setup, IT troubleshooting, tool onboarding, and technical support — a VA who can actually fix things when they break.</p>
-      <div class="va-service-tools"><span class="tool-chip green">Hardware</span><span class="tool-chip purple">Networks</span><span class="tool-chip">Software</span></div>
-    </div>
-  </div>
-
-  <div class="va-workflow reveal">
-    <div class="va-workflow-title">// How I work as your VA</div>
-    <div class="workflow-steps">
-      <div class="workflow-step"><div class="step-num pink">01</div><div class="step-label">Onboard</div><p class="step-desc">I learn your tools, preferences, and workflows — quick setup, minimal friction.</p></div>
-      <div class="workflow-step"><div class="step-num purple">02</div><div class="step-label">Organize</div><p class="step-desc">I audit your existing processes and identify what to optimize, delegate, or automate.</p></div>
-      <div class="workflow-step"><div class="step-num pink">03</div><div class="step-label">Execute</div><p class="step-desc">Tasks completed accurately, on time, and with clear communication throughout.</p></div>
-      <div class="workflow-step"><div class="step-num teal">04</div><div class="step-label">Automate</div><p class="step-desc">I build workflows so recurring tasks run themselves — freeing us both for bigger things.</p></div>
+    <div class="pillar">
+      <div class="pillar-bar v"></div>
+      <div class="pillar-num v">DISCIPLINE 03</div>
+      <div class="pillar-title">Prompt Engineering</div>
+      <p class="pillar-body">Designing production-grade system prompts that make AI models behave consistently, accurately, and reliably. From customer-facing chatbots to structured data extraction pipelines — every automation I build starts with a well-engineered prompt.</p>
+      <div class="pillar-tags">
+        <span class="tag v">System Prompts</span>
+        <span class="tag v">Chain-of-Thought</span>
+        <span class="tag v">JSON Output</span>
+        <span class="tag v">Few-Shot</span>
+        <span class="tag v">Guardrails</span>
+      </div>
     </div>
   </div>
 </section>
-  
+
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-label green">Experience</div>
+  <div class="section-eyebrow teal">Experience</div>
   <h2>Work History</h2>
-  <div class="exp-card reveal">
-    <div class="exp-top">
+
+  <div class="exp-item teal reveal">
+    <div class="exp-header">
       <div>
         <div class="exp-role">IT Staff — Technical Support</div>
-        <div class="exp-company green">Beyond Infinity Connection Philippines</div>
+        <div class="exp-org">Beyond Infinity Connection Philippines</div>
+        <div class="exp-period">2024 – 2025 · 1 Year · Full-time</div>
       </div>
-      <div class="exp-period">2024 – 2025 · 1 year</div>
+      <span class="exp-badge teal">IT Support</span>
     </div>
-    <ul class="exp-bullets green">
-      <li>Provided hardware setup, configuration, and maintenance across the organization</li>
-      <li>Managed helpdesk support — troubleshooting software, network, and device issues for staff</li>
+    <ul class="exp-list t">
+      <li>Provided hardware setup, configuration, and ongoing maintenance across the organization's infrastructure</li>
+      <li>Managed helpdesk support — troubleshooting software issues, hardware failures, and network problems for all staff</li>
       <li>Administered network support including IP address management and connectivity troubleshooting</li>
-      <li>Assisted in deploying and maintaining internal systems and software used by business teams</li>
-      <li>Documented technical procedures and supported non-technical users in day-to-day system use</li>
+      <li>Deployed and maintained internal systems and business software used across departments</li>
+      <li>Documented technical procedures and created user guides to support non-technical staff in daily system use</li>
     </ul>
   </div>
-  <div class="exp-card va-card reveal">
-    <div class="exp-top">
+
+  <div class="exp-item pink reveal">
+    <div class="exp-header">
       <div>
-        <div class="exp-role">Virtual Assistant Functions</div>
-        <div class="exp-company pink">Within IT Role & Self-Initiated Projects</div>
+        <div class="exp-role">VA-Applicable Functions & Freelance AI Work</div>
+        <div class="exp-org pink">Within IT Role & Self-Initiated Projects</div>
+        <div class="exp-period">2024 – Present · Ongoing</div>
       </div>
-      <div class="exp-period">2024 – Present</div>
+      <span class="exp-badge pink">VA · Admin · AI</span>
     </div>
-    <ul class="exp-bullets pink">
+    <ul class="exp-list p">
       <li>Drafted and organized technical documentation, SOPs, and user guides for non-technical staff</li>
-      <li>Assisted colleagues with scheduling, follow-ups, and coordination of IT-related tasks</li>
-      <li>Performed data entry, reporting, and organized records using Microsoft Excel and Word</li>
-      <li>Prepared procurement emails, formal correspondence, and internal communications</li>
+      <li>Assisted colleagues with scheduling, follow-ups, and coordination of IT-related tasks and deadlines</li>
+      <li>Performed data entry, report generation, and organized records using Microsoft Excel and Word</li>
+      <li>Prepared procurement emails, formal correspondence, and internal communications on behalf of the team</li>
       <li>Created training materials and tutorial content for onboarding staff to new tools and systems</li>
-      <li>Managed and organized digital files, email threads, and project documentation</li>
+      <li>Built and deployed AI chatbots and automation workflows for external clients as freelance projects</li>
     </ul>
-    <span class="exp-va-tag">🤝 VA-Applicable Experience</span>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-label green">Projects</div>
-  <h2>AI, Automation <span style="color:var(--muted);font-size:0.6em">&</span> VA Work</h2>
-  <div class="projects-grid">
-    <div class="project-card reveal">
-      <span class="project-num">01</span><span class="project-icon">🌐</span>
+  <div class="section-eyebrow teal">Projects</div>
+  <h2>Selected Work</h2>
+  <p class="section-lead">A mix of IT infrastructure projects, AI automation builds, and VA-related tools — each reflecting a different facet of my skill set.</p>
+
+  <div class="projects-grid reveal">
+    <div class="project">
+      <span class="project-n">01</span>
+      <span class="project-icon">🌐</span>
       <div class="project-title">IP Address Automation System</div>
-      <p class="project-desc">Built an automated system to manage and assign IP addresses across a network, reducing manual errors and saving administrative time significantly.</p>
-      <span class="project-tag green">Network · Automation</span>
+      <p class="project-desc">Automated IP address management and assignment across a company network — eliminating manual errors and reducing the time spent on network administration tasks.</p>
+      <div class="project-footer"><span class="tag t">Network</span><span class="tag t">Automation</span></div>
     </div>
-    <div class="project-card reveal">
-      <span class="project-num">02</span><span class="project-icon">⚡</span>
+    <div class="project">
+      <span class="project-n">02</span>
+      <span class="project-icon">⚡</span>
       <div class="project-title">Task Automation System</div>
-      <p class="project-desc">Designed an AI-assisted workflow to automate repetitive daily work tasks, improving team productivity and ensuring consistency across operations.</p>
-      <span class="project-tag green">AI · Workflow</span>
+      <p class="project-desc">Designed an AI-assisted workflow to automate repetitive daily operational tasks — improving team throughput and ensuring consistency across processes.</p>
+      <div class="project-footer"><span class="tag t">AI</span><span class="tag t">Workflow</span></div>
     </div>
-    <div class="project-card reveal">
-      <span class="project-num">03</span><span class="project-icon">🛡️</span>
+    <div class="project">
+      <span class="project-n">03</span>
+      <span class="project-icon">🛡️</span>
       <div class="project-title">Compliance Automation System</div>
-      <p class="project-desc">Developed a system to automate compliance checks and reporting, ensuring processes meet standards without manual review overhead.</p>
-      <span class="project-tag green">Compliance · Reporting</span>
+      <p class="project-desc">Built a system that automates compliance checks and generates structured reports — ensuring standards are met without manual review overhead.</p>
+      <div class="project-footer"><span class="tag t">Compliance</span><span class="tag v">Prompt Eng</span></div>
     </div>
-    <div class="project-card reveal">
-      <span class="project-num">04</span><span class="project-icon">📷</span>
+    <div class="project">
+      <span class="project-n">04</span>
+      <span class="project-icon">📷</span>
       <div class="project-title">AI Camera — IoT System</div>
-      <p class="project-desc">Built an AI-powered camera and IoT system integrating computer vision for real-world monitoring and automated detection use cases.</p>
-      <span class="project-tag green">IoT · Computer Vision</span>
+      <p class="project-desc">Built an AI-powered IoT camera system integrating computer vision for real-time monitoring and automated detection — capstone-level engineering project.</p>
+      <div class="project-footer"><span class="tag t">IoT</span><span class="tag t">Computer Vision</span></div>
     </div>
-    <div class="project-card va-project reveal">
-      <span class="project-num">05</span><span class="project-icon">📊</span>
+    <div class="project pk">
+      <span class="project-n">05</span>
+      <span class="project-icon">📊</span>
       <div class="project-title">Operations Dashboard Suite</div>
-      <p class="project-desc">Designed and built Excel-based dashboards for manufacturing operations tracking — Rework/Scrap Monitoring and Consumables Usage Tracker.</p>
-      <span class="project-tag pink">VA · Reporting · Excel</span>
+      <p class="project-desc">Designed Excel-based dashboards for manufacturing operations — Rework/Scrap Monitoring and Consumables Usage Tracker — with structured data and visual reporting.</p>
+      <div class="project-footer"><span class="tag p">VA</span><span class="tag p">Reporting</span><span class="tag n">Excel</span></div>
     </div>
-    <div class="project-card va-project reveal" style="position:relative">
-      <span class="project-num">06</span><span class="project-icon">🤝</span>
-      <div class="project-title">AI Portfolio Assistant (Chatbot)</div>
-      <p class="project-desc">Built and deployed an AI-powered chatbot on a colleague's portfolio site — handling visitor questions, VA inquiries, and lead capture through an automated webhook flow.</p>
-      <span class="project-tag purple">Prompt Eng · AI · VA</span>
+    <div class="project pu">
+      <span class="project-n">06</span>
+      <span class="project-icon">🤖</span>
+      <div class="project-title">AI Portfolio Chatbot</div>
+      <p class="project-desc">Built and deployed an AI chatbot on a colleague's portfolio — handling visitor questions, VA inquiries, and lead capture via a prompt-engineered Make.com webhook flow.</p>
+      <div class="project-footer"><span class="tag v">Prompt Eng</span><span class="tag t">AI</span><span class="tag p">VA</span></div>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-label green">Skills</div>
+  <div class="section-eyebrow teal">Skills</div>
   <h2>Technical Arsenal</h2>
-  <div class="skills-grid">
-    <div class="skill-group reveal">
-      <div class="skill-group-title green">AI & Automation</div>
-      <div class="skill-item"><span class="skill-name">Claude (Anthropic)</span><div class="skill-bar-wrap"><div class="skill-bar green" style="width:95%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">ChatGPT / Prompting</span><div class="skill-bar-wrap"><div class="skill-bar green" style="width:90%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Workflow Automation</span><div class="skill-bar-wrap"><div class="skill-bar green" style="width:88%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">AI Agent Building</span><div class="skill-bar-wrap"><div class="skill-bar green" style="width:85%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">IoT + AI Integration</span><div class="skill-bar-wrap"><div class="skill-bar green" style="width:80%"></div></div></div>
+  <div class="skills-outer reveal">
+    <div>
+      <div class="skill-col-title t">AI & Automation</div>
+      <div class="skill-row"><span class="skill-name">Claude (Anthropic)</span><div class="skill-track"><div class="skill-fill t" data-w="95"></div></div></div>
+      <div class="skill-row"><span class="skill-name">ChatGPT / GPT-4o</span><div class="skill-track"><div class="skill-fill t" data-w="90"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Workflow Automation</span><div class="skill-track"><div class="skill-fill t" data-w="88"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Make.com Pipelines</span><div class="skill-track"><div class="skill-fill t" data-w="86"></div></div></div>
+      <div class="skill-row"><span class="skill-name">AI Agent Building</span><div class="skill-track"><div class="skill-fill t" data-w="84"></div></div></div>
+      <div class="skill-row"><span class="skill-name">IoT + AI Integration</span><div class="skill-track"><div class="skill-fill t" data-w="80"></div></div></div>
     </div>
-    <div class="skill-group reveal">
-      <div class="skill-group-title pink">Virtual Assistant</div>
-      <div class="skill-item"><span class="skill-name">Calendar Management</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="width:90%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Email Management</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="width:88%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Research & Reporting</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="width:85%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Documentation & SOPs</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="width:88%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Data Entry & Excel</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="width:85%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Client Communication</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="width:82%"></div></div></div>
+    <div>
+      <div class="skill-col-title p">Virtual Assistant</div>
+      <div class="skill-row"><span class="skill-name">Calendar Management</span><div class="skill-track"><div class="skill-fill p" data-w="90"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Email Management</span><div class="skill-track"><div class="skill-fill p" data-w="88"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Research & Reporting</span><div class="skill-track"><div class="skill-fill p" data-w="86"></div></div></div>
+      <div class="skill-row"><span class="skill-name">SOPs & Documentation</span><div class="skill-track"><div class="skill-fill p" data-w="88"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Data Entry & Excel</span><div class="skill-track"><div class="skill-fill p" data-w="85"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Client Communication</span><div class="skill-track"><div class="skill-fill p" data-w="82"></div></div></div>
     </div>
-    <div class="skill-group reveal">
-      <div class="skill-group-title purple">Prompt Engineering</div>
-      <div class="skill-item"><span class="skill-name">System Prompt Design</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="width:93%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Chain-of-Thought</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="width:90%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Structured JSON Output</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="width:92%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Guardrails & Fallbacks</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="width:88%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Few-Shot Calibration</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="width:87%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Iterative Refinement</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="width:90%"></div></div></div>
-    </div>
-  </div>
-  <!-- IT skills below in a compact row -->
-  <div class="reveal" style="margin-top:40px; border-top:1px solid var(--border); padding-top:40px;">
-    <div class="skill-group-title green" style="margin-bottom:20px; border:none; padding:0;">IT & Technical</div>
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px">
-      <div class="skill-item"><span class="skill-name">Hardware Setup & Config</span><div class="skill-bar-wrap"><div class="skill-bar green" style="width:92%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Network & IP Mgmt</span><div class="skill-bar-wrap"><div class="skill-bar green" style="width:88%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Helpdesk Support</span><div class="skill-bar-wrap"><div class="skill-bar green" style="width:90%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Microsoft 365</span><div class="skill-bar-wrap"><div class="skill-bar green" style="width:88%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Technical Writing</span><div class="skill-bar-wrap"><div class="skill-bar green" style="width:84%"></div></div></div>
+    <div>
+      <div class="skill-col-title v">Prompt Engineering</div>
+      <div class="skill-row"><span class="skill-name">System Prompt Design</span><div class="skill-track"><div class="skill-fill v" data-w="93"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Chain-of-Thought</span><div class="skill-track"><div class="skill-fill v" data-w="91"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Structured JSON Output</span><div class="skill-track"><div class="skill-fill v" data-w="92"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Guardrails & Fallbacks</span><div class="skill-track"><div class="skill-fill v" data-w="88"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Few-Shot Calibration</span><div class="skill-track"><div class="skill-fill v" data-w="87"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Iterative Refinement</span><div class="skill-track"><div class="skill-fill v" data-w="90"></div></div></div>
     </div>
   </div>
-</section>
-
-<!-- PROMPT ENGINEERING SECTION -->
-<section id="prompt-engineering">
-  <div class="pe-bg-purple"></div>
-  <div class="pe-bg-teal"></div>
-  <div style="position:absolute;top:40%;left:60%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,157,0.04) 0%,transparent 70%);pointer-events:none"></div>
-
-  <div class="section-label purple">Prompt Engineering</div>
-  <h2>Prompt <span style="color:var(--accent2)">Engineering</span></h2>
-  <p class="section-sub">Crafting precise, structured prompts that turn AI models into reliable, high-output tools — not just chatbots. This is the backbone of every automation I build.</p>
-
-  <div class="reveal" style="border:1px solid rgba(124,107,255,0.3);background:rgba(124,107,255,0.04);padding:32px 36px;margin-bottom:52px;position:relative;">
-    <div style="position:absolute;top:-10px;left:24px;background:var(--bg);padding:0 8px;color:var(--accent2);font-size:10px;letter-spacing:1.5px;font-family:'DM Mono',monospace;">// prompt engineering philosophy</div>
-    <p style="color:var(--muted);font-size:14px;line-height:1.9;max-width:760px;">
-      Prompt engineering isn't just writing questions — it's <span style="color:var(--accent2)">system design for language models</span>. Every automation I deploy starts with a meticulously crafted system prompt that defines the AI's role, constraints, output format, tone, and fallback behavior. A well-engineered prompt is the difference between an AI that occasionally helps and one that <span style="color:var(--accent)">reliably delivers</span> — every single time.
-    </p>
-  </div>
-
-  <div class="pe-techniques-grid reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:52px;">
-    <div style="background:var(--card);padding:28px 24px;transition:background 0.3s" onmouseover="this.style.background='#161622'" onmouseout="this.style.background='var(--card)'">
-      <div style="font-size:22px;margin-bottom:14px">🧠</div>
-      <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px">Role & Persona Prompting</div>
-      <p style="color:var(--muted);font-size:12px;line-height:1.8">Defining a precise AI persona — role, expertise level, communication style, and hard boundaries — so the model behaves consistently across every interaction.</p>
-      <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px"><span class="tool-chip purple">System Prompts</span><span class="tool-chip purple">Context Setting</span></div>
-    </div>
-    <div style="background:var(--card);padding:28px 24px;transition:background 0.3s" onmouseover="this.style.background='#161622'" onmouseout="this.style.background='var(--card)'">
-      <div style="font-size:22px;margin-bottom:14px">📐</div>
-      <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px">Structured Output Design</div>
-      <p style="color:var(--muted);font-size:12px;line-height:1.8">Engineering prompts that produce machine-readable, consistent outputs — JSON, markdown, tables — so AI responses can be directly parsed and routed inside Make.com pipelines.</p>
-      <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px"><span class="tool-chip green">JSON Output</span><span class="tool-chip green">Make.com</span></div>
-    </div>
-    <div style="background:var(--card);padding:28px 24px;transition:background 0.3s" onmouseover="this.style.background='#161622'" onmouseout="this.style.background='var(--card)'">
-      <div style="font-size:22px;margin-bottom:14px">🔗</div>
-      <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px">Chain-of-Thought Prompting</div>
-      <p style="color:var(--muted);font-size:12px;line-height:1.8">Breaking complex tasks into step-by-step reasoning chains so the model processes logic sequentially — dramatically improving accuracy on multi-step decisions.</p>
-      <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px"><span class="tool-chip purple">CoT</span><span class="tool-chip purple">Reasoning</span></div>
-    </div>
-    <div style="background:var(--card);padding:28px 24px;transition:background 0.3s" onmouseover="this.style.background='#161622'" onmouseout="this.style.background='var(--card)'">
-      <div style="font-size:22px;margin-bottom:14px">🎯</div>
-      <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px">Few-Shot Examples</div>
-      <p style="color:var(--muted);font-size:12px;line-height:1.8">Embedding 2–5 worked examples directly in the prompt to demonstrate exact format, tone, and output depth — reducing hallucination and response variance on live deployments.</p>
-      <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px"><span class="tool-chip">Few-Shot</span><span class="tool-chip">Calibration</span></div>
-    </div>
-    <div style="background:var(--card);padding:28px 24px;transition:background 0.3s" onmouseover="this.style.background='#161622'" onmouseout="this.style.background='var(--card)'">
-      <div style="font-size:22px;margin-bottom:14px">🛡️</div>
-      <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px">Guardrails & Fallbacks</div>
-      <p style="color:var(--muted);font-size:12px;line-height:1.8">Building explicit instructions for edge cases, ambiguous inputs, and out-of-scope queries — so customer-facing AI tools stay on-brand and never produce unexpected responses.</p>
-      <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px"><span class="tool-chip">Safety</span><span class="tool-chip">Edge Cases</span></div>
-    </div>
-    <div style="background:var(--card);padding:28px 24px;transition:background 0.3s" onmouseover="this.style.background='#161622'" onmouseout="this.style.background='var(--card)'">
-      <div style="font-size:22px;margin-bottom:14px">🔄</div>
-      <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px">Iterative Prompt Refinement</div>
-      <p style="color:var(--muted);font-size:12px;line-height:1.8">Testing prompts against real user inputs, identifying failure modes, and refining language, structure, and constraints — treating prompts as living code that evolves with the product.</p>
-      <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px"><span class="tool-chip green">A/B Testing</span><span class="tool-chip green">Iteration</span></div>
-    </div>
-  </div>
-
-  <!-- Real Prompt Examples -->
-  <div class="reveal" style="margin-bottom:52px">
-    <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--accent2);margin-bottom:28px;letter-spacing:-0.5px">// real prompts from my deployed projects</div>
-    <div class="pe-examples-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
-      <div style="border:1px solid var(--border);background:var(--card);overflow:hidden">
-        <div style="background:rgba(124,107,255,0.08);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-          <span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700">Sophie & Eve Beauty Bot</span>
-          <span style="font-size:10px;letter-spacing:1.2px;color:var(--accent2);border:1px solid rgba(124,107,255,0.3);padding:3px 8px">SYSTEM PROMPT</span>
-        </div>
-        <div style="padding:20px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.9">
-          You are <span style="color:var(--accent2)">Sophia</span>, a friendly beauty consultant for <span style="color:var(--accent2)">Sophie & Eve Beauty and Wellness</span>. Help customers with:<br><br>
-          <span style="color:var(--accent)">→</span> Service bookings & pricing inquiries<br>
-          <span style="color:var(--accent)">→</span> Product recommendations<br>
-          <span style="color:var(--accent)">→</span> Appointment follow-ups<br><br>
-          Always respond in a warm, professional tone. If asked something outside scope, say: <span style="color:var(--accent3)">"I'll connect you with our team for that!"</span><br>
-          Never discuss competitors. Keep responses under 80 words.
-        </div>
-      </div>
-      <div style="border:1px solid var(--border);background:var(--card);overflow:hidden">
-        <div style="background:rgba(0,245,196,0.06);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-          <span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700">Bite & Go Foodies Order Bot</span>
-          <span style="font-size:10px;letter-spacing:1.2px;color:var(--accent);border:1px solid rgba(0,245,196,0.3);padding:3px 8px">STRUCTURED OUTPUT</span>
-        </div>
-        <div style="padding:20px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.9">
-          Extract order intent and return <span style="color:var(--accent)">JSON only</span>:<br><br>
-          <span style="color:var(--border)">{</span><br>
-          &nbsp;&nbsp;<span style="color:var(--accent2)">"intent"</span>: <span style="color:var(--accent3)">"order|inquiry|complaint"</span>,<br>
-          &nbsp;&nbsp;<span style="color:var(--accent2)">"items"</span>: [<span style="color:var(--accent3)">"..."</span>],<br>
-          &nbsp;&nbsp;<span style="color:var(--accent2)">"quantity"</span>: 0,<br>
-          &nbsp;&nbsp;<span style="color:var(--accent2)">"special_request"</span>: <span style="color:var(--accent3)">"..."</span><br>
-          <span style="color:var(--border)">}</span><br><br>
-          <span style="color:var(--accent2)">No preamble. No explanation. JSON only.</span>
-        </div>
-      </div>
-      <div style="border:1px solid var(--border);background:var(--card);overflow:hidden">
-        <div style="background:rgba(255,107,157,0.06);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-          <span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700">Portfolio AI Assistant</span>
-          <span style="font-size:10px;letter-spacing:1.2px;color:var(--accent3);border:1px solid rgba(255,107,157,0.3);padding:3px 8px">PERSONA PROMPT</span>
-        </div>
-        <div style="padding:20px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.9">
-          You are an AI assistant representing <span style="color:var(--accent3)">Stucey Rosal</span> — IT Specialist, VA, and AI Automation expert in Zambales, PH.<br><br>
-          Answer questions about her skills, services, and rates. Be concise. <span style="color:var(--accent)">Always end with a CTA</span> directing to Stuceyrosal15@gmail.com.<br><br>
-          <span style="color:var(--accent2)">If off-topic:</span> "I'm only set up to answer about Stucey's work!"
-        </div>
-      </div>
-      <div style="border:1px solid var(--border);background:var(--card);overflow:hidden">
-        <div style="background:rgba(124,107,255,0.06);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-          <span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700">Compliance Report Generator</span>
-          <span style="font-size:10px;letter-spacing:1.2px;color:var(--accent2);border:1px solid rgba(124,107,255,0.3);padding:3px 8px">CHAIN-OF-THOUGHT</span>
-        </div>
-        <div style="padding:20px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.9">
-          Given this data, generate a compliance summary. Think step by step:<br><br>
-          <span style="color:var(--accent)">Step 1:</span> Identify non-compliant entries<br>
-          <span style="color:var(--accent)">Step 2:</span> Group by category and severity<br>
-          <span style="color:var(--accent)">Step 3:</span> Suggest corrective actions<br><br>
-          Output: Summary → Issues Found → Recommendations.<br>
-          Data: <span style="color:var(--accent3)">{{input_data}}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="reveal" style="border:1px solid var(--border);background:var(--card);padding:28px 32px">
-    <div style="color:var(--accent2);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px">// models & platforms I prompt engineer on</div>
-    <div style="display:flex;flex-wrap:wrap;gap:10px">
-      <span style="background:rgba(0,245,196,0.08);border:1px solid rgba(0,245,196,0.25);color:var(--accent);font-size:11px;padding:7px 16px;letter-spacing:1px">Claude (Anthropic)</span>
-      <span style="background:rgba(124,107,255,0.08);border:1px solid rgba(124,107,255,0.25);color:var(--accent2);font-size:11px;padding:7px 16px;letter-spacing:1px">ChatGPT / GPT-4o</span>
-      <span style="background:rgba(255,107,157,0.08);border:1px solid rgba(255,107,157,0.25);color:var(--accent3);font-size:11px;padding:7px 16px;letter-spacing:1px">Blackbox AI</span>
-      <span style="background:rgba(0,245,196,0.08);border:1px solid rgba(0,245,196,0.25);color:var(--accent);font-size:11px;padding:7px 16px;letter-spacing:1px">Make.com AI Modules</span>
-      <span style="background:rgba(124,107,255,0.08);border:1px solid rgba(124,107,255,0.25);color:var(--accent2);font-size:11px;padding:7px 16px;letter-spacing:1px">ManyChat AI Step</span>
-      <span style="background:rgba(255,107,157,0.08);border:1px solid rgba(255,107,157,0.25);color:var(--accent3);font-size:11px;padding:7px 16px;letter-spacing:1px">Webhook + AI Pipelines</span>
+  <div class="reveal" style="margin-top:48px;padding-top:40px;border-top:1px solid var(--border)">
+    <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);padding-bottom:16px;border-bottom:1px solid rgba(0,229,180,.18);margin-bottom:24px">IT & Technical</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
+      <div class="skill-row"><span class="skill-name">Hardware Setup & Config</span><div class="skill-track"><div class="skill-fill t" data-w="92"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Network & IP Management</span><div class="skill-track"><div class="skill-fill t" data-w="88"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Helpdesk Support</span><div class="skill-track"><div class="skill-fill t" data-w="90"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Microsoft 365 Suite</span><div class="skill-track"><div class="skill-fill t" data-w="88"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Technical Writing</span><div class="skill-track"><div class="skill-fill t" data-w="84"></div></div></div>
     </div>
   </div>
 </section>
+
+<!-- ══════════════════════════════ SERVICES — THREE TABBED SECTIONS -->
+<div id="services">
+  <div style="background:var(--bg);border-top:1px solid var(--border);padding:72px 56px 0">
+    <div class="section-eyebrow teal">Services</div>
+    <h2>What I <span style="color:var(--teal)">Offer</span></h2>
+    <p class="section-lead" style="margin-bottom:32px">Three distinct service offerings — each a standalone discipline, all working better together.</p>
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="svc-nav" id="svcNav">
+    <button class="svc-tab active-t" id="tab-ai" onclick="showTab('ai')">⚙ AI Automation</button>
+    <button class="svc-tab" id="tab-va" onclick="showTab('va')">🤝 Virtual Assistant</button>
+    <button class="svc-tab" id="tab-pe" onclick="showTab('pe')">✍ Prompt Engineering</button>
+  </div>
+
+  <!-- ── AI AUTOMATION TAB ── -->
+  <div class="svc-section active" id="svc-ai" style="background:var(--bg)">
+    <div class="ai-hero reveal">
+      <div class="ai-hero-text">
+        <p>I build <b>end-to-end AI automation systems</b> that replace repetitive, manual processes with reliable, scalable workflows. From simple trigger-based pipelines to complex multi-step AI agent chains — I design systems that run without constant supervision.</p>
+        <p>My IT background gives me a technical advantage: I understand both the <b>infrastructure side</b> (APIs, webhooks, network logic) and the <b>AI layer</b> (prompt engineering, model behavior, structured outputs).</p>
+        <p>Every system I build is documented, tested, and handed over with clear runbooks — so you maintain control without depending on me indefinitely.</p>
+      </div>
+      <div>
+        <div class="ai-highlight-box">
+          <p>I don't just connect apps together — I <b>architect logic</b> that handles edge cases, validates outputs, and fails gracefully when something goes wrong. That's the difference between a fragile automation and one that runs for months without intervention.</p>
+        </div>
+        <div class="ai-stats">
+          <div class="ai-stat"><div class="ai-stat-num t">4+</div><div class="ai-stat-label">AI Systems Built</div></div>
+          <div class="ai-stat"><div class="ai-stat-num t">100%</div><div class="ai-stat-label">Remote Deployable</div></div>
+          <div class="ai-stat"><div class="ai-stat-num v">Make.com</div><div class="ai-stat-label">Primary Platform</div></div>
+          <div class="ai-stat"><div class="ai-stat-num t">Fast</div><div class="ai-stat-label">Turnaround</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-grid reveal">
+      <div class="ai-card">
+        <span class="ai-card-icon">🔄</span>
+        <div class="ai-card-title">Workflow Automation</div>
+        <p class="ai-card-body">End-to-end task pipelines using Make.com, webhooks, and AI modules — replacing manual, repetitive processes with automated flows that run 24/7.</p>
+        <div class="pillar-tags"><span class="tag t">Make.com</span><span class="tag t">Webhooks</span><span class="tag n">Zapier</span></div>
+      </div>
+      <div class="ai-card">
+        <span class="ai-card-icon">🤖</span>
+        <div class="ai-card-title">AI Chatbot Deployment</div>
+        <p class="ai-card-body">Prompt-engineered AI bots for customer support, lead capture, FAQ handling, and internal tools — deployed on your platform of choice.</p>
+        <div class="pillar-tags"><span class="tag t">Claude</span><span class="tag t">ChatGPT</span><span class="tag n">ManyChat</span></div>
+      </div>
+      <div class="ai-card">
+        <span class="ai-card-icon">📊</span>
+        <div class="ai-card-title">Data Processing Pipelines</div>
+        <p class="ai-card-body">AI-powered pipelines that extract, classify, transform, and route structured data — feeding into spreadsheets, CRMs, or databases automatically.</p>
+        <div class="pillar-tags"><span class="tag t">JSON Output</span><span class="tag t">AI Extraction</span></div>
+      </div>
+      <div class="ai-card">
+        <span class="ai-card-icon">🌐</span>
+        <div class="ai-card-title">Network Automation</div>
+        <p class="ai-card-body">Automated IP management, network monitoring alerts, and infrastructure task automation — reducing manual administration load on IT teams.</p>
+        <div class="pillar-tags"><span class="tag t">Network</span><span class="tag t">IP Management</span></div>
+      </div>
+      <div class="ai-card">
+        <span class="ai-card-icon">📷</span>
+        <div class="ai-card-title">IoT & Computer Vision</div>
+        <p class="ai-card-body">AI-integrated IoT systems with real-time detection and automated alerting — from capstone-grade camera systems to sensor-triggered workflows.</p>
+        <div class="pillar-tags"><span class="tag t">IoT</span><span class="tag t">Computer Vision</span></div>
+      </div>
+      <div class="ai-card">
+        <span class="ai-card-icon">✅</span>
+        <div class="ai-card-title">Compliance Automation</div>
+        <p class="ai-card-body">Systems that run automated compliance checks, flag violations, and generate structured audit reports — without manual review overhead.</p>
+        <div class="pillar-tags"><span class="tag t">Compliance</span><span class="tag v">Prompt Eng</span></div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="ai-workflow-title">// How I deliver an automation project</div>
+      <div class="ai-steps">
+        <div class="ai-step"><div class="step-circle t">01</div><div class="step-label">Discover</div><p class="step-desc">I map your current process, identify bottlenecks, and scope the automation clearly.</p></div>
+        <div class="ai-step"><div class="step-circle v">02</div><div class="step-label">Design</div><p class="step-desc">I architect the workflow logic, define triggers, AI steps, outputs, and error handling.</p></div>
+        <div class="ai-step"><div class="step-circle t">03</div><div class="step-label">Build</div><p class="step-desc">I build and test the automation end-to-end — real data, real edge cases, documented results.</p></div>
+        <div class="ai-step"><div class="step-circle v">04</div><div class="step-label">Hand Off</div><p class="step-desc">Full documentation, runbook, and optional training session — you own it completely.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── VIRTUAL ASSISTANT TAB ── -->
+  <div class="svc-section" id="svc-va" style="background:var(--bg);position:relative">
+    <div class="va-glow"></div>
+    <div class="va-intro reveal">
+      <div class="va-intro-text">
+        <p>With a background in IT support and AI automation, I bring a <b>unique edge as a Virtual Assistant</b>: I handle your day-to-day administrative tasks while also building the automations that make those tasks disappear over time.</p>
+        <p>Whether it's managing your inbox, organizing your calendar, conducting research, preparing reports, or coordinating projects — I handle it with precision and keep you updated proactively.</p>
+        <p>My IT foundation means I can also <b>troubleshoot tools, set up software, and handle technical tasks</b> that most VAs simply can't touch.</p>
+      </div>
+      <div>
+        <div class="va-highlight">
+          <p>Most VAs do the tasks. I <b>also automate the tasks</b> — so you're not paying for the same work twice. When something is repetitive, I build a workflow. When something is manual, I find an AI solution. You get a VA who progressively frees up time for higher-value work.</p>
+        </div>
+        <div class="va-mini-stats">
+          <div class="va-mini-stat"><div class="va-mini-stat-num p">100%</div><div class="va-mini-stat-label">Remote Ready</div></div>
+          <div class="va-mini-stat"><div class="va-mini-stat-num p">AI+</div><div class="va-mini-stat-label">Powered Workflows</div></div>
+          <div class="va-mini-stat"><div class="va-mini-stat-num v">M365</div><div class="va-mini-stat-label">Certified</div></div>
+          <div class="va-mini-stat"><div class="va-mini-stat-num t">Fast</div><div class="va-mini-stat-label">Turnaround</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="va-services reveal">
+      <div class="va-svc">
+        <span class="va-svc-icon">📅</span>
+        <div class="va-svc-title">Calendar & Schedule Management</div>
+        <p class="va-svc-body">Meeting scheduling, timezone coordination, reminders, and follow-ups — your calendar stays organized so you never miss a beat.</p>
+        <div class="pillar-tags"><span class="tag p">Google Calendar</span><span class="tag v">Outlook</span><span class="tag n">Calendly</span></div>
+      </div>
+      <div class="va-svc">
+        <span class="va-svc-icon">📧</span>
+        <div class="va-svc-title">Email & Inbox Management</div>
+        <p class="va-svc-body">Inbox triage, response drafting, labeling and filtering — keeping your communications organized and important messages front and center.</p>
+        <div class="pillar-tags"><span class="tag t">Gmail</span><span class="tag v">Microsoft 365</span><span class="tag n">Outlook</span></div>
+      </div>
+      <div class="va-svc">
+        <span class="va-svc-icon">🔍</span>
+        <div class="va-svc-title">Research & Data Entry</div>
+        <p class="va-svc-body">Market research, competitor analysis, lead gathering, and data organization — turning raw information into clear, actionable formats.</p>
+        <div class="pillar-tags"><span class="tag t">Excel</span><span class="tag v">Sheets</span><span class="tag n">Notion</span></div>
+      </div>
+      <div class="va-svc">
+        <span class="va-svc-icon">🤖</span>
+        <div class="va-svc-title">AI-Powered Task Automation</div>
+        <p class="va-svc-body">Building AI workflows that eliminate repetitive tasks — so your time and budget go toward growth, not maintenance.</p>
+        <div class="pillar-tags"><span class="tag t">Claude</span><span class="tag t">ChatGPT</span><span class="tag n">Make.com</span></div>
+      </div>
+      <div class="va-svc">
+        <span class="va-svc-icon">📊</span>
+        <div class="va-svc-title">Reporting & Documentation</div>
+        <p class="va-svc-body">Reports, SOPs, trackers, and dashboards — written and structured so teams stay aligned and processes stay clear.</p>
+        <div class="pillar-tags"><span class="tag t">Excel</span><span class="tag v">Word</span><span class="tag n">PowerPoint</span></div>
+      </div>
+      <div class="va-svc">
+        <span class="va-svc-icon">🛠</span>
+        <div class="va-svc-title">Tech Support & Tool Setup</div>
+        <p class="va-svc-body">Software setup, IT troubleshooting, tool onboarding, and technical support — a VA who can actually fix things when they break.</p>
+        <div class="pillar-tags"><span class="tag t">Hardware</span><span class="tag v">Networks</span><span class="tag n">Software</span></div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="va-workflow-title">// How I work as your VA</div>
+      <div class="va-steps">
+        <div class="va-step"><div class="step-circle p">01</div><div class="step-label">Onboard</div><p class="step-desc">I learn your tools, preferences, and workflows — quick setup, minimal disruption.</p></div>
+        <div class="va-step"><div class="step-circle v">02</div><div class="step-label">Organize</div><p class="step-desc">I audit your current processes and identify what to optimize, delegate, or automate.</p></div>
+        <div class="va-step"><div class="step-circle p">03</div><div class="step-label">Execute</div><p class="step-desc">Tasks are completed accurately, on time, with clear communication throughout.</p></div>
+        <div class="va-step"><div class="step-circle t">04</div><div class="step-label">Automate</div><p class="step-desc">Recurring work gets automated — freeing both of us for higher-value tasks.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROMPT ENGINEERING TAB ── -->
+  <div class="svc-section" id="svc-pe" style="background:var(--bg)">
+    <div class="pe-philosophy reveal">
+      <p>Prompt engineering is <span class="v">system design for language models</span>. Every automation I build starts with a meticulously structured prompt that defines the AI's role, output format, constraints, tone, and edge-case behavior. The difference between an AI that occasionally helps and one that <span class="t">reliably delivers</span> is almost always the prompt.</p>
+    </div>
+
+    <div class="pe-grid reveal">
+      <div class="pe-card">
+        <div class="pe-icon">🧠</div>
+        <div class="pe-title">Role & Persona Prompting</div>
+        <p class="pe-body">Defining a precise AI persona — expertise level, communication style, hard constraints — so the model behaves consistently across every interaction without drift.</p>
+        <div class="pe-tags"><span class="tag v">System Prompts</span><span class="tag v">Persona Design</span></div>
+      </div>
+      <div class="pe-card">
+        <div class="pe-icon">📐</div>
+        <div class="pe-title">Structured Output Design</div>
+        <p class="pe-body">Prompts that produce machine-readable JSON, markdown, or table outputs — enabling direct parsing and routing inside Make.com and webhook automation pipelines.</p>
+        <div class="pe-tags"><span class="tag t">JSON Output</span><span class="tag t">Make.com</span></div>
+      </div>
+      <div class="pe-card">
+        <div class="pe-icon">🔗</div>
+        <div class="pe-title">Chain-of-Thought Prompting</div>
+        <p class="pe-body">Breaking complex tasks into sequential reasoning steps — dramatically improving accuracy on multi-stage decisions and analytical workflows.</p>
+        <div class="pe-tags"><span class="tag v">CoT</span><span class="tag v">Step-by-Step</span></div>
+      </div>
+      <div class="pe-card">
+        <div class="pe-icon">🎯</div>
+        <div class="pe-title">Few-Shot Calibration</div>
+        <p class="pe-body">Embedding 2–5 worked examples inside the prompt to anchor the model to exact format, tone, and output depth — reducing hallucination on live deployments.</p>
+        <div class="pe-tags"><span class="tag n">Few-Shot</span><span class="tag n">Examples</span></div>
+      </div>
+      <div class="pe-card">
+        <div class="pe-icon">🛡️</div>
+        <div class="pe-title">Guardrails & Fallbacks</div>
+        <p class="pe-body">Explicit instructions for edge cases, ambiguous inputs, and out-of-scope queries — so customer-facing AI tools stay on-brand and never produce harmful or unexpected responses.</p>
+        <div class="pe-tags"><span class="tag n">Safety</span><span class="tag n">Edge Cases</span></div>
+      </div>
+      <div class="pe-card">
+        <div class="pe-icon">🔄</div>
+        <div class="pe-title">Iterative Refinement</div>
+        <p class="pe-body">Testing prompts against real user inputs, identifying failure modes, and refining structure over time — treating prompts as living code that evolves with the product.</p>
+        <div class="pe-tags"><span class="tag t">A/B Testing</span><span class="tag t">Iteration</span></div>
+      </div>
+    </div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--purple);margin-bottom:24px;letter-spacing:-.3px">// Real prompts from deployed projects</div>
+    <div class="pe-examples reveal">
+      <div class="pe-ex">
+        <div class="pe-ex-head" style="background:rgba(124,107,255,.06)">
+          <span class="pe-ex-title">Sophie & Eve Beauty Bot</span>
+          <span class="pe-ex-label v">System Prompt</span>
+        </div>
+        <div class="pe-ex-body">
+          You are <span class="hl-v">Sophia</span>, a friendly beauty consultant for <span class="hl-v">Sophie & Eve Beauty and Wellness</span>.<br><br>
+          Help customers with:<br>
+          <span class="hl-t">→</span> Service bookings & pricing inquiries<br>
+          <span class="hl-t">→</span> Product recommendations<br>
+          <span class="hl-t">→</span> Appointment follow-ups<br><br>
+          Respond warmly and professionally. If asked something outside scope: <span class="hl-p">"I'll connect you with our team!"</span> Never discuss competitors. Keep responses under 80 words.
+        </div>
+      </div>
+      <div class="pe-ex">
+        <div class="pe-ex-head" style="background:rgba(0,229,180,.05)">
+          <span class="pe-ex-title">Bite & Go Order Bot</span>
+          <span class="pe-ex-label t">Structured Output</span>
+        </div>
+        <div class="pe-ex-body">
+          Extract order intent and return <span class="hl-t">JSON only</span> — no preamble:<br><br>
+          {<br>
+          &nbsp;&nbsp;<span class="hl-v">"intent"</span>: <span class="hl-p">"order|inquiry|complaint"</span>,<br>
+          &nbsp;&nbsp;<span class="hl-v">"items"</span>: ["..."],<br>
+          &nbsp;&nbsp;<span class="hl-v">"quantity"</span>: 0,<br>
+          &nbsp;&nbsp;<span class="hl-v">"special_request"</span>: "..."<br>
+          }<br><br>
+          <span class="hl-v">No explanation. JSON only.</span> If unclear, set intent to <span class="hl-p">"clarify"</span>.
+        </div>
+      </div>
+      <div class="pe-ex">
+        <div class="pe-ex-head" style="background:rgba(255,95,150,.05)">
+          <span class="pe-ex-title">Portfolio AI Assistant</span>
+          <span class="pe-ex-label p">Persona Prompt</span>
+        </div>
+        <div class="pe-ex-body">
+          You are an AI assistant representing <span class="hl-p">Stucey Rosal</span> — IT Specialist, VA, and AI Automation expert based in Zambales, PH.<br><br>
+          Answer questions about her skills, services, and availability. Be concise. <span class="hl-t">Always end with a CTA</span> directing to Stuceyrosal15@gmail.com.<br><br>
+          <span class="hl-v">If off-topic:</span> "I'm set up only to answer about Stucey's work — please reach out directly!"
+        </div>
+      </div>
+      <div class="pe-ex">
+        <div class="pe-ex-head" style="background:rgba(124,107,255,.06)">
+          <span class="pe-ex-title">Compliance Report Generator</span>
+          <span class="pe-ex-label v">Chain-of-Thought</span>
+        </div>
+        <div class="pe-ex-body">
+          Analyze the data and generate a compliance summary. Think step by step:<br><br>
+          <span class="hl-t">Step 1:</span> Identify non-compliant entries<br>
+          <span class="hl-t">Step 2:</span> Group by category and severity<br>
+          <span class="hl-t">Step 3:</span> Suggest corrective actions<br><br>
+          Output format: Summary → Issues Found → Recommendations.<br>
+          Input data: <span class="hl-p">{{input_data}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pe-platforms reveal">
+      <div class="pe-platforms-label">Models & platforms I prompt engineer on</div>
+      <div class="pe-platforms-row">
+        <span class="tag t">Claude (Anthropic)</span>
+        <span class="tag v">ChatGPT / GPT-4o</span>
+        <span class="tag p">Blackbox AI</span>
+        <span class="tag t">Make.com AI Modules</span>
+        <span class="tag v">ManyChat AI Step</span>
+        <span class="tag p">Webhook + AI Pipelines</span>
+      </div>
+    </div>
+  </div>
+</div><!-- end #services -->
 
 <!-- EDUCATION -->
 <section id="education">
-  <div class="section-label green">Education & Certifications</div>
+  <div class="section-eyebrow teal">Education & Certifications</div>
   <h2>Credentials</h2>
-  <div class="edu-cert-grid">
+  <div class="edu-grid reveal">
     <div>
-      <div class="edu-card reveal" style="margin-bottom:20px">
+      <div class="edu-card" style="margin-bottom:20px">
         <div class="edu-deg">BS Industrial Technology — Major in Computer Technology</div>
         <div class="edu-school">President Ramon Magsaysay State University</div>
-        <div class="edu-year">2021 – 2025</div>
+        <div class="edu-year">2021 – 2025 · Graduate</div>
       </div>
-      <div class="edu-card reveal">
+      <div class="edu-card">
         <div class="edu-deg">Secondary Education</div>
         <div class="edu-school">Palauig Academy Educational Foundation</div>
-        <div class="edu-year">Secondary Level</div>
+        <div class="edu-year">Secondary Level · Completed</div>
       </div>
     </div>
-    <div class="edu-card reveal">
+    <div class="edu-card">
       <div class="edu-deg" style="margin-bottom:20px">Certifications & Training</div>
       <ul class="cert-list">
         <li>Microsoft Licensing Certification</li>
-        <li>Internet Tracing / Network Fundamentals</li>
-        <li>Self-directed AI & Automation Learning — Claude, ChatGPT, Blackbox AI</li>
-        <li>Prompt Engineering — System Design for LLMs</li>
+        <li>Internet Tracing & Network Fundamentals</li>
+        <li>AI & Automation — Self-directed (Claude, ChatGPT, Blackbox AI)</li>
+        <li>Prompt Engineering — System Design for Language Models</li>
         <li>IoT Systems & Computer Vision Integration</li>
         <li>Virtual Assistant Skills — Admin Support, Scheduling, Documentation</li>
         <li>Microsoft 365 Productivity Suite (Word, Excel, Outlook, PowerPoint)</li>
@@ -890,17 +1021,17 @@
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-label pink" style="justify-content:center">Contact</div>
+  <div class="section-eyebrow pink" style="justify-content:center">Contact</div>
   <div class="contact-inner">
     <h2>Let's Work Together</h2>
-    <p class="contact-sub">Open to IT roles, AI automation projects, Virtual Assistant engagements, prompt engineering contracts, and freelance work. Remote-ready. Let's build something useful.</p>
+    <p class="contact-lead" style="margin:0 auto 40px;max-width:480px;color:var(--soft);font-size:13px;line-height:1.9">Open to IT roles, AI automation projects, Virtual Assistant engagements, prompt engineering contracts, and freelance work. Remote-ready and available immediately.</p>
     <div class="contact-links">
       <a href="tel:+639507536207" class="contact-link">📞 +63 950 753 6207</a>
-      <a href="mailto:Stuceyrosal15@gmail.com" class="contact-link va-link">✉ Send Email</a>
+      <a href="mailto:Stuceyrosal15@gmail.com" class="contact-link p">✉ Send an Email</a>
     </div>
-    <a href="mailto:Stuceyrosal15@gmail.com" class="contact-email-big">Stuceyrosal15@gmail.com</a>
-    <div class="contact-va-note">
-      <strong>AI Automation · VA · Prompt Engineering</strong> — I offer flexible remote support across all three specializations. Whether you need workflows built, admin handled, or AI systems engineered, message me to discuss your needs.
+    <a href="mailto:Stuceyrosal15@gmail.com" class="contact-email">Stuceyrosal15@gmail.com</a>
+    <div class="contact-note">
+      <b>Looking for an all-in-one remote specialist?</b> I offer AI automation, virtual assistant support, and prompt engineering — individually or as a bundled package. Message me to discuss scope, availability, and rates. I respond promptly.
     </div>
   </div>
 </section>
@@ -908,146 +1039,172 @@
 <!-- FOOTER -->
 <footer>
   <span>© 2025 Stucey Rosal</span>
-  <span style="color:var(--muted);font-size:11px">IT Specialist · <span style="color:var(--accent)">AI Automation</span> · <span style="color:var(--accent3)">VA</span> · <span style="color:var(--accent2)">Prompt Engineer</span></span>
+  <div class="footer-roles">
+    <span style="color:var(--teal)">AI Automation</span>
+    <span style="color:var(--muted)">·</span>
+    <span style="color:var(--pink)">Virtual Assistant</span>
+    <span style="color:var(--muted)">·</span>
+    <span style="color:var(--purple)">Prompt Engineer</span>
+    <span style="color:var(--muted)">·</span>
+    <span style="color:var(--soft)">IT Specialist</span>
+  </div>
   <span>San Juan, Palauig, Zambales, PH</span>
 </footer>
 
-<!-- CHATBOT WIDGET (unchanged) -->
-<style>
-:root{--cb-black:#0a0a0a;--cb-dark:#111111;--cb-card:#1a1a1a;--cb-border:#2a2a2a;--cb-accent:#ff6b9d;--cb-accent-dim:rgba(255,107,157,0.15);--cb-white:#ffffff;--cb-gray:#888;}
-.chat-fab{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
-.fab-btn{width:60px;height:60px;border-radius:50%;background:var(--cb-accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;animation:pinkPulse 2.5s infinite;transition:transform .2s;position:relative;}
-.fab-btn svg{width:26px;height:26px;fill:var(--cb-black);}
-.fab-badge{position:absolute;top:-3px;right:-3px;width:18px;height:18px;background:#7c6bff;border-radius:50%;border:2px solid var(--cb-black);font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;}
-.fab-tooltip{background:var(--cb-card);color:var(--cb-white);padding:8px 14px;border-radius:10px;font-size:12px;font-weight:600;white-space:nowrap;border:1px solid var(--cb-accent);animation:tooltipBob 2.5s ease-in-out infinite;}
-@keyframes pinkPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,157,0.4);}50%{box-shadow:0 0 0 14px rgba(255,107,157,0);}}
-@keyframes tooltipBob{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
-.chat-panel{position:fixed;bottom:102px;right:28px;z-index:9998;width:360px;max-height:580px;border-radius:20px;background:var(--cb-dark);border:1px solid var(--cb-border);box-shadow:0 24px 80px rgba(0,0,0,0.6);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right;transition:transform .25s cubic-bezier(.34,1.56,.64,1),opacity .2s;}
-.chat-panel.hidden{transform:scale(0.7);opacity:0;pointer-events:none;}
-.chat-header{background:var(--cb-card);padding:14px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--cb-border);flex-shrink:0;}
-.header-avatar{width:40px;height:40px;border-radius:12px;background:var(--cb-accent-dim);border:1.5px solid var(--cb-accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--cb-accent);}
-.header-text h3{color:var(--cb-white);font-size:14px;font-weight:700;}
-.header-text p{color:var(--cb-gray);font-size:11px;display:flex;align-items:center;gap:5px;margin-top:2px;}
-.online-dot{width:6px;height:6px;background:var(--cb-accent);border-radius:50%;animation:blink 2s infinite;}
-@keyframes blink{50%{opacity:0.3;}}
-.header-close{margin-left:auto;background:var(--cb-border);border:none;color:var(--cb-gray);width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
-.quick-chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px 8px;background:var(--cb-card);border-bottom:1px solid var(--cb-border);flex-shrink:0;}
-.chip{background:transparent;border:1px solid var(--cb-border);color:var(--cb-gray);font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer;transition:border-color .2s,color .2s;}
-.chip:hover{border-color:var(--cb-accent);color:var(--cb-accent);}
-.messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth;}
-.msg{display:flex;gap:8px;align-items:flex-end;}
-.msg.user{flex-direction:row-reverse;}
-.msg-icon{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;background:var(--cb-accent-dim);color:var(--cb-accent);border:1px solid var(--cb-accent);}
-.msg.user .msg-icon{background:var(--cb-border);color:var(--cb-gray);border-color:var(--cb-border);}
-.bubble{max-width:80%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.55;}
-.msg.bot .bubble{background:var(--cb-card);color:var(--cb-white);border:1px solid var(--cb-border);}
-.msg.user .bubble{background:var(--cb-accent);color:var(--cb-black);font-weight:700;}
-.typing-bubble{display:flex;gap:4px;padding:12px 14px;background:var(--cb-card);border-radius:14px;border:1px solid var(--cb-border);width:fit-content;}
-.typing-bubble span{width:6px;height:6px;background:var(--cb-accent);border-radius:50%;animation:tdot 1.2s infinite;}
-.typing-bubble span:nth-child(2){animation-delay:.2s;}
-.typing-bubble span:nth-child(3){animation-delay:.4s;}
-@keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-6px);opacity:1;}}
-.chat-input-area{padding:10px 12px;background:var(--cb-card);border-top:1px solid var(--cb-border);display:flex;gap:8px;align-items:center;flex-shrink:0;}
-.chat-input{flex:1;border:1px solid var(--cb-border);border-radius:10px;padding:9px 14px;font-size:13px;color:var(--cb-white);background:var(--cb-dark);outline:none;}
-.chat-input:focus{border-color:var(--cb-accent);}
-.send-btn{width:38px;height:38px;border-radius:10px;background:var(--cb-accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.send-btn svg{width:16px;height:16px;fill:var(--cb-black);}
-.powered-by{text-align:center;font-size:10px;color:#444;padding:5px 0 7px;background:var(--cb-card);}
-.powered-by span{color:var(--cb-accent);}
-</style>
-
+<!-- CHATBOT -->
 <div class="chat-fab" id="chatFab">
-  <div class="fab-tooltip">💬 Ask about my services!</div>
+  <div class="fab-tip">💬 Ask about my services!</div>
   <button class="fab-btn" onclick="toggleChat()">
-    <div class="fab-badge">1</div>
+    <div class="fab-dot">1</div>
     <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
   </button>
 </div>
 
 <div class="chat-panel hidden" id="chatPanel">
-  <div class="chat-header">
-    <div class="header-avatar">SR_</div>
-    <div class="header-text">
+  <div class="chat-head">
+    <div class="chat-avatar">SR_</div>
+    <div class="chat-head-text">
       <h3>Stucey's AI Assistant</h3>
-      <p><span class="online-dot"></span> online · AI · VA · Prompt Eng</p>
+      <p><span class="chat-dot"></span> online · AI · VA · Prompt Eng</p>
     </div>
-    <button class="header-close" onclick="toggleChat()">✕</button>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
   </div>
-  <div class="quick-chips">
-    <button class="chip" onclick="sendChip('What VA services do you offer?')">🤝 VA Services</button>
-    <button class="chip" onclick="sendChip('Tell me about your AI automation projects')">🤖 AI Projects</button>
-    <button class="chip" onclick="sendChip('What is prompt engineering?')">✍ Prompt Eng</button>
-    <button class="chip" onclick="sendChip('How can I hire you?')">📩 Hire Me</button>
-    <button class="chip" onclick="sendChip('What is your rate?')">💰 Rates</button>
+  <div class="chat-chips">
+    <button class="chip" onclick="sendChip('What VA services do you offer?')">VA services</button>
+    <button class="chip" onclick="sendChip('Tell me about your AI automation work')">AI automation</button>
+    <button class="chip" onclick="sendChip('What is prompt engineering?')">Prompt engineering</button>
+    <button class="chip" onclick="sendChip('How can I hire you?')">Hire Stucey</button>
+    <button class="chip" onclick="sendChip('What tools do you use?')">Tools</button>
   </div>
-  <div class="messages" id="messages">
+  <div class="chat-msgs" id="chatMsgs">
     <div class="msg bot">
-      <div class="msg-icon">SR_</div>
-      <div class="bubble">Hey! 👋 I'm Stucey's AI assistant.<br><br>Ask me about her <strong>AI automation</strong>, <strong>VA services</strong>, <strong>prompt engineering</strong>, or how to <strong>work together</strong>!</div>
+      <div class="msg-ico">SR</div>
+      <div class="bubble">Hi! I'm Stucey's AI assistant. Ask me about her AI automation, VA services, or prompt engineering work — I'm happy to help! 👋</div>
     </div>
   </div>
-  <div class="chat-input-area">
-    <input class="chat-input" id="chatInput" type="text" placeholder="Ask about AI, VA, or Prompt Eng..." onkeydown="if(event.key==='Enter') sendMessage()"/>
-    <button class="send-btn" onclick="sendMessage()">
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendMsg()"/>
+    <button class="chat-send" onclick="sendMsg()">
       <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
     </button>
   </div>
-  <div class="powered-by">Built by <span>Stucey Rosal</span> + <span>AI Automation</span></div>
+  <div class="chat-powered">Powered by <span>Claude AI</span></div>
 </div>
 
 <script>
-const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/ck4g16mpmv7p782931mh1bf96lqm9lcc";
-let isOpen = false;
-function toggleChat() {
-  isOpen = !isOpen;
-  const panel = document.getElementById('chatPanel');
-  const fab = document.getElementById('chatFab');
-  if (isOpen) {
-    panel.classList.remove('hidden');
-    fab.querySelector('.fab-badge').style.display = 'none';
-    fab.querySelector('.fab-tooltip').style.display = 'none';
-    document.getElementById('chatInput').focus();
-  } else { panel.classList.add('hidden'); }
-}
-function sendChip(text) { document.getElementById('chatInput').value = text; sendMessage(); }
-async function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-  input.value = '';
-  appendMessage('user', text);
-  const typingId = showTyping();
-  try {
-    const res = await fetch(MAKE_WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:text,source:'stucey-portfolio'}) });
-    removeTyping(typingId);
-    if (!res.ok) throw new Error('error');
-    const rawText = await res.text();
-    let reply = "Sorry, I could not get a response right now!";
-    try { const data = JSON.parse(rawText); reply = data.reply || data.message || data.response || data.answer || reply; } catch(e) { if (rawText && rawText.trim().length > 0) reply = rawText.trim(); }
-    reply = reply.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/^\* (.+)/gm,"• $1").replace(/\n/g,"<br>");
-    appendMessage("bot", reply);
-  } catch(err) { removeTyping(typingId); appendMessage('bot',"⚠️ Reach out directly at <strong>Stuceyrosal15@gmail.com</strong> or <strong>+63 950 753 6207</strong>!"); }
-}
-function appendMessage(role, text) {
-  const msgs = document.getElementById('messages');
-  const div = document.createElement('div');
-  div.className = `msg ${role}`;
-  div.innerHTML = `<div class="msg-icon">${role==='bot'?'SR_':'👤'}</div><div class="bubble">${text}</div>`;
-  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
-}
-function showTyping() {
-  const msgs = document.getElementById('messages');
-  const id = 'typing-' + Date.now();
-  const div = document.createElement('div');
-  div.className = 'msg bot'; div.id = id;
-  div.innerHTML = `<div class="msg-icon">SR_</div><div class="typing-bubble"><span></span><span></span><span></span></div>`;
-  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight; return id;
-}
-function removeTyping(id) { const el = document.getElementById(id); if (el) el.remove(); }
+// ── REVEAL ON SCROLL ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') })
+}, { threshold: 0.12 })
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
 
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => { entries.forEach((e,i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); }); }, { threshold: 0.1 });
-reveals.forEach(el => observer.observe(el));
+// ── SKILL BARS ──
+const skillObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.querySelectorAll('.skill-fill').forEach(f => {
+        f.style.transform = `scaleX(${f.dataset.w / 100})`
+      })
+    }
+  })
+}, { threshold: 0.2 })
+document.querySelectorAll('.skills-outer, .reveal').forEach(el => skillObserver.observe(el))
+
+// ── SERVICE TABS ──
+function showTab(tab) {
+  document.querySelectorAll('.svc-section').forEach(s => s.classList.remove('active'))
+  document.querySelectorAll('.svc-tab').forEach(t => {
+    t.className = 'svc-tab'
+  })
+  document.getElementById('svc-' + tab).classList.add('active')
+  const activeTab = document.getElementById('tab-' + tab)
+  const colors = { ai: 'active-t', va: 'active-p', pe: 'active-v' }
+  activeTab.classList.add(colors[tab])
+  // trigger reveals in newly shown section
+  setTimeout(() => {
+    document.querySelectorAll('#svc-' + tab + ' .reveal').forEach(el => {
+      if(!el.classList.contains('in')) observer.observe(el)
+      el.classList.add('in')
+    })
+    document.querySelectorAll('#svc-' + tab + ' .skill-fill').forEach(f => {
+      f.style.transform = `scaleX(${f.dataset.w / 100})`
+    })
+  }, 50)
+}
+// initialize first tab
+showTab('ai')
+
+// ── CHAT ──
+let chatOpen = false
+function toggleChat() {
+  chatOpen = !chatOpen
+  document.getElementById('chatPanel').classList.toggle('hidden', !chatOpen)
+  document.querySelector('.fab-dot').style.display = chatOpen ? 'none' : 'flex'
+  document.querySelector('.fab-tip').style.display = chatOpen ? 'none' : 'block'
+}
+function sendChip(text) {
+  document.getElementById('chatInput').value = text
+  sendMsg()
+}
+
+const SYSTEM_PROMPT = `You are an AI assistant for Stucey Rosal's portfolio website. Stucey is a 2025 graduate from the Philippines offering three main services:
+
+1. AI AUTOMATION: Building workflows with Make.com, webhooks, Claude, ChatGPT. Projects include IP automation, task automation, compliance automation, IoT camera system.
+2. VIRTUAL ASSISTANT: Calendar/email management, research, data entry, SOPs, reporting, tech support. Uses Microsoft 365, Google Workspace, Notion, Excel.
+3. PROMPT ENGINEERING: System prompts, Chain-of-Thought, JSON structured output, few-shot prompting, guardrails. Works with Claude, GPT-4o, Blackbox AI, ManyChat.
+
+She also has 1 year of IT support experience at Beyond Infinity Connection Philippines.
+Location: San Juan, Palauig, Zambales, Philippines. Remote-ready.
+Contact: Stuceyrosal15@gmail.com | +63 950 753 6207
+
+Be concise and helpful. Always end with a CTA to contact her at Stuceyrosal15@gmail.com for inquiries. If asked something unrelated to her work, say: "I'm only set up to answer questions about Stucey's work — feel free to reach out directly at Stuceyrosal15@gmail.com!"`
+
+async function sendMsg() {
+  const input = document.getElementById('chatInput')
+  const text = input.value.trim()
+  if (!text) return
+  input.value = ''
+  appendMsg('user', text)
+  const typing = appendTyping()
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: text }]
+      })
+    })
+    const data = await response.json()
+    typing.remove()
+    const reply = data.content?.[0]?.text || "Sorry, I couldn't get a response. Please email Stuceyrosal15@gmail.com directly!"
+    appendMsg('bot', reply)
+  } catch(e) {
+    typing.remove()
+    appendMsg('bot', "Something went wrong. Please reach out directly at Stuceyrosal15@gmail.com!")
+  }
+}
+
+function appendMsg(role, text) {
+  const msgs = document.getElementById('chatMsgs')
+  const div = document.createElement('div')
+  div.className = `msg ${role}`
+  div.innerHTML = `<div class="msg-ico">${role === 'bot' ? 'SR' : 'You'}</div><div class="bubble">${text}</div>`
+  msgs.appendChild(div)
+  msgs.scrollTop = msgs.scrollHeight
+  return div
+}
+function appendTyping() {
+  const msgs = document.getElementById('chatMsgs')
+  const div = document.createElement('div')
+  div.className = 'msg bot'
+  div.innerHTML = `<div class="msg-ico">SR</div><div class="typing"><span></span><span></span><span></span></div>`
+  msgs.appendChild(div)
+  msgs.scrollTop = msgs.scrollHeight
+  return div
+}
 </script>
 </body>
 </html>
