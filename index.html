@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Stucey Rosal — AI Automation & IT Specialist</title>
+<title>Stucey Rosal — AI Automation · IT Specialist · Virtual Assistant</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
 <style>
   :root {
@@ -12,15 +12,14 @@
     --border: #1e1e2e;
     --accent: #00f5c4;
     --accent2: #7c6bff;
+    --accent3: #ff6b9d;
     --text: #e8e8f0;
     --muted: #666680;
     --card: #13131c;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--bg);
     color: var(--text);
@@ -30,7 +29,6 @@
     overflow-x: hidden;
   }
 
-  /* ── NOISE OVERLAY ── */
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -47,19 +45,18 @@
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 18px;
-    color: var(--accent);
-    letter-spacing: -0.5px;
-  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: var(--accent); letter-spacing: -0.5px; }
   .nav-links { display: flex; gap: 32px; }
-  .nav-links a {
-    color: var(--muted); text-decoration: none; font-size: 12px;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    transition: color 0.2s;
-  }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--accent); }
+  .nav-va-badge {
+    background: linear-gradient(135deg, rgba(255,107,157,0.15), rgba(124,107,255,0.15));
+    border: 1px solid rgba(255,107,157,0.4);
+    color: var(--accent3);
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 2px; display: flex; align-items: center; gap: 6px;
+  }
+  .nav-va-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent3); animation: blink 2s infinite; }
 
   /* ── HERO ── */
   #hero {
@@ -76,284 +73,239 @@
     background-size: 48px 48px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
   }
-  .hero-glow {
-    position: absolute; top: -20%; left: 20%;
-    width: 600px; height: 600px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,245,196,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-glow2 {
-    position: absolute; bottom: -10%; right: 10%;
-    width: 400px; height: 400px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,107,255,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
+  .hero-glow { position: absolute; top: -20%; left: 20%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,245,196,0.08) 0%, transparent 70%); pointer-events: none; }
+  .hero-glow2 { position: absolute; bottom: -10%; right: 10%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(124,107,255,0.08) 0%, transparent 70%); pointer-events: none; }
+  .hero-glow3 { position: absolute; top: 30%; right: -5%; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(255,107,157,0.06) 0%, transparent 70%); pointer-events: none; }
 
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    color: var(--accent); font-size: 11px; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 24px;
-    opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
-  }
-  .hero-tag::before {
-    content: ''; width: 32px; height: 1px; background: var(--accent);
-  }
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(52px, 8vw, 100px);
-    font-weight: 800; line-height: 0.95;
-    letter-spacing: -3px; margin-bottom: 32px;
-    opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
-  }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
+  .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(52px, 8vw, 100px); font-weight: 800; line-height: 0.95; letter-spacing: -3px; margin-bottom: 32px; opacity: 0; animation: fadeUp 0.6s 0.35s forwards; }
   h1 .line-dim { color: var(--muted); }
   h1 .line-accent { color: var(--accent); }
 
-  .hero-sub {
-    max-width: 520px; color: var(--muted); font-size: 14px; line-height: 1.8;
-    margin-bottom: 48px;
-    opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
+  .hero-role-tags {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.6s 0.45s forwards;
   }
+  .role-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 2px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .role-tag.it { background: rgba(0,245,196,0.08); border: 1px solid rgba(0,245,196,0.25); color: var(--accent); }
+  .role-tag.va { background: rgba(255,107,157,0.1); border: 1px solid rgba(255,107,157,0.35); color: var(--accent3); }
+  .role-tag.ai { background: rgba(124,107,255,0.1); border: 1px solid rgba(124,107,255,0.35); color: var(--accent2); }
 
-  .hero-cta {
-    display: flex; gap: 16px; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp 0.6s 0.65s forwards;
-  }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 14px 28px; border-radius: 4px; font-family: 'DM Mono', monospace;
-    font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
-    text-decoration: none; cursor: pointer; transition: all 0.2s; border: none;
-  }
-  .btn-primary {
-    background: var(--accent); color: #0a0a0f; font-weight: 600;
-  }
+  .hero-sub { max-width: 560px; color: var(--muted); font-size: 14px; line-height: 1.8; margin-bottom: 48px; opacity: 0; animation: fadeUp 0.6s 0.5s forwards; }
+  .hero-sub strong { color: var(--accent3); font-weight: normal; }
+
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.65s forwards; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; }
+  .btn-primary { background: var(--accent); color: #0a0a0f; font-weight: 600; }
   .btn-primary:hover { background: #00ddb0; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,245,196,0.3); }
-  .btn-ghost {
-    background: transparent; color: var(--text);
-    border: 1px solid var(--border);
-  }
+  .btn-va { background: var(--accent3); color: #0a0a0f; font-weight: 600; }
+  .btn-va:hover { background: #ff5090; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,107,157,0.35); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
   .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-  .hero-meta {
-    position: absolute; bottom: 48px; left: 48px; right: 48px;
-    display: flex; justify-content: space-between; align-items: center;
-    opacity: 0; animation: fadeUp 0.6s 0.8s forwards;
-  }
+  .hero-meta { position: absolute; bottom: 48px; left: 48px; right: 48px; display: flex; justify-content: space-between; align-items: center; opacity: 0; animation: fadeUp 0.6s 0.8s forwards; }
   .hero-contact { display: flex; gap: 32px; }
-  .hero-contact a {
-    color: var(--muted); text-decoration: none; font-size: 12px;
-    transition: color 0.2s;
-  }
+  .hero-contact a { color: var(--muted); text-decoration: none; font-size: 12px; transition: color 0.2s; }
   .hero-contact a:hover { color: var(--accent); }
   .scroll-hint { color: var(--muted); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
   .scroll-hint::after { content: '↓'; animation: bounce 1.5s infinite; display: inline-block; }
 
-  /* ── SECTIONS ── */
-  section { padding: 100px 48px; }
-  .section-label {
-    display: flex; align-items: center; gap: 12px;
-    color: var(--accent); font-size: 11px; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 16px;
+  /* ── VA SECTION ── */
+  #va {
+    padding: 100px 48px;
+    background: var(--bg);
+    position: relative; overflow: hidden;
+    border-top: 1px solid var(--border);
   }
-  .section-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); }
-  h2 {
-    font-family: 'Syne', sans-serif; font-size: clamp(32px, 5vw, 56px);
-    font-weight: 800; letter-spacing: -2px; margin-bottom: 60px;
-    line-height: 1;
+  .va-bg-accent {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,107,157,0.03) 0%, transparent 60%);
+    pointer-events: none;
   }
+  .va-glow { position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(255,107,157,0.07) 0%, transparent 70%); pointer-events: none; }
+  .section-label { display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .section-label.pink { color: var(--accent3); }
+  .section-label.pink::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent3); }
+  .section-label.green { color: var(--accent); }
+  .section-label.green::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); }
+  .section-label.purple { color: var(--accent2); }
+  .section-label.purple::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent2); }
+  h2 { font-family: 'Syne', sans-serif; font-size: clamp(32px, 5vw, 56px); font-weight: 800; letter-spacing: -2px; margin-bottom: 16px; line-height: 1; }
+  .section-sub { color: var(--muted); max-width: 540px; margin-bottom: 60px; line-height: 1.9; }
+
+  .va-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-bottom: 60px; }
+  .va-intro-left p { color: var(--muted); line-height: 1.9; margin-bottom: 14px; }
+  .va-intro-left p strong { color: var(--text); font-weight: normal; }
+
+  .va-highlight-box {
+    border: 1px solid rgba(255,107,157,0.3);
+    background: rgba(255,107,157,0.05);
+    padding: 28px 32px; position: relative;
+    margin-top: 28px;
+  }
+  .va-highlight-box::before { content: '// why hire a VA + AI specialist'; position: absolute; top: -10px; left: 20px; background: var(--bg); padding: 0 8px; color: var(--accent3); font-size: 10px; letter-spacing: 1px; }
+  .va-highlight-box p { color: var(--muted); font-size: 13px; line-height: 1.9; }
+  .va-highlight-box p strong { color: var(--accent3); font-weight: normal; }
+
+  .va-services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border);
+    margin-bottom: 60px;
+  }
+  .va-service-card {
+    background: var(--card); padding: 32px 28px; position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .va-service-card:hover { background: #161622; }
+  .va-service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent3), var(--accent2)); opacity: 0; transition: opacity 0.3s; }
+  .va-service-card:hover::before { opacity: 1; }
+  .va-service-icon { font-size: 26px; margin-bottom: 16px; display: block; }
+  .va-service-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+  .va-service-desc { color: var(--muted); font-size: 12px; line-height: 1.8; }
+  .va-service-tools { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tool-chip { background: rgba(255,107,157,0.08); border: 1px solid rgba(255,107,157,0.2); color: var(--accent3); font-size: 10px; padding: 3px 8px; letter-spacing: 1px; border-radius: 2px; }
+  .tool-chip.purple { background: rgba(124,107,255,0.08); border-color: rgba(124,107,255,0.2); color: var(--accent2); }
+  .tool-chip.green { background: rgba(0,245,196,0.08); border-color: rgba(0,245,196,0.2); color: var(--accent); }
+
+  .va-workflow { margin-bottom: 0; }
+  .va-workflow-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--accent3); margin-bottom: 28px; letter-spacing: -0.5px; }
+  .workflow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .workflow-steps::before { content: ''; position: absolute; top: 28px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, var(--accent3), var(--accent2)); opacity: 0.4; z-index: 0; }
+  .workflow-step { text-align: center; position: relative; z-index: 1; padding: 0 12px; }
+  .step-num { width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; position: relative; }
+  .step-num.pink { background: rgba(255,107,157,0.1); border: 1px solid rgba(255,107,157,0.4); color: var(--accent3); }
+  .step-num.purple { background: rgba(124,107,255,0.1); border: 1px solid rgba(124,107,255,0.4); color: var(--accent2); }
+  .step-num.teal { background: rgba(0,245,196,0.1); border: 1px solid rgba(0,245,196,0.4); color: var(--accent); }
+  .step-label { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .step-desc { color: var(--muted); font-size: 11px; line-height: 1.7; }
 
   /* ── ABOUT ── */
-  #about { background: var(--surface); border-top: 1px solid var(--border); }
-  .about-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
-  }
+  #about { background: var(--surface); border-top: 1px solid var(--border); padding: 100px 48px; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
   .about-text p { color: var(--muted); margin-bottom: 16px; line-height: 1.9; }
-  .about-stats {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    background: var(--border); border: 1px solid var(--border);
-    margin-top: 40px;
-  }
-  .stat {
-    background: var(--surface); padding: 28px 24px;
-  }
-  .stat-num {
-    font-family: 'Syne', sans-serif; font-size: 40px; font-weight: 800;
-    color: var(--accent); line-height: 1;
-  }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 40px; }
+  .stat { background: var(--surface); padding: 28px 24px; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 40px; font-weight: 800; line-height: 1; }
+  .stat-num.green { color: var(--accent); }
+  .stat-num.pink { color: var(--accent3); }
+  .stat-num.purple { color: var(--accent2); }
   .stat-label { color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; }
-
-  .about-right {}
-  .info-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 16px 0; border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
+  .info-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
   .info-row:last-child { border-bottom: none; }
   .info-key { color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
   .info-val { color: var(--text); }
 
   /* ── EXPERIENCE ── */
-  #experience { }
-  .exp-card {
-    border: 1px solid var(--border); padding: 40px; margin-bottom: 24px;
-    background: var(--card); position: relative; overflow: hidden;
-    transition: border-color 0.3s;
-  }
-  .exp-card::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-    background: linear-gradient(to bottom, var(--accent), var(--accent2));
-  }
+  #experience { padding: 100px 48px; }
+  .exp-card { border: 1px solid var(--border); padding: 40px; margin-bottom: 24px; background: var(--card); position: relative; overflow: hidden; transition: border-color 0.3s; }
+  .exp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--accent), var(--accent2)); }
   .exp-card:hover { border-color: var(--accent); }
+  .exp-card.va-card::before { background: linear-gradient(to bottom, var(--accent3), var(--accent2)); }
+  .exp-card.va-card:hover { border-color: var(--accent3); }
   .exp-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
   .exp-role { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; }
-  .exp-company { color: var(--accent); font-size: 13px; margin-top: 4px; }
-  .exp-period {
-    background: var(--border); padding: 6px 12px; border-radius: 2px;
-    font-size: 11px; letter-spacing: 1px; color: var(--muted); white-space: nowrap;
-  }
+  .exp-company { font-size: 13px; margin-top: 4px; }
+  .exp-company.green { color: var(--accent); }
+  .exp-company.pink { color: var(--accent3); }
+  .exp-period { background: var(--border); padding: 6px 12px; border-radius: 2px; font-size: 11px; letter-spacing: 1px; color: var(--muted); white-space: nowrap; }
   .exp-bullets { list-style: none; }
-  .exp-bullets li {
-    color: var(--muted); padding: 6px 0; font-size: 13px; line-height: 1.7;
-    display: flex; gap: 12px;
-  }
-  .exp-bullets li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+  .exp-bullets li { color: var(--muted); padding: 6px 0; font-size: 13px; line-height: 1.7; display: flex; gap: 12px; }
+  .exp-bullets li::before { content: '→'; flex-shrink: 0; }
+  .exp-bullets.green li::before { color: var(--accent); }
+  .exp-bullets.pink li::before { color: var(--accent3); }
+  .exp-va-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,107,157,0.1); border: 1px solid rgba(255,107,157,0.3); color: var(--accent3); font-size: 10px; letter-spacing: 1.5px; padding: 4px 10px; border-radius: 2px; margin-top: 12px; text-transform: uppercase; }
 
   /* ── PROJECTS ── */
-  #projects { background: var(--surface); border-top: 1px solid var(--border); }
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px;
-    background: var(--border); border: 1px solid var(--border);
-  }
-  .project-card {
-    background: var(--card); padding: 36px; position: relative; overflow: hidden;
-    transition: background 0.3s;
-  }
+  #projects { background: var(--surface); border-top: 1px solid var(--border); padding: 100px 48px; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .project-card { background: var(--card); padding: 36px; position: relative; overflow: hidden; transition: background 0.3s; }
   .project-card:hover { background: #161622; }
   .project-card:hover .project-icon { transform: scale(1.1); }
-  .project-num {
-    font-family: 'Syne', sans-serif; font-size: 60px; font-weight: 800;
-    color: var(--border); position: absolute; top: 20px; right: 24px;
-    line-height: 1; pointer-events: none; transition: color 0.3s;
-  }
+  .project-num { font-family: 'Syne', sans-serif; font-size: 60px; font-weight: 800; color: var(--border); position: absolute; top: 20px; right: 24px; line-height: 1; pointer-events: none; transition: color 0.3s; }
   .project-card:hover .project-num { color: rgba(0,245,196,0.07); }
-  .project-icon {
-    font-size: 28px; margin-bottom: 20px; display: block;
-    transition: transform 0.3s;
-  }
-  .project-title {
-    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700;
-    margin-bottom: 12px;
-  }
+  .project-card.va-project:hover .project-num { color: rgba(255,107,157,0.07); }
+  .project-icon { font-size: 28px; margin-bottom: 20px; display: block; transition: transform 0.3s; }
+  .project-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; }
   .project-desc { color: var(--muted); font-size: 13px; line-height: 1.8; }
-  .project-tag {
-    display: inline-block; margin-top: 20px;
-    background: rgba(0,245,196,0.08); color: var(--accent);
-    padding: 4px 10px; font-size: 10px; letter-spacing: 1.5px;
-    text-transform: uppercase; border-radius: 2px;
-  }
+  .project-tag { display: inline-block; margin-top: 20px; padding: 4px 10px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 2px; }
+  .project-tag.green { background: rgba(0,245,196,0.08); color: var(--accent); }
+  .project-tag.pink { background: rgba(255,107,157,0.1); color: var(--accent3); }
 
   /* ── SKILLS ── */
-  #skills {}
-  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .skill-group { }
-  .skill-group-title {
-    font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
-    letter-spacing: 1px; text-transform: uppercase;
-    margin-bottom: 24px; padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-    color: var(--accent);
-  }
-  .skill-item {
-    display: flex; align-items: center; gap: 16px; margin-bottom: 16px;
-  }
-  .skill-name { font-size: 13px; color: var(--text); min-width: 200px; }
-  .skill-bar-wrap {
-    flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden;
-  }
-  .skill-bar {
-    height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 2px; transform-origin: left;
-    animation: growBar 1s ease-out forwards; transform: scaleX(0);
-  }
+  #skills { padding: 100px 48px; }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+  .skill-group-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .skill-group-title.green { color: var(--accent); border-color: rgba(0,245,196,0.2); }
+  .skill-group-title.pink { color: var(--accent3); border-color: rgba(255,107,157,0.2); }
+  .skill-group-title.purple { color: var(--accent2); border-color: rgba(124,107,255,0.2); }
+  .skill-item { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .skill-name { font-size: 12px; color: var(--text); min-width: 160px; }
+  .skill-bar-wrap { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .skill-bar { height: 100%; border-radius: 2px; transform-origin: left; animation: growBar 1s ease-out forwards; transform: scaleX(0); }
+  .skill-bar.green { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .skill-bar.pink { background: linear-gradient(90deg, var(--accent3), var(--accent2)); }
+  .skill-bar.purple { background: linear-gradient(90deg, var(--accent2), var(--accent3)); }
 
   /* ── EDUCATION ── */
-  #education { background: var(--surface); border-top: 1px solid var(--border); }
+  #education { background: var(--surface); border-top: 1px solid var(--border); padding: 100px 48px; }
   .edu-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .edu-card {
-    border: 1px solid var(--border); padding: 32px;
-    background: var(--card); position: relative;
-  }
-  .edu-deg {
-    font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px;
-  }
+  .edu-card { border: 1px solid var(--border); padding: 32px; background: var(--card); }
+  .edu-deg { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; }
   .edu-school { color: var(--accent); font-size: 13px; margin-bottom: 4px; }
   .edu-year { color: var(--muted); font-size: 12px; letter-spacing: 1px; }
   .cert-list { list-style: none; }
-  .cert-list li {
-    display: flex; align-items: flex-start; gap: 10px;
-    padding: 12px 0; border-bottom: 1px solid var(--border);
-    font-size: 13px; color: var(--muted);
-  }
+  .cert-list li { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted); }
   .cert-list li:last-child { border-bottom: none; }
   .cert-list li::before { content: '✓'; color: var(--accent); flex-shrink: 0; font-size: 12px; margin-top: 2px; }
 
   /* ── CONTACT ── */
-  #contact { text-align: center; }
-  .contact-inner { max-width: 560px; margin: 0 auto; }
+  #contact { text-align: center; padding: 100px 48px; }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
   #contact h2 { margin-bottom: 16px; }
   .contact-sub { color: var(--muted); margin-bottom: 48px; }
   .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin-bottom: 48px; }
-  .contact-link {
-    display: flex; align-items: center; gap: 10px;
-    border: 1px solid var(--border); padding: 14px 24px;
-    color: var(--text); text-decoration: none; font-size: 13px;
-    transition: all 0.2s; background: var(--card);
-  }
+  .contact-link { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); padding: 14px 24px; color: var(--text); text-decoration: none; font-size: 13px; transition: all 0.2s; background: var(--card); }
   .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-  .contact-email-big {
-    font-family: 'Syne', sans-serif; font-size: clamp(18px, 3vw, 28px);
-    font-weight: 700; color: var(--accent); text-decoration: none;
-    letter-spacing: -1px; display: inline-block;
-    transition: opacity 0.2s;
-  }
+  .contact-link.va-link:hover { border-color: var(--accent3); color: var(--accent3); }
+  .contact-email-big { font-family: 'Syne', sans-serif; font-size: clamp(18px, 3vw, 28px); font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: -1px; display: inline-block; transition: opacity 0.2s; }
   .contact-email-big:hover { opacity: 0.7; }
+  .contact-va-note { margin-top: 40px; padding: 24px 32px; border: 1px solid rgba(255,107,157,0.25); background: rgba(255,107,157,0.04); font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .contact-va-note strong { color: var(--accent3); font-weight: normal; }
 
   /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border); padding: 32px 48px;
-    display: flex; justify-content: space-between; align-items: center;
-    color: var(--muted); font-size: 12px;
-  }
+  footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; }
 
   /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(4px); }
-  }
-  @keyframes growBar {
-    to { transform: scaleX(1); }
-  }
-
-  .reveal {
-    opacity: 0; transform: translateY(32px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+  @keyframes growBar { to { transform: scaleX(1); } }
+  @keyframes blink { 50% { opacity: 0.3; } }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .va-services-grid { grid-template-columns: 1fr; }
+    .workflow-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .workflow-steps::before { display: none; }
+    .va-intro-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
   @media (max-width: 768px) {
     nav { padding: 16px 24px; }
     .nav-links { display: none; }
-    section { padding: 80px 24px; }
+    section, #about, #experience, #projects, #skills, #education, #contact, #va { padding: 80px 24px; }
     #hero { padding: 100px 24px 80px; }
     h1 { letter-spacing: -2px; }
-    .about-grid, .skills-grid, .edu-cert-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-grid, .edu-cert-grid { grid-template-columns: 1fr; gap: 40px; }
     .hero-meta { flex-direction: column; align-items: flex-start; gap: 16px; }
     footer { flex-direction: column; gap: 8px; text-align: center; }
+    .workflow-steps { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -363,12 +315,14 @@
 <nav>
   <div class="nav-logo">SR_</div>
   <div class="nav-links">
+    <a href="#va">VA Services</a>
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
   </div>
+  <div class="nav-va-badge">VA Available</div>
 </nav>
 
 <!-- HERO -->
@@ -376,17 +330,26 @@
   <div class="hero-grid-bg"></div>
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
+  <div class="hero-glow3"></div>
 
-  <div class="hero-tag">Available for hire</div>
+  <div class="hero-tag">Available for hire · Remote-ready</div>
   <h1>
     <span class="line-dim">STUCEY</span><br>
     <span class="line-dim">ROSAL</span><br>
     <span class="line-accent">._</span>
   </h1>
+
+  <div class="hero-role-tags">
+    <span class="role-tag it">⚙ IT Support Specialist</span>
+    <span class="role-tag va">🤝 Virtual Assistant</span>
+    <span class="role-tag ai">🤖 AI Automation</span>
+  </div>
+
   <p class="hero-sub">
-    AI Automation Specialist & IT Support professional. Building practical AI-powered systems that solve real business problems — from IP management to compliance automation and IoT.
+    AI Automation Specialist &amp; IT Support professional with a <strong>strong Virtual Assistant skill set</strong> — calendar management, admin support, client communication, research, and AI-powered task execution. Remote-ready and results-driven.
   </p>
   <div class="hero-cta">
+    <a href="#va" class="btn btn-va">🤝 VA Services</a>
     <a href="#projects" class="btn btn-primary">View Projects →</a>
     <a href="#contact" class="btn btn-ghost">Get In Touch</a>
   </div>
@@ -395,86 +358,183 @@
     <div class="hero-contact">
       <a href="mailto:Stuceyrosal15@gmail.com">Stuceyrosal15@gmail.com</a>
       <a href="tel:+639507536207">+63 950 753 6207</a>
-      <span style="color:var(--muted)">San Juan, Palauig, Zambales</span>
+      <span style="color:var(--muted)">San Juan, Palauig, Zambales · Remote</span>
     </div>
     <div class="scroll-hint">Scroll</div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">About</div>
-  <h2>Who I Am</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>Fresh graduate in Industrial Technology (Computer Technology) with 1 year of hands-on IT experience and a strong self-driven background in AI automation.</p>
-      <p>Proficient in building practical automation systems using AI tools including Claude and ChatGPT. I'm passionate about turning business problems into working AI-powered solutions and helping teams adopt new technology with confidence.</p>
-      <div class="about-stats">
-        <div class="stat">
-          <div class="stat-num">4+</div>
-          <div class="stat-label">AI Projects Built</div>
+<!-- VA SECTION -->
+<section id="va">
+  <div class="va-bg-accent"></div>
+  <div class="va-glow"></div>
+  <div class="section-label pink">Virtual Assistant</div>
+  <h2>VA <span style="color:var(--accent3)">Services</span></h2>
+  <p class="section-sub">I don't just support systems — I support people. As a VA, I combine traditional executive support skills with AI-powered workflows to get more done, faster.</p>
+
+  <div class="va-intro-grid reveal">
+    <div class="va-intro-left">
+      <p>With a background in IT support and AI automation, I bring a <strong>unique edge as a Virtual Assistant</strong>: I can handle your day-to-day administrative tasks while also building the tools and automations that make those tasks disappear.</p>
+      <p>Whether it's managing your inbox, organizing your calendar, doing research, preparing reports, or coordinating projects — I handle it with precision and keep you updated without being asked.</p>
+      <p>My IT foundation means I can also <strong>troubleshoot tools, set up systems, onboard software</strong>, and handle technical tasks that most VAs can't touch.</p>
+    </div>
+    <div>
+      <div class="va-highlight-box">
+        <p>Most VAs do the tasks. I <strong>also automate the tasks</strong> — so you're not paying for the same work twice. When something repeats, I build a workflow. When something is manual, I find an AI solution. You get a VA who makes herself less needed over time — and spends that freed-up time on higher-value work for you.</p>
+      </div>
+      <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border);">
+        <div style="background: var(--card); padding: 20px;">
+          <div style="font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: var(--accent3);">100%</div>
+          <div style="color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px;">Remote Ready</div>
         </div>
-        <div class="stat">
-          <div class="stat-num">1yr</div>
-          <div class="stat-label">IT Experience</div>
+        <div style="background: var(--card); padding: 20px;">
+          <div style="font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: var(--accent3);">AI+</div>
+          <div style="color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px;">Powered Workflows</div>
         </div>
-        <div class="stat">
-          <div class="stat-num">3+</div>
-          <div class="stat-label">Certifications</div>
+        <div style="background: var(--card); padding: 20px;">
+          <div style="font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: var(--accent2);">M365</div>
+          <div style="color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px;">Certified</div>
         </div>
-        <div class="stat">
-          <div class="stat-num">2025</div>
-          <div class="stat-label">Graduate</div>
+        <div style="background: var(--card); padding: 20px;">
+          <div style="font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: var(--accent);">Fast</div>
+          <div style="color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px;">Turnaround</div>
         </div>
       </div>
     </div>
-    <div class="about-right">
-      <div class="info-row">
-        <span class="info-key">Name</span>
-        <span class="info-val">Stucey Huggy Bear Rosal</span>
+  </div>
+
+  <div class="va-services-grid reveal">
+    <div class="va-service-card">
+      <span class="va-service-icon">📅</span>
+      <div class="va-service-title">Calendar & Schedule Management</div>
+      <p class="va-service-desc">Meeting scheduling, time zone coordination, reminders, follow-ups, and keeping your day organized so you never miss a beat.</p>
+      <div class="va-service-tools">
+        <span class="tool-chip">Google Calendar</span>
+        <span class="tool-chip purple">Outlook</span>
+        <span class="tool-chip green">Calendly</span>
       </div>
-      <div class="info-row">
-        <span class="info-key">Role</span>
-        <span class="info-val">AI Automation & IT Specialist</span>
+    </div>
+    <div class="va-service-card">
+      <span class="va-service-icon">📧</span>
+      <div class="va-service-title">Email & Inbox Management</div>
+      <p class="va-service-desc">Inbox organization, drafting responses, filtering, labeling, and ensuring important messages never get missed.</p>
+      <div class="va-service-tools">
+        <span class="tool-chip green">Gmail</span>
+        <span class="tool-chip purple">Microsoft 365</span>
+        <span class="tool-chip">Outlook</span>
       </div>
-      <div class="info-row">
-        <span class="info-key">Degree</span>
-        <span class="info-val">BS Industrial Technology — CompTech</span>
+    </div>
+    <div class="va-service-card">
+      <span class="va-service-icon">🔍</span>
+      <div class="va-service-title">Research & Data Entry</div>
+      <p class="va-service-desc">Market research, competitor analysis, lead gathering, data cleaning, and organizing information into clear, usable formats.</p>
+      <div class="va-service-tools">
+        <span class="tool-chip green">Excel</span>
+        <span class="tool-chip purple">Sheets</span>
+        <span class="tool-chip">Notion</span>
       </div>
-      <div class="info-row">
-        <span class="info-key">University</span>
-        <span class="info-val">President Ramon Magsaysay State University</span>
+    </div>
+    <div class="va-service-card">
+      <span class="va-service-icon">🤖</span>
+      <div class="va-service-title">AI-Powered Task Automation</div>
+      <p class="va-service-desc">Building AI workflows that automate repetitive tasks — so you stop doing the same thing manually and start scaling your time.</p>
+      <div class="va-service-tools">
+        <span class="tool-chip green">Claude</span>
+        <span class="tool-chip purple">ChatGPT</span>
+        <span class="tool-chip">Make.com</span>
       </div>
-      <div class="info-row">
-        <span class="info-key">Location</span>
-        <span class="info-val">San Juan, Palauig, Zambales, PH</span>
+    </div>
+    <div class="va-service-card">
+      <span class="va-service-icon">📊</span>
+      <div class="va-service-title">Reporting & Documentation</div>
+      <p class="va-service-desc">Creating reports, SOPs, trackers, dashboards, and written documentation that keeps teams aligned and processes clear.</p>
+      <div class="va-service-tools">
+        <span class="tool-chip green">Excel</span>
+        <span class="tool-chip purple">Word</span>
+        <span class="tool-chip">PowerPoint</span>
       </div>
-      <div class="info-row">
-        <span class="info-key">Status</span>
-        <span class="info-val" style="color:var(--accent)">Open to Opportunities</span>
+    </div>
+    <div class="va-service-card">
+      <span class="va-service-icon">🛠</span>
+      <div class="va-service-title">Tech Support & Tool Setup</div>
+      <p class="va-service-desc">Software setup, IT troubleshooting, tool onboarding, and technical support — a VA who can actually fix things when they break.</p>
+      <div class="va-service-tools">
+        <span class="tool-chip green">Hardware</span>
+        <span class="tool-chip purple">Networks</span>
+        <span class="tool-chip">Software</span>
       </div>
-      <div class="info-row">
-        <span class="info-key">Core Strengths</span>
-        <span class="info-val">Self-directed · Problem Solver · Communicator</span>
+    </div>
+  </div>
+
+  <div class="va-workflow reveal">
+    <div class="va-workflow-title">// How I work as your VA</div>
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="step-num pink">01</div>
+        <div class="step-label">Onboard</div>
+        <p class="step-desc">I learn your tools, preferences, and workflows — quick setup, minimal friction.</p>
       </div>
+      <div class="workflow-step">
+        <div class="step-num purple">02</div>
+        <div class="step-label">Organize</div>
+        <p class="step-desc">I audit your existing processes and identify what to optimize, delegate, or automate.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num pink">03</div>
+        <div class="step-label">Execute</div>
+        <p class="step-desc">Tasks completed accurately, on time, and with clear communication throughout.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num teal">04</div>
+        <div class="step-label">Automate</div>
+        <p class="step-desc">I build workflows so recurring tasks run themselves — freeing us both for bigger things.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label green">About</div>
+  <h2>Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Fresh graduate in Industrial Technology (Computer Technology) with 1 year of hands-on IT experience, a strong self-driven background in AI automation, and a growing portfolio of <span style="color:var(--accent3)">Virtual Assistant skills</span> built through real work experience.</p>
+      <p>Proficient in building practical automation systems using AI tools including Claude and ChatGPT. I help teams adopt new technology with confidence — and handle the day-to-day admin tasks that keep operations running smoothly.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="stat-num green">4+</div><div class="stat-label">AI Projects Built</div></div>
+        <div class="stat"><div class="stat-num pink">6+</div><div class="stat-label">VA Services Offered</div></div>
+        <div class="stat"><div class="stat-num purple">3+</div><div class="stat-label">Certifications</div></div>
+        <div class="stat"><div class="stat-num green">2025</div><div class="stat-label">Graduate</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="info-row"><span class="info-key">Name</span><span class="info-val">Stucey Huggy Bear Rosal</span></div>
+      <div class="info-row"><span class="info-key">Primary Role</span><span class="info-val">AI Automation & IT Specialist</span></div>
+      <div class="info-row"><span class="info-key">Also Available As</span><span class="info-val" style="color:var(--accent3)">Virtual Assistant</span></div>
+      <div class="info-row"><span class="info-key">Degree</span><span class="info-val">BS Industrial Technology — CompTech</span></div>
+      <div class="info-row"><span class="info-key">University</span><span class="info-val">President Ramon Magsaysay State University</span></div>
+      <div class="info-row"><span class="info-key">Location</span><span class="info-val">San Juan, Palauig, Zambales, PH</span></div>
+      <div class="info-row"><span class="info-key">Work Setup</span><span class="info-val" style="color:var(--accent)">Remote-Ready · Flexible Hours</span></div>
+      <div class="info-row"><span class="info-key">Core Strengths</span><span class="info-val">Self-directed · Problem Solver · Communicator</span></div>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-label">Experience</div>
+  <div class="section-label green">Experience</div>
   <h2>Work History</h2>
 
   <div class="exp-card reveal">
     <div class="exp-top">
       <div>
         <div class="exp-role">IT Staff — Technical Support</div>
-        <div class="exp-company">Beyond Infinity Connection Philippines</div>
+        <div class="exp-company green">Beyond Infinity Connection Philippines</div>
       </div>
       <div class="exp-period">2024 – 2025 · 1 year</div>
     </div>
-    <ul class="exp-bullets">
+    <ul class="exp-bullets green">
       <li>Provided hardware setup, configuration, and maintenance across the organization</li>
       <li>Managed helpdesk support — troubleshooting software, network, and device issues for staff</li>
       <li>Administered network support including IP address management and connectivity troubleshooting</li>
@@ -482,12 +542,31 @@
       <li>Documented technical procedures and supported non-technical users in day-to-day system use</li>
     </ul>
   </div>
+
+  <div class="exp-card va-card reveal">
+    <div class="exp-top">
+      <div>
+        <div class="exp-role">Virtual Assistant Functions</div>
+        <div class="exp-company pink">Within IT Role & Self-Initiated Projects</div>
+      </div>
+      <div class="exp-period">2024 – Present</div>
+    </div>
+    <ul class="exp-bullets pink">
+      <li>Drafted and organized technical documentation, SOPs, and user guides for non-technical staff</li>
+      <li>Assisted colleagues with scheduling, follow-ups, and coordination of IT-related tasks</li>
+      <li>Performed data entry, reporting, and organized records using Microsoft Excel and Word</li>
+      <li>Prepared procurement emails, formal correspondence, and internal communications</li>
+      <li>Created training materials and tutorial content for onboarding staff to new tools and systems</li>
+      <li>Managed and organized digital files, email threads, and project documentation</li>
+    </ul>
+    <span class="exp-va-tag">🤝 VA-Applicable Experience</span>
+  </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-label">Projects</div>
-  <h2>AI & Automation Work</h2>
+  <div class="section-label green">Projects</div>
+  <h2>AI, Automation <span style="color:var(--muted); font-size:0.6em;">&</span> VA Work</h2>
   <div class="projects-grid">
 
     <div class="project-card reveal">
@@ -495,7 +574,7 @@
       <span class="project-icon">🌐</span>
       <div class="project-title">IP Address Automation System</div>
       <p class="project-desc">Built an automated system to manage and assign IP addresses across a network, reducing manual errors and saving administrative time significantly.</p>
-      <span class="project-tag">Network · Automation</span>
+      <span class="project-tag green">Network · Automation</span>
     </div>
 
     <div class="project-card reveal">
@@ -503,7 +582,7 @@
       <span class="project-icon">⚡</span>
       <div class="project-title">Task Automation System</div>
       <p class="project-desc">Designed an AI-assisted workflow to automate repetitive daily work tasks, improving team productivity and ensuring consistency across operations.</p>
-      <span class="project-tag">AI · Workflow</span>
+      <span class="project-tag green">AI · Workflow</span>
     </div>
 
     <div class="project-card reveal">
@@ -511,7 +590,7 @@
       <span class="project-icon">🛡️</span>
       <div class="project-title">Compliance Automation System</div>
       <p class="project-desc">Developed a system to automate compliance checks and reporting, ensuring processes meet standards without manual review overhead.</p>
-      <span class="project-tag">Compliance · Reporting</span>
+      <span class="project-tag green">Compliance · Reporting</span>
     </div>
 
     <div class="project-card reveal">
@@ -519,7 +598,23 @@
       <span class="project-icon">📷</span>
       <div class="project-title">AI Camera — IoT System</div>
       <p class="project-desc">Built an AI-powered camera and IoT system integrating computer vision for real-world monitoring and automated detection use cases.</p>
-      <span class="project-tag">IoT · Computer Vision</span>
+      <span class="project-tag green">IoT · Computer Vision</span>
+    </div>
+
+    <div class="project-card va-project reveal">
+      <span class="project-num">05</span>
+      <span class="project-icon">📊</span>
+      <div class="project-title">Operations Dashboard Suite</div>
+      <p class="project-desc">Designed and built Excel-based dashboards for manufacturing operations tracking — Rework/Scrap Monitoring and Consumables Usage Tracker — using structured data and visual reporting.</p>
+      <span class="project-tag pink">VA · Reporting · Excel</span>
+    </div>
+
+    <div class="project-card va-project reveal">
+      <span class="project-num">06</span>
+      <span class="project-icon">🤝</span>
+      <div class="project-title">AI Portfolio Assistant (Chatbot)</div>
+      <p class="project-desc">Built and deployed an AI-powered chatbot on a colleague's portfolio site — handling visitor questions, VA inquiries, and lead capture through an automated webhook flow.</p>
+      <span class="project-tag pink">VA · AI · Client Support</span>
     </div>
 
   </div>
@@ -527,70 +622,44 @@
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-label">Skills</div>
+  <div class="section-label green">Skills</div>
   <h2>Technical Arsenal</h2>
   <div class="skills-grid">
+
     <div class="skill-group reveal">
-      <div class="skill-group-title">AI & Automation</div>
-      <div class="skill-item">
-        <span class="skill-name">Claude (Anthropic)</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.95; animation-delay:0.1s"></div></div>
-      </div>
-      <div class="skill-item">
-        <span class="skill-name">ChatGPT / Prompt Engineering</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.9; animation-delay:0.2s"></div></div>
-      </div>
-      <div class="skill-item">
-        <span class="skill-name">Workflow & Task Automation</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.88; animation-delay:0.3s"></div></div>
-      </div>
-      <div class="skill-item">
-        <span class="skill-name">AI Agent Building</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.85; animation-delay:0.4s"></div></div>
-      </div>
-      <div class="skill-item">
-        <span class="skill-name">IoT + AI Integration</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.80; animation-delay:0.5s"></div></div>
-      </div>
-      <div class="skill-item">
-        <span class="skill-name">Blackbox AI</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.78; animation-delay:0.6s"></div></div>
-      </div>
+      <div class="skill-group-title green">AI & Automation</div>
+      <div class="skill-item"><span class="skill-name">Claude (Anthropic)</span><div class="skill-bar-wrap"><div class="skill-bar green" style="--w:0.95; animation-delay:0.1s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">ChatGPT / Prompting</span><div class="skill-bar-wrap"><div class="skill-bar green" style="--w:0.9; animation-delay:0.2s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Workflow Automation</span><div class="skill-bar-wrap"><div class="skill-bar green" style="--w:0.88; animation-delay:0.3s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">AI Agent Building</span><div class="skill-bar-wrap"><div class="skill-bar green" style="--w:0.85; animation-delay:0.4s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">IoT + AI Integration</span><div class="skill-bar-wrap"><div class="skill-bar green" style="--w:0.80; animation-delay:0.5s"></div></div></div>
     </div>
 
     <div class="skill-group reveal">
-      <div class="skill-group-title">IT & Technical</div>
-      <div class="skill-item">
-        <span class="skill-name">Hardware Setup & Config</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.92; animation-delay:0.1s"></div></div>
-      </div>
-      <div class="skill-item">
-        <span class="skill-name">Network Support & IP Mgmt</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.88; animation-delay:0.2s"></div></div>
-      </div>
-      <div class="skill-item">
-        <span class="skill-name">Helpdesk & Troubleshooting</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.90; animation-delay:0.3s"></div></div>
-      </div>
-      <div class="skill-item">
-        <span class="skill-name">Microsoft 365</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.85; animation-delay:0.4s"></div></div>
-      </div>
-      <div class="skill-item">
-        <span class="skill-name">System Documentation</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.82; animation-delay:0.5s"></div></div>
-      </div>
-      <div class="skill-item">
-        <span class="skill-name">Technical Training</span>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.78; animation-delay:0.6s"></div></div>
-      </div>
+      <div class="skill-group-title pink">Virtual Assistant</div>
+      <div class="skill-item"><span class="skill-name">Calendar Management</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="--w:0.90; animation-delay:0.1s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Email Management</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="--w:0.88; animation-delay:0.2s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Research & Reporting</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="--w:0.85; animation-delay:0.3s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Documentation & SOPs</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="--w:0.88; animation-delay:0.4s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Data Entry & Excel</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="--w:0.85; animation-delay:0.5s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Client Communication</span><div class="skill-bar-wrap"><div class="skill-bar pink" style="--w:0.82; animation-delay:0.6s"></div></div></div>
     </div>
+
+    <div class="skill-group reveal">
+      <div class="skill-group-title purple">IT & Technical</div>
+      <div class="skill-item"><span class="skill-name">Hardware Setup & Config</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="--w:0.92; animation-delay:0.1s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Network & IP Mgmt</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="--w:0.88; animation-delay:0.2s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Helpdesk Support</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="--w:0.90; animation-delay:0.3s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Microsoft 365</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="--w:0.88; animation-delay:0.4s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Technical Writing</span><div class="skill-bar-wrap"><div class="skill-bar purple" style="--w:0.84; animation-delay:0.5s"></div></div></div>
+    </div>
+
   </div>
 </section>
 
 <!-- EDUCATION -->
 <section id="education">
-  <div class="section-label">Education & Certifications</div>
+  <div class="section-label green">Education & Certifications</div>
   <h2>Credentials</h2>
   <div class="edu-cert-grid">
     <div>
@@ -612,6 +681,8 @@
         <li>Internet Tracing / Network Fundamentals</li>
         <li>Self-directed AI & Automation Learning — Claude, ChatGPT, Blackbox AI</li>
         <li>IoT Systems & Computer Vision Integration</li>
+        <li>Virtual Assistant Skills — Admin Support, Scheduling, Documentation</li>
+        <li>Microsoft 365 Productivity Suite (Word, Excel, Outlook, PowerPoint)</li>
       </ul>
     </div>
   </div>
@@ -619,64 +690,36 @@
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-label" style="justify-content:center">Contact</div>
+  <div class="section-label pink" style="justify-content:center">Contact</div>
   <div class="contact-inner">
     <h2>Let's Work Together</h2>
-    <p class="contact-sub">Open to IT roles, AI automation projects, and freelance opportunities. Let's build something useful.</p>
+    <p class="contact-sub">Open to IT roles, AI automation projects, Virtual Assistant engagements, and freelance work. Remote-ready. Let's build something useful — or let me handle the tasks that are slowing you down.</p>
     <div class="contact-links">
       <a href="tel:+639507536207" class="contact-link">📞 +63 950 753 6207</a>
-      <a href="mailto:Stuceyrosal15@gmail.com" class="contact-link">✉ Send Email</a>
+      <a href="mailto:Stuceyrosal15@gmail.com" class="contact-link va-link">✉ Send Email</a>
     </div>
     <a href="mailto:Stuceyrosal15@gmail.com" class="contact-email-big">Stuceyrosal15@gmail.com</a>
+    <div class="contact-va-note">
+      <strong>Looking for a Virtual Assistant?</strong> I offer flexible remote VA support — from calendar and inbox management to AI-powered workflows and tech setup. I bring IT skills that most VAs don't have, and AI skills that make the work faster and smarter. Message me to discuss your needs.
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <span>© 2025 Stucey Rosal</span>
-  <span style="color:var(--border)">Built to be hosted anywhere</span>
+  <span style="color:var(--muted); font-size:11px">IT Specialist · VA · AI Automation</span>
   <span>San Juan, Palauig, Zambales, PH</span>
 </footer>
 
-<script>
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-
-  // Skill bars animate on scroll
-  const barObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.skill-bar').forEach(bar => {
-          const w = bar.style.getPropertyValue('--w') || 0.8;
-          bar.style.width = (parseFloat(w) * 100) + '%';
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.skill-group').forEach(g => barObserver.observe(g));
-
-  // Set skill bar widths on load too
-  document.querySelectorAll('.skill-bar').forEach(bar => {
-    const w = parseFloat(bar.style.getPropertyValue('--w') || '0.8');
-    bar.style.setProperty('width', (w * 100) + '%');
-  });
-</script>
 <style>
-:root{--cb-black:#0a0a0a;--cb-dark:#111111;--cb-card:#1a1a1a;--cb-border:#2a2a2a;--cb-accent:#00ff88;--cb-accent-dim:rgba(0,255,136,0.15);--cb-white:#ffffff;--cb-gray:#888;}
+:root{--cb-black:#0a0a0a;--cb-dark:#111111;--cb-card:#1a1a1a;--cb-border:#2a2a2a;--cb-accent:#ff6b9d;--cb-accent-dim:rgba(255,107,157,0.15);--cb-white:#ffffff;--cb-gray:#888;}
 .chat-fab{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
-.fab-btn{width:60px;height:60px;border-radius:50%;background:var(--cb-accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;animation:greenPulse 2.5s infinite;transition:transform .2s;position:relative;}
+.fab-btn{width:60px;height:60px;border-radius:50%;background:var(--cb-accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;animation:pinkPulse 2.5s infinite;transition:transform .2s;position:relative;}
 .fab-btn svg{width:26px;height:26px;fill:var(--cb-black);}
-.fab-badge{position:absolute;top:-3px;right:-3px;width:18px;height:18px;background:#ff4444;border-radius:50%;border:2px solid var(--cb-black);font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;}
+.fab-badge{position:absolute;top:-3px;right:-3px;width:18px;height:18px;background:#7c6bff;border-radius:50%;border:2px solid var(--cb-black);font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;}
 .fab-tooltip{background:var(--cb-card);color:var(--cb-white);padding:8px 14px;border-radius:10px;font-size:12px;font-weight:600;white-space:nowrap;border:1px solid var(--cb-accent);animation:tooltipBob 2.5s ease-in-out infinite;}
-@keyframes greenPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,0.4);}50%{box-shadow:0 0 0 14px rgba(0,255,136,0);}}
+@keyframes pinkPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,157,0.4);}50%{box-shadow:0 0 0 14px rgba(255,107,157,0);}}
 @keyframes tooltipBob{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
 .chat-panel{position:fixed;bottom:102px;right:28px;z-index:9998;width:360px;max-height:580px;border-radius:20px;background:var(--cb-dark);border:1px solid var(--cb-border);box-shadow:0 24px 80px rgba(0,0,0,0.6);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right;transition:transform .25s cubic-bezier(.34,1.56,.64,1),opacity .2s;}
 .chat-panel.hidden{transform:scale(0.7);opacity:0;pointer-events:none;}
@@ -688,7 +731,8 @@
 @keyframes blink{50%{opacity:0.3;}}
 .header-close{margin-left:auto;background:var(--cb-border);border:none;color:var(--cb-gray);width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
 .quick-chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px 8px;background:var(--cb-card);border-bottom:1px solid var(--cb-border);flex-shrink:0;}
-.chip{background:transparent;border:1px solid var(--cb-border);color:var(--cb-gray);font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer;}
+.chip{background:transparent;border:1px solid var(--cb-border);color:var(--cb-gray);font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer;transition: border-color .2s, color .2s;}
+.chip:hover{border-color:var(--cb-accent);color:var(--cb-accent);}
 .messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth;}
 .msg{display:flex;gap:8px;align-items:flex-end;}
 .msg.user{flex-direction:row-reverse;}
@@ -710,46 +754,46 @@
 .powered-by{text-align:center;font-size:10px;color:#444;padding:5px 0 7px;background:var(--cb-card);}
 .powered-by span{color:var(--cb-accent);}
 </style>
-<!-- FAB -->
+
 <div class="chat-fab" id="chatFab">
-  <div class="fab-tooltip">👋 Ask me anything!</div>
+  <div class="fab-tooltip">🤝 Ask about VA services!</div>
   <button class="fab-btn" onclick="toggleChat()">
     <div class="fab-badge">1</div>
     <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
   </button>
 </div>
 
-<!-- CHAT PANEL -->
 <div class="chat-panel hidden" id="chatPanel">
   <div class="chat-header">
     <div class="header-avatar">SR_</div>
     <div class="header-text">
       <h3>Stucey's AI Assistant</h3>
-      <p><span class="online-dot"></span> online · replies instantly</p>
+      <p><span class="online-dot"></span> online · VA & IT inquiries</p>
     </div>
     <button class="header-close" onclick="toggleChat()">✕</button>
   </div>
   <div class="quick-chips">
-    <button class="chip" onclick="sendChip('What services do you offer?')">⚡ Services</button>
+    <button class="chip" onclick="sendChip('What VA services do you offer?')">🤝 VA Services</button>
     <button class="chip" onclick="sendChip('Tell me about your projects')">🛠 Projects</button>
     <button class="chip" onclick="sendChip('What are your skills?')">💡 Skills</button>
-    <button class="chip" onclick="sendChip('How can I hire you?')">📩 Hire Me</button>
+    <button class="chip" onclick="sendChip('How can I hire you as a VA?')">📩 Hire Me</button>
     <button class="chip" onclick="sendChip('What is your rate?')">💰 Rates</button>
   </div>
   <div class="messages" id="messages">
     <div class="msg bot">
       <div class="msg-icon">SR_</div>
-      <div class="bubble">Hey! 👋 I'm Stucey's AI assistant.<br><br>Ask me about his <strong>services</strong>, <strong>projects</strong>, <strong>skills</strong>, or how to <strong>work with him</strong>!</div>
+      <div class="bubble">Hey! 👋 I'm Stucey's AI assistant.<br><br>Ask me about her <strong>VA services</strong>, <strong>IT projects</strong>, <strong>skills</strong>, or how to <strong>work together</strong>!</div>
     </div>
   </div>
   <div class="chat-input-area">
-    <input class="chat-input" id="chatInput" type="text" placeholder="Ask something..." onkeydown="if(event.key==='Enter') sendMessage()"/>
+    <input class="chat-input" id="chatInput" type="text" placeholder="Ask about VA services..." onkeydown="if(event.key==='Enter') sendMessage()"/>
     <button class="send-btn" onclick="sendMessage()">
       <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
     </button>
   </div>
   <div class="powered-by">Built by <span>Stucey Rosal</span> + <span>AI Automation</span></div>
 </div>
+
 <script>
 const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/ck4g16mpmv7p782931mh1bf96lqm9lcc";
 let isOpen = false;
@@ -797,7 +841,7 @@ async function sendMessage() {
     appendMessage("bot", reply);
   } catch (err) {
     removeTyping(typingId);
-    appendMessage('bot', "⚠️ Please reach out directly at <strong>Stuceyrosal15@gmail.com</strong> or <strong>+63 950 753 6207</strong>!");
+    appendMessage('bot', "⚠️ Reach out directly at <strong>Stuceyrosal15@gmail.com</strong> or <strong>+63 950 753 6207</strong>!");
   }
 }
 function appendMessage(role, text) {
@@ -812,8 +856,7 @@ function showTyping() {
   const msgs = document.getElementById('messages');
   const id = 'typing-' + Date.now();
   const div = document.createElement('div');
-  div.className = 'msg bot';
-  div.id = id;
+  div.className = 'msg bot'; div.id = id;
   div.innerHTML = `<div class="msg-icon">SR_</div><div class="typing-bubble"><span></span><span></span><span></span></div>`;
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
@@ -823,6 +866,30 @@ function removeTyping(id) {
   const el = document.getElementById(id);
   if (el) el.remove();
 }
+
+// Scroll reveals
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+
+// Skill bars
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.skill-bar').forEach(bar => {
+        const w = bar.style.getPropertyValue('--w') || 0.8;
+        bar.style.width = (parseFloat(w) * 100) + '%';
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.skill-group').forEach(g => barObserver.observe(g));
+document.querySelectorAll('.skill-bar').forEach(bar => {
+  const w = parseFloat(bar.style.getPropertyValue('--w') || '0.8');
+  bar.style.setProperty('width', (w * 100) + '%');
+});
 </script>
 </body>
 </html>
