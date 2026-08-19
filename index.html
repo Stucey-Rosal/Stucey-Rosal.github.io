@@ -1,403 +1,868 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-accent="blue">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StuceyOS — Stucey Rosal · AI Automation Specialist (Huggy Bear Digital)</title>
-<meta name="description" content="Stucey Rosal — AI Automation Specialist under Huggy Bear Digital. n8n & Make.com workflow automation, Claude/OpenAI integration, HIPAA-compliant system design, Virtual Assistant. An interactive desktop-style portfolio.">
+<meta name="description" content="Stucey Rosal — AI Automation Specialist under Huggy Bear Digital. n8n & Make.com workflow automation, Claude/OpenAI integration, HIPAA-compliant system design, Virtual Assistant. An interactive macOS-style portfolio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-deep:#060a14;
-    --bg-mid:#0c1224;
-    --panel: rgba(15,21,40,0.74);
-    --panel-solid:#111a30;
-    --border: rgba(255,255,255,0.08);
-    --text:#eaf0f7;
-    --text-dim:#8a93ab;
-    --text-dimmer:#5c6580;
-    --accent:#38e1c9;
-    --accent-soft: rgba(56,225,201,0.15);
-    --pink:#ff5d8f;
-    --pink-soft: rgba(255,93,143,0.15);
-    --amber:#ffd166;
-    --violet:#9b8cff;
-    --success:#4ade80;
-    --mono: 'IBM Plex Mono', ui-monospace, monospace;
-    --sans: 'Inter', -apple-system, sans-serif;
-    --radius: 14px;
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, "Segoe UI", sans-serif;
+    --mono: "SF Mono", "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --accent: #0a84ff;
+    --accent-hover: #409cff;
+    --accent-soft: rgba(10,132,255,.18);
+    --red: #ff5f57;
+    --yellow: #febc2e;
+    --green: #28c840;
+    --system-red: #ff453a;
+    --radius-win: 12px;
+    --menubar-h: 28px;
+    --dock-offset: 88px;
+  }
+  html[data-theme="dark"]{
+    --text: #f5f5f7;
+    --text-2: rgba(255,255,255,.62);
+    --text-3: rgba(255,255,255,.38);
+    --chrome: rgba(36,36,36,.72);
+    --chrome-solid: #2c2c2c;
+    --window: rgba(42,42,42,.78);
+    --window-solid: #2a2a2a;
+    --sidebar: rgba(38,38,38,.55);
+    --fill: rgba(255,255,255,.06);
+    --fill-2: rgba(255,255,255,.1);
+    --line: rgba(255,255,255,.12);
+    --line-2: rgba(255,255,255,.08);
+    --shadow: 0 22px 70px rgba(0,0,0,.5), 0 0 0 .5px rgba(0,0,0,.45);
+    --menubar-bg: rgba(28,28,28,.55);
+    --menubar-fg: rgba(255,255,255,.92);
+    --dock-bg: rgba(40,40,40,.48);
+    --dock-line: rgba(255,255,255,.16);
+    --widget: rgba(30,30,30,.5);
+    --selection: rgba(10,132,255,.35);
+    --input: rgba(0,0,0,.28);
+    --paper: #fff;
+    --paper-text: #1d1d1f;
+    --tl-inactive: #636366;
+    --tooltip: rgba(40,40,40,.92);
+  }
+  html[data-theme="light"]{
+    --text: #1d1d1f;
+    --text-2: rgba(0,0,0,.55);
+    --text-3: rgba(0,0,0,.36);
+    --chrome: rgba(246,246,246,.78);
+    --chrome-solid: #f2f2f2;
+    --window: rgba(246,246,246,.86);
+    --window-solid: #f6f6f6;
+    --sidebar: rgba(232,232,232,.72);
+    --fill: rgba(0,0,0,.04);
+    --fill-2: rgba(0,0,0,.07);
+    --line: rgba(0,0,0,.1);
+    --line-2: rgba(0,0,0,.06);
+    --shadow: 0 22px 70px rgba(0,0,0,.22), 0 0 0 .5px rgba(0,0,0,.12);
+    --menubar-bg: rgba(255,255,255,.52);
+    --menubar-fg: #1d1d1f;
+    --dock-bg: rgba(255,255,255,.42);
+    --dock-line: rgba(255,255,255,.7);
+    --widget: rgba(255,255,255,.48);
+    --selection: rgba(0,122,255,.28);
+    --input: rgba(255,255,255,.7);
+    --paper: #fff;
+    --paper-text: #1d1d1f;
+    --tl-inactive: #d2d2d7;
+    --tooltip: rgba(50,50,50,.92);
   }
 
   *{box-sizing:border-box;}
   html,body{
     margin:0; padding:0; height:100%;
-    background: var(--bg-deep);
+    font-family:var(--font);
     color:var(--text);
-    font-family: var(--sans);
     overflow:hidden;
+    cursor:default;
+    user-select:none;
     -webkit-font-smoothing:antialiased;
   }
-  ::selection{ background:var(--accent); color:#04120f; }
-  a{ color:inherit; }
-  button{ font-family:inherit; cursor:pointer; }
-  ::-webkit-scrollbar{ width:8px; height:8px; }
-  ::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.15); border-radius:8px; }
-  ::-webkit-scrollbar-track{ background:transparent; }
+  button,input,textarea{font-family:inherit;}
+  button{cursor:default;}
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  ::selection{background:var(--selection);}
+  :focus{outline:none;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  ::-webkit-scrollbar{width:8px; height:8px;}
+  ::-webkit-scrollbar-thumb{background:rgba(127,127,127,.45); border-radius:8px; border:2px solid transparent; background-clip:padding-box;}
+  ::-webkit-scrollbar-track{background:transparent;}
 
-  /* ---------- Background ---------- */
-  #bg{
+  body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after{
+    animation:none !important; transition:none !important;
+  }
+
+  /* Wallpaper */
+  #wallpaper{
     position:fixed; inset:0; z-index:0;
     background:
-      radial-gradient(ellipse 120% 60% at 50% 0%, rgba(56,225,201,0.10), transparent 60%),
-      radial-gradient(ellipse 80% 50% at 80% 100%, rgba(155,140,255,0.10), transparent 60%),
-      linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 55%, #0a1020 100%);
+      radial-gradient(ellipse 110% 70% at 50% -18%, #ffc9a0 0%, #ff7b52 18%, #d4526a 36%, #6b3a7a 55%, #1b1640 78%, #070816 100%);
   }
-  #stars{ position:fixed; inset:0; z-index:1; pointer-events:none; }
-  .star{ position:absolute; background:#fff; border-radius:50%; animation: twinkle 4s ease-in-out infinite; }
-  @keyframes twinkle{ 0%,100%{opacity:.25;} 50%{opacity:1;} }
-  #horizon{
-    position:fixed; left:0; right:0; bottom:0; height:38vh; z-index:1; pointer-events:none;
-    background: linear-gradient(180deg, transparent, rgba(4,7,14,0.9) 70%, #04070e 100%);
+  html[data-theme="light"] #wallpaper{
+    background:
+      radial-gradient(ellipse 90% 50% at 50% -8%, #ffe7c2 0%, #7ec8ea 32%, #4ea0d4 58%, #87c08b 82%, #cfe8bf 100%);
   }
-  #silhouette{
-    position:fixed; bottom:0; left:50%; transform:translateX(-50%); z-index:1; pointer-events:none;
-    opacity:0.9; width:min(46vw, 420px);
+  #stars{position:fixed; inset:0; z-index:1; pointer-events:none;}
+  .star{position:absolute; background:#fff; border-radius:50%; animation:twinkle 4s ease-in-out infinite;}
+  @keyframes twinkle{0%,100%{opacity:.2} 50%{opacity:.95}}
+  #hills{position:fixed; left:0; right:0; bottom:0; z-index:1; pointer-events:none; height:46vh;}
+  html[data-theme="light"] #hills path:first-child{fill:rgba(46,110,70,.35);}
+  html[data-theme="light"] #hills path:last-child{fill:rgba(28,72,48,.45);}
+  #grain{
+    position:fixed; inset:0; z-index:2; pointer-events:none; opacity:.045;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.55'/></svg>");
   }
 
-  /* ---------- Menu bar ---------- */
+  /* Menu bar */
   #menubar{
-    position:fixed; top:0; left:0; right:0; height:38px; z-index:50;
+    position:fixed; top:0; left:0; right:0; height:var(--menubar-h); z-index:80;
     display:flex; align-items:center; justify-content:space-between;
-    padding:0 14px;
-    background: rgba(8,12,24,0.6);
-    backdrop-filter: blur(16px);
-    border-bottom:1px solid var(--border);
-    font-family:var(--mono); font-size:12.5px; color:var(--text-dim);
+    padding:0 10px 0 8px;
+    background:var(--menubar-bg);
+    backdrop-filter:saturate(180%) blur(24px);
+    -webkit-backdrop-filter:saturate(180%) blur(24px);
+    color:var(--menubar-fg);
+    font-size:13px; letter-spacing:-.01em;
+    box-shadow:0 0.5px 0 var(--line);
   }
-  #menubar .left, #menubar .right{ display:flex; align-items:center; gap:18px; }
-  #menubar .brand{ color:var(--text); font-weight:700; display:flex; align-items:center; gap:6px; }
-  #menubar .brand .dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent); }
-  #menubar .menu-item{ opacity:.8; }
-  #menubar .menu-item:hover{ opacity:1; color:var(--text); }
-  #menubar .right span{ display:flex; align-items:center; gap:5px; }
-  #menubar .icon{ font-size:13px; }
-  #clock{ color:var(--text); font-weight:600; }
+  #menubar .left, #menubar .right{display:flex; align-items:center; height:100%;}
+  .apple-btn, .menu-item, .status-btn{
+    height:100%; display:flex; align-items:center; padding:0 9px;
+    border:none; background:transparent; color:inherit; font:inherit;
+    border-radius:6px; position:relative; white-space:nowrap;
+  }
+  .apple-btn{padding:0 10px; font-size:15px;}
+  .apple-btn svg{width:14px; height:16px; display:block;}
+  .menu-item.bold, #app-name{font-weight:700;}
+  .apple-btn:hover, .menu-item:hover, .status-btn:hover,
+  .apple-btn.open, .menu-item.open, .status-btn.open{background:var(--accent); color:#fff;}
+  .apple-btn.open svg, .status-btn.open svg{fill:#fff;}
+  .status-btn{gap:7px; font-variant-numeric:tabular-nums; padding:0 7px;}
+  .status-btn svg{width:15px; height:15px; fill:currentColor;}
+  #clock{font-weight:500; padding-right:4px;}
 
-  /* ---------- Desktop layout ---------- */
-  #desktop{ position:fixed; inset:38px 0 78px 0; z-index:5; }
+  .menu-panel{
+    display:none; position:absolute; top:calc(100% + 2px); left:0; min-width:230px;
+    background:var(--chrome); color:var(--text);
+    backdrop-filter:saturate(180%) blur(40px);
+    -webkit-backdrop-filter:saturate(180%) blur(40px);
+    border:1px solid var(--line); border-radius:8px;
+    box-shadow:var(--shadow); padding:6px; z-index:90;
+  }
+  .menu-item.open .menu-panel, .apple-btn.open .menu-panel, .status-btn.open .menu-panel{display:block;}
+  .menu-panel.right{left:auto; right:0;}
+  .menu-panel button, .menu-panel a.row{
+    display:flex; align-items:center; justify-content:space-between;
+    width:100%; text-align:left; border:none; background:transparent;
+    color:var(--text); font:inherit; font-size:13px; padding:5px 10px; border-radius:5px;
+    text-decoration:none; cursor:default;
+  }
+  .menu-panel button:hover, .menu-panel a.row:hover{background:var(--accent); color:#fff; text-decoration:none;}
+  .menu-panel .kbd{font-size:12px; color:var(--text-3); margin-left:24px;}
+  .menu-panel button:hover .kbd, .menu-panel a.row:hover .kbd{color:rgba(255,255,255,.8);}
+  .sep{height:1px; background:var(--line); margin:5px 8px;}
 
+  /* Desktop */
+  #desktop{position:fixed; inset:var(--menubar-h) 0 var(--dock-offset) 0; z-index:5;}
   #icons{
-    position:absolute; top:22px; left:22px;
-    display:grid; grid-template-columns:repeat(auto-fit, 84px); gap:6px 4px;
-  }
-  .icon-btn{
-    width:84px; background:transparent; border:none; color:var(--text);
-    display:flex; flex-direction:column; align-items:center; gap:6px;
-    padding:8px 4px; border-radius:10px; text-align:center;
-  }
-  .icon-btn:hover{ background:rgba(255,255,255,0.06); }
-  .icon-btn .glyph{
-    width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center;
-    font-size:20px; color:#04120f; position:relative;
-  }
-  .icon-btn .lbl{ font-size:11.5px; color:var(--text); font-family:var(--mono); line-height:1.2; }
-  .badge{
-    position:absolute; top:-4px; right:-4px; background:var(--pink); color:#fff;
-    font-size:9px; font-weight:700; min-width:15px; height:15px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; font-family:var(--mono);
-    border:2px solid var(--bg-deep);
-  }
-
-  #widgets{
-    position:absolute; top:22px; right:22px; width:300px;
+    position:absolute; top:18px; left:18px;
     display:flex; flex-direction:column; gap:14px;
   }
+  .desk-icon{
+    width:88px; background:transparent; border:none; color:#fff;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    padding:6px 4px 4px; border-radius:8px;
+  }
+  .desk-icon .glyph{width:54px; height:54px; filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));}
+  .desk-icon .lbl{
+    font-size:11.5px; line-height:1.2; text-align:center;
+    text-shadow:0 1px 3px rgba(0,0,0,.85); padding:1px 6px; border-radius:4px; max-width:88px;
+  }
+  .desk-icon.selected{background:rgba(255,255,255,.14);}
+  .desk-icon.selected .lbl{background:var(--accent); text-shadow:none;}
+  html[data-theme="light"] .desk-icon{color:#1d1d1f;}
+  html[data-theme="light"] .desk-icon .lbl{text-shadow:0 1px 2px rgba(255,255,255,.7);}
+
+  /* Widgets */
+  #widgets{
+    position:absolute; top:18px; right:18px; width:292px;
+    display:flex; flex-direction:column; gap:12px;
+    max-height:calc(100% - 12px); overflow-y:auto; overflow-x:hidden;
+    padding-right:2px;
+  }
   .widget{
-    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
-    padding:14px 16px; backdrop-filter: blur(18px);
+    background:var(--widget); border:1px solid var(--line-2); border-radius:22px;
+    padding:14px 16px; backdrop-filter:saturate(180%) blur(28px);
+    -webkit-backdrop-filter:saturate(180%) blur(28px);
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
   }
-  .widget .whead{
+  .whead{
     display:flex; align-items:center; justify-content:space-between;
-    font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
-    color:var(--text-dim); margin-bottom:10px;
+    font-size:12px; font-weight:600; color:var(--text-2); margin-bottom:8px;
   }
-  .widget .whead .tag{ color:var(--accent); }
-  .widget .whead .live{ color:var(--success); }
-
-  #note{ background:linear-gradient(160deg, rgba(255,209,102,0.16), rgba(255,93,143,0.10)); border-color: rgba(255,209,102,0.25); }
-  #note p{ margin:0 0 10px 0; font-size:13px; line-height:1.55; color:var(--text); }
-  #note p:last-child{ margin-bottom:0; }
-  #note a{ color:var(--amber); text-decoration:underline; text-underline-offset:2px; }
-
-  #weather .wtemp{ font-family:var(--mono); font-size:30px; font-weight:600; }
-  #weather .wrow{ display:flex; align-items:center; justify-content:space-between; }
-  #weather .wdesc{ font-size:11.5px; color:var(--text-dim); margin-top:2px; }
-  #weather .wloc{ color:var(--text); font-weight:600; }
-  #weather .wicon{ font-size:26px; }
-  #weather .waqi{ color:var(--success); font-size:11px; font-family:var(--mono); }
-
-  #calendar table{ width:100%; border-collapse:collapse; font-family:var(--mono); font-size:11px; }
-  #calendar th{ color:var(--text-dimmer); font-weight:500; padding-bottom:6px; }
-  #calendar td{ text-align:center; padding:4px 0; color:var(--text-dim); }
-  #calendar td.today{ position:relative; }
+  .whead .live{color:#30d158; font-size:11px;}
+  #note{background:linear-gradient(180deg,#fff6a8,#ffe56b); color:#3a3208; border-color:rgba(180,140,20,.2);}
+  #note .whead{color:#7a6a22;}
+  #note p{margin:0 0 8px; font-size:13px; line-height:1.45; user-select:text;}
+  #note p:last-child{margin:0;}
+  #note a{color:#8a5a00; text-decoration:underline;}
+  #weather .wtemp{font-size:44px; font-weight:300; letter-spacing:-1.5px; line-height:1;}
+  #weather .wrow{display:flex; align-items:flex-start; justify-content:space-between;}
+  #weather .wdesc{font-size:13px; color:var(--text-2); margin-top:4px;}
+  #weather .wicon{font-size:32px;}
+  #weather .wextra{margin-top:8px; font-size:12px; color:var(--text-2);}
+  #calendar .cmonth{color:var(--system-red); font-weight:700; text-transform:uppercase; letter-spacing:.04em; font-size:12px;}
+  #calendar table{width:100%; border-collapse:collapse; font-size:12px;}
+  #calendar th{color:var(--text-3); font-weight:600; padding-bottom:6px; font-size:10px;}
+  #calendar td{text-align:center; padding:3px 0; color:var(--text-2);}
   #calendar td.today span{
-    background:var(--pink); color:#fff; border-radius:50%; width:20px; height:20px;
+    background:var(--system-red); color:#fff; border-radius:50%; width:22px; height:22px;
     display:inline-flex; align-items:center; justify-content:center; font-weight:700;
   }
-  #calendar .cmonth{ color:var(--pink); }
+  #sysres .sr-row{margin-bottom:10px;}
+  #sysres .sr-row:last-child{margin:0;}
+  #sysres .sr-label{display:flex; justify-content:space-between; font-size:12px; color:var(--text-2); margin-bottom:5px;}
+  #sysres .sr-label b{color:var(--text); font-weight:600;}
+  #sysres .bar{height:5px; border-radius:99px; background:var(--fill-2); overflow:hidden;}
+  #sysres .bar i{display:block; height:100%; border-radius:99px; background:var(--accent); transition:width .6s ease;}
+  #visitors .vnum{font-size:34px; font-weight:700; letter-spacing:1px; font-variant-numeric:tabular-nums;}
+  #visitors .vsub{font-size:12px; color:var(--text-2); margin-top:2px;}
 
-  #sysres .sr-row{ margin-bottom:12px; }
-  #sysres .sr-row:last-child{ margin-bottom:0; }
-  #sysres .sr-label{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-dim); margin-bottom:5px; font-family:var(--mono); }
-  #sysres .sr-label b{ color:var(--text); font-weight:600; }
-  #sysres .bar{ height:6px; border-radius:4px; background:rgba(255,255,255,0.08); overflow:hidden; }
-  #sysres .bar i{ display:block; height:100%; border-radius:4px; background:linear-gradient(90deg, var(--accent), var(--violet)); transition: width .6s ease; }
-
-  #visitors .vnum{ font-family:var(--mono); font-size:30px; font-weight:700; color:var(--text); letter-spacing:1px; }
-  #visitors .vsub{ font-size:11px; color:var(--text-dim); margin-top:4px; }
-
-  /* ---------- Dock ---------- */
+  /* Dock */
+  #dock-wrap{
+    position:fixed; bottom:8px; left:50%; transform:translateX(-50%); z-index:70;
+    max-width:96vw;
+  }
   #dock{
-    position:fixed; bottom:14px; left:50%; transform:translateX(-50%); z-index:60;
-    display:flex; align-items:flex-end; gap:8px;
-    background:rgba(10,14,26,0.65); border:1px solid var(--border); border-radius:20px;
-    padding:10px 14px; backdrop-filter: blur(20px);
-    max-width:94vw; overflow-x:auto;
+    display:flex; align-items:flex-end; gap:4px;
+    background:var(--dock-bg); border:1px solid var(--dock-line);
+    border-radius:22px; padding:6px 8px 5px;
+    backdrop-filter:saturate(180%) blur(30px);
+    -webkit-backdrop-filter:saturate(180%) blur(30px);
+    box-shadow:0 12px 32px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.18);
   }
+  .dock-sep{width:1px; height:36px; margin:0 6px 10px; background:rgba(127,127,127,.45); align-self:flex-end;}
   .dock-btn{
-    background:transparent; border:none; display:flex; flex-direction:column; align-items:center; gap:5px;
-    padding:2px 4px; flex:0 0 auto;
+    position:relative; background:transparent; border:none; padding:0 2px 2px;
+    display:flex; flex-direction:column; align-items:center; color:var(--text);
   }
+  .dock-btn .bounce{display:block; transform-origin:bottom center;}
   .dock-btn .glyph{
-    width:48px; height:48px; border-radius:13px; display:flex; align-items:center; justify-content:center;
-    font-size:21px; color:#04120f; transition: transform .15s ease;
-    position:relative;
+    width:52px; height:52px; display:block;
+    transform:scale(var(--scale,1)); transform-origin:bottom center;
+    transition:transform .08s ease-out;
+    filter:drop-shadow(0 4px 6px rgba(0,0,0,.28));
   }
-  .dock-btn:hover .glyph{ transform:translateY(-6px) scale(1.05); }
-  .dock-btn .dlbl{ font-size:9.5px; color:var(--text-dim); font-family:var(--mono); }
+  .dock-btn .dot{
+    width:4px; height:4px; border-radius:50%; margin-top:3px;
+    background:transparent;
+  }
+  html[data-theme="dark"] .dock-btn.running .dot{background:#d1d1d6;}
+  html[data-theme="light"] .dock-btn.running .dot{background:#1d1d1f;}
+  .dock-btn .tip{
+    position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%);
+    background:var(--tooltip); color:#fff; font-size:12px; padding:3px 10px; border-radius:6px;
+    white-space:nowrap; opacity:0; pointer-events:none; box-shadow:0 6px 18px rgba(0,0,0,.25);
+  }
+  .dock-btn:hover .tip{opacity:1;}
+  @keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    25%{transform:translateY(-18px)}
+    50%{transform:translateY(0)}
+    75%{transform:translateY(-9px)}
+  }
+  .dock-btn.bounce-on .bounce{animation:bounce .7s ease;}
 
-  .swatch-teal{ background:linear-gradient(150deg,#5cf2da,var(--accent)); }
-  .swatch-pink{ background:linear-gradient(150deg,#ff8bb2,var(--pink)); }
-  .swatch-amber{ background:linear-gradient(150deg,#ffe19b,var(--amber)); }
-  .swatch-violet{ background:linear-gradient(150deg,#c1b6ff,var(--violet)); }
-  .swatch-blue{ background:linear-gradient(150deg,#7fd8ff,#3aa9ff); }
-  .swatch-gray{ background:linear-gradient(150deg,#cfd4de,#8b93a8); }
-
-  /* ---------- Windows ---------- */
+  /* Windows */
   .window{
-    position:fixed; z-index:100; width:min(640px, 92vw); max-height:78vh;
-    background:var(--panel-solid); border:1px solid var(--border); border-radius:16px;
-    box-shadow:0 30px 80px rgba(0,0,0,0.55);
-    display:none; flex-direction:column; overflow:hidden;
+    position:fixed; z-index:40; width:min(720px, 92vw); max-height:78vh;
+    background:var(--window);
+    backdrop-filter:saturate(180%) blur(40px);
+    -webkit-backdrop-filter:saturate(180%) blur(40px);
+    border:1px solid var(--line);
+    border-radius:var(--radius-win);
+    box-shadow:var(--shadow);
+    display:none; flex-direction:column; overflow:hidden; color:var(--text);
   }
-  .window.open{ display:flex; animation: winIn .18s ease-out; }
-  @keyframes winIn{ from{ opacity:0; transform:translateY(10px) scale(.98);} to{opacity:1; transform:none;} }
+  .window.open{display:flex;}
+  .window.minimized{display:none !important;}
+  .window.zoomed{max-height:none;}
+  .window:not(.focused){filter:saturate(.92);}
+  @keyframes winIn{from{opacity:0; transform:translateY(8px) scale(.98)} to{opacity:1; transform:none}}
+  .window.open.anim{animation:winIn .18s ease-out;}
   .titlebar{
-    display:flex; align-items:center; gap:10px; padding:10px 14px;
-    background:rgba(255,255,255,0.03); border-bottom:1px solid var(--border);
-    cursor:grab; user-select:none; font-family:var(--mono); font-size:12px; color:var(--text-dim);
+    display:flex; align-items:center; gap:10px; min-height:38px; padding:0 12px;
+    background:var(--fill); border-bottom:1px solid var(--line-2);
+    cursor:grab; flex:0 0 auto;
   }
-  .titlebar:active{ cursor:grabbing; }
-  .dots{ display:flex; gap:7px; }
-  .dots span{ width:11px; height:11px; border-radius:50%; }
-  .dots .r{ background:#ff5f57; } .dots .y{ background:#febc2e; } .dots .g{ background:#28c840; }
-  .dots span{ display:flex; align-items:center; justify-content:center; font-size:8px; color:rgba(0,0,0,0.5); }
-  .titlebar .wtitle{ flex:1; text-align:center; color:var(--text); font-weight:600; }
-  .wbody{ padding:20px 22px; overflow-y:auto; font-size:13.5px; line-height:1.65; color:var(--text); }
-  .wbody h3{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin:0 0 6px; }
-  .wbody h4{ margin:18px 0 6px; font-size:14.5px; }
-  .wbody p{ color:var(--text-dim); margin:0 0 12px; }
-  .wbody .tag{
-    display:inline-block; font-family:var(--mono); font-size:10.5px; background:var(--accent-soft);
-    color:var(--accent); padding:3px 8px; border-radius:6px; margin:2px 4px 2px 0;
+  .titlebar:active{cursor:grabbing;}
+  .traffic{display:flex; gap:8px; align-items:center; z-index:2;}
+  .tl{
+    width:12px; height:12px; border-radius:50%; border:none; padding:0;
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(0,0,0,.55); font-size:9px; line-height:1; font-weight:700;
   }
-  .info-table{ width:100%; border-collapse:collapse; margin:8px 0 16px; }
-  .info-table td{ padding:6px 0; border-bottom:1px solid var(--border); font-size:12.5px; }
-  .info-table td:first-child{ color:var(--text-dimmer); font-family:var(--mono); width:38%; }
-  .stat-row{ display:flex; gap:22px; margin:14px 0 4px; flex-wrap:wrap; }
-  .stat{ }
-  .stat b{ display:block; font-family:var(--mono); font-size:20px; color:var(--accent); }
-  .stat span{ font-size:11px; color:var(--text-dim); }
-
+  .tl.close{background:var(--red);}
+  .tl.min{background:var(--yellow);}
+  .tl.zoom{background:var(--green);}
+  .window:not(.focused) .tl{background:var(--tl-inactive);}
+  .window:not(.focused) .traffic:hover .tl.close{background:var(--red);}
+  .window:not(.focused) .traffic:hover .tl.min{background:var(--yellow);}
+  .window:not(.focused) .traffic:hover .tl.zoom{background:var(--green);}
+  .tl span{opacity:0; pointer-events:none;}
+  .traffic:hover .tl span{opacity:1;}
+  .wtitle{flex:1; text-align:center; font-size:13px; font-weight:600; color:var(--text-2); margin-right:44px;}
+  .wbody{padding:18px 22px; overflow-y:auto; font-size:13.5px; line-height:1.6; user-select:text; cursor:auto;}
+  .wbody h3{margin:0 0 8px; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent);}
+  .wbody h4{margin:16px 0 6px; font-size:15px;}
+  .wbody p{color:var(--text-2); margin:0 0 12px;}
+  .wbody b, .wbody strong{color:var(--text); font-weight:600;}
+  .tag{
+    display:inline-block; font-size:11px; background:var(--accent-soft); color:var(--accent);
+    padding:3px 8px; border-radius:99px; margin:2px 4px 2px 0; font-weight:500;
+  }
+  .info-table{width:100%; border-collapse:collapse; margin:8px 0 14px;}
+  .info-table td{padding:7px 0; border-bottom:1px solid var(--line-2); font-size:13px;}
+  .info-table td:first-child{color:var(--text-3); width:36%;}
+  .stat-row{display:flex; gap:22px; margin:12px 0; flex-wrap:wrap;}
+  .stat b{display:block; font-size:22px; color:var(--accent); letter-spacing:-.03em;}
+  .stat span{font-size:11px; color:var(--text-2);}
   .proj-card, .svc-card{
-    border:1px solid var(--border); border-radius:12px; padding:14px 16px; margin-bottom:12px;
-    background:rgba(255,255,255,0.02);
+    border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:10px; background:var(--fill);
   }
-  .proj-card .ptitle, .svc-card .stitle{ font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
-  .proj-card .pnum{ font-family:var(--mono); color:var(--text-dimmer); font-size:11px; }
-
-  code, .codeline{ font-family:var(--mono); }
+  .ptitle, .stitle{font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:8px;}
+  .pnum{color:var(--text-3); font-size:12px; font-variant-numeric:tabular-nums;}
   .code-block{
-    background:#080d1a; border:1px solid var(--border); border-radius:10px; padding:14px 16px;
-    font-family:var(--mono); font-size:12px; line-height:1.7; color:#c9d6e8; overflow-x:auto; margin:10px 0 16px;
+    background:rgba(0,0,0,.28); border:1px solid var(--line); border-radius:10px; padding:14px 16px;
+    font-family:var(--mono); font-size:12px; line-height:1.7; overflow-x:auto; margin:0 0 14px; user-select:text;
   }
-  .code-block .c{ color:var(--text-dimmer); }
-  .code-block .k{ color:var(--violet); }
-  .code-block .s{ color:var(--amber); }
-  .code-block .f{ color:var(--accent); }
-
-  /* Terminal window */
-  #win-terminal .wbody{ padding:0; }
-  #term-screen{
-    background:#04070d; font-family:var(--mono); font-size:12.5px; padding:16px;
-    height:360px; overflow-y:auto; color:#c9f7ee;
-  }
-  #term-screen .line{ margin-bottom:4px; white-space:pre-wrap; word-break:break-word; }
-  #term-screen .prompt{ color:var(--accent); }
-  #term-screen .out{ color:#b7c3d6; }
-  #term-input-row{ display:flex; align-items:center; padding:10px 16px; background:#060a12; border-top:1px solid var(--border); }
-  #term-input-row .prompt{ color:var(--accent); font-family:var(--mono); font-size:12.5px; margin-right:8px; }
-  #term-input{
-    flex:1; background:transparent; border:none; outline:none; color:#eaf0f7; font-family:var(--mono); font-size:12.5px;
-  }
-
-  /* Messages window (prompt examples as chat) */
-  .msg-row{ display:flex; gap:10px; margin-bottom:16px; align-items:flex-start; }
-  .msg-avatar{ width:28px; height:28px; border-radius:50%; flex:0 0 auto; display:flex; align-items:center; justify-content:center; font-size:13px; color:#04120f; font-weight:700; }
-  .msg-bubble{ background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:12px; padding:10px 13px; flex:1; }
-  .msg-bubble .msender{ font-family:var(--mono); font-size:10.5px; color:var(--text-dimmer); margin-bottom:5px; }
-  .msg-bubble pre{ margin:0; font-family:var(--mono); font-size:11.5px; white-space:pre-wrap; color:#c9d6e8; }
-
-  /* Settings window */
-  .swatches{ display:flex; gap:10px; margin:10px 0 18px; flex-wrap:wrap; }
-  .swatch-btn{ width:34px; height:34px; border-radius:50%; border:2px solid transparent; }
-  .swatch-btn.active{ border-color:#fff; }
-  .toggle-row{ display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); }
-
+  html[data-theme="light"] .code-block{background:#1d1d1f; color:#e8e8ed;}
+  .code-block .c{color:#86868b;} .code-block .k{color:#bf5af2;} .code-block .s{color:#ffd60a;}
   .cta-btn{
-    display:inline-block; background:var(--accent); color:#04120f; font-weight:700; font-size:13px;
-    padding:10px 18px; border-radius:9px; border:none; text-decoration:none; margin:6px 8px 6px 0;
+    display:inline-flex; align-items:center; gap:6px; background:var(--accent); color:#fff !important;
+    font-weight:600; font-size:13px; padding:8px 14px; border-radius:8px; border:none; margin:6px 8px 6px 0;
+    text-decoration:none !important;
   }
-  .cta-btn.alt{ background:transparent; color:var(--text); border:1px solid var(--border); }
+  .cta-btn.alt{background:var(--fill-2); color:var(--text) !important; border:1px solid var(--line);}
+  .resize{
+    position:absolute; right:0; bottom:0; width:16px; height:16px; cursor:nwse-resize;
+    background:linear-gradient(135deg, transparent 50%, rgba(127,127,127,.45) 50%);
+    border-bottom-right-radius:12px;
+  }
 
-  /* PDF Previewer window */
-  #win-resume{ width:min(760px, 94vw); }
-  #win-resume .wbody{ padding:0; display:flex; flex-direction:column; height:70vh; }
+  /* Finder */
+  #win-about{width:min(820px,94vw); height:min(620px,78vh); max-height:none;}
+  .finder{display:flex; flex:1; min-height:0;}
+  .finder-side{
+    width:186px; flex:0 0 186px; background:var(--sidebar); border-right:1px solid var(--line-2);
+    padding:8px 8px 16px; overflow-y:auto; font-size:12.5px;
+  }
+  .side-lab{font-size:11px; color:var(--text-3); font-weight:600; padding:8px 8px 4px; text-transform:uppercase; letter-spacing:.04em;}
+  .side-item{
+    display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+    border:none; background:transparent; color:var(--text); font:inherit; padding:5px 8px; border-radius:6px;
+  }
+  .side-item.active, .side-item:hover{background:var(--fill-2);}
+  .side-item.active{background:var(--accent); color:#fff;}
+  .finder-main{flex:1; overflow-y:auto; padding:18px 22px; user-select:text; cursor:auto;}
+  .tb{
+    display:flex; align-items:center; gap:8px; padding:0 10px 8px 52px; margin-top:-4px;
+  }
+  .tb-btn{
+    width:28px; height:22px; border:none; border-radius:6px; background:var(--fill-2); color:var(--text-2);
+  }
+  .tb-search{
+    margin-left:auto; background:var(--input); border:1px solid var(--line); color:var(--text);
+    border-radius:6px; padding:4px 10px; font-size:12px; width:160px;
+  }
+
+  /* Safari */
+  #win-contact{width:min(780px,94vw);}
+  .safari-bar{display:flex; align-items:center; gap:8px; padding:0 12px 8px 52px; margin-top:-2px;}
+  .url-field{
+    flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
+    background:var(--input); border:1px solid var(--line); border-radius:8px; height:28px;
+    font-size:13px; color:var(--text-2);
+  }
+  .fav-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(92px,1fr)); gap:16px; margin:18px 0;}
+  .fav{
+    display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--text); text-decoration:none;
+    background:transparent; border:none; font:inherit;
+  }
+  .fav i{
+    width:56px; height:56px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+    font-size:24px; background:var(--fill-2); border:1px solid var(--line);
+  }
+  .fav span{font-size:12px; color:var(--text-2);}
+
+  /* Messages — iMessage */
+  #win-messages{width:min(760px,94vw); height:min(580px,78vh); max-height:none;}
+  #win-messages .wbody{padding:0; display:flex; flex-direction:column; flex:1; min-height:0; height:auto; cursor:auto;}
+  .imsg{display:flex; flex:1; min-height:0;}
+  .imsg-list{
+    width:220px; flex:0 0 220px; background:var(--sidebar); border-right:1px solid var(--line-2);
+    overflow-y:auto; padding:8px 6px;
+  }
+  .imsg-conv{
+    display:flex; gap:10px; width:100%; text-align:left; border:none; background:transparent;
+    color:var(--text); padding:8px; border-radius:10px; font:inherit; align-items:center;
+  }
+  .imsg-conv.active{background:var(--accent); color:#fff;}
+  .imsg-conv .av{
+    width:40px; height:40px; border-radius:50%; flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; color:#fff;
+  }
+  .imsg-conv .meta{min-width:0; flex:1;}
+  .imsg-conv .meta b{display:block; font-size:13px; font-weight:600;}
+  .imsg-conv .meta span{display:block; font-size:11.5px; opacity:.7; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .imsg-thread{flex:1; min-width:0; display:flex; flex-direction:column; background:var(--window-solid);}
+  .imsg-header{
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    padding:10px 12px 8px; border-bottom:1px solid var(--line-2);
+  }
+  .imsg-header .av{
+    width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; color:#fff; font-size:18px; background:linear-gradient(180deg,#5ac8fa,#007aff);
+  }
+  .imsg-header b{font-size:13px;}
+  .imsg-header small{font-size:11px; color:#30d158;}
+  .imsg-scroll{flex:1; overflow-y:auto; padding:14px 16px 8px; display:flex; flex-direction:column; gap:2px;}
+  .imsg-day{
+    align-self:center; font-size:11px; color:var(--text-3); margin:8px 0 12px; font-weight:600;
+  }
+  .imsg-row{display:flex; margin:1px 0; max-width:78%;}
+  .imsg-row.them{align-self:flex-start;}
+  .imsg-row.me{align-self:flex-end;}
+  .imsg-bubble{
+    padding:7px 12px; font-size:14px; line-height:1.35; white-space:pre-wrap; word-break:break-word;
+    user-select:text; cursor:auto;
+  }
+  .imsg-row.them .imsg-bubble{
+    background:#e9e9eb; color:#111; border-radius:18px 18px 18px 5px;
+  }
+  html[data-theme="dark"] .imsg-row.them .imsg-bubble{background:#3a3a3c; color:#f5f5f7;}
+  .imsg-row.me .imsg-bubble{
+    background:#0b93f6; color:#fff; border-radius:18px 18px 5px 18px;
+  }
+  .imsg-label{font-size:11px; color:var(--text-3); margin:10px 0 4px 4px;}
+  .imsg-status{align-self:flex-end; font-size:11px; color:var(--text-3); margin:2px 4px 8px; min-height:14px;}
+  .imsg-typing{
+    align-self:flex-start; background:#e9e9eb; border-radius:18px; padding:10px 14px;
+    display:none; gap:5px; align-items:center;
+  }
+  html[data-theme="dark"] .imsg-typing{background:#3a3a3c;}
+  .imsg-typing.show{display:flex;}
+  .imsg-typing i{
+    width:7px; height:7px; border-radius:50%; background:#8e8e93;
+    animation:imsgDot 1.2s infinite ease-in-out;
+  }
+  .imsg-typing i:nth-child(2){animation-delay:.15s;}
+  .imsg-typing i:nth-child(3){animation-delay:.3s;}
+  @keyframes imsgDot{0%,80%,100%{transform:translateY(0);opacity:.4} 40%{transform:translateY(-3px);opacity:1}}
+  .imsg-compose{
+    display:flex; gap:8px; padding:8px 12px 12px; align-items:flex-end; border-top:1px solid var(--line-2);
+  }
+  .imsg-compose.hidden{display:none;}
+  .imsg-compose textarea{
+    flex:1; resize:none; border:1px solid var(--line); background:var(--input); color:var(--text);
+    border-radius:18px; padding:8px 14px; font-size:14px; line-height:1.3; max-height:88px;
+    font-family:inherit; outline:none;
+  }
+  .imsg-send{
+    width:28px; height:28px; border-radius:50%; border:none; background:#8e8e93; color:#fff;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  .imsg-send.on{background:#0b93f6;}
+  .imsg-readonly{padding:10px 16px; font-size:12px; color:var(--text-3); text-align:center; border-top:1px solid var(--line-2);}
+  @media (max-width:780px){
+    .imsg-list{width:92px; flex-basis:92px;}
+    .imsg-conv .meta span{display:none;}
+  }
+
+  /* Terminal */
+  #win-terminal{width:min(680px,94vw);}
+  #win-terminal .wbody{padding:0; background:#1e1e1e;}
+  #term-screen{
+    font-family:var(--mono); font-size:12.5px; padding:14px 16px; height:340px; overflow-y:auto; color:#d7ffe8; user-select:text;
+  }
+  #term-screen .line{margin-bottom:4px; white-space:pre-wrap; word-break:break-word;}
+  #term-screen .prompt{color:#30d158;}
+  #term-input-row{display:flex; align-items:center; padding:8px 16px 12px; background:#1e1e1e;}
+  #term-input-row .prompt{color:#30d158; font-family:var(--mono); font-size:12.5px; margin-right:8px;}
+  #term-input{flex:1; background:transparent; border:none; outline:none; color:#f5f5f7; font-family:var(--mono); font-size:12.5px;}
+
+  /* Settings */
+  #win-settings{width:min(720px,94vw); height:min(520px,76vh); max-height:none;}
+  .settings{display:flex; flex:1; min-height:0;}
+  .set-side{width:200px; background:var(--sidebar); border-right:1px solid var(--line-2); padding:10px 8px; overflow-y:auto;}
+  .set-main{flex:1; overflow-y:auto; padding:20px 24px; user-select:text;}
+  .swatches{display:flex; gap:10px; margin:10px 0 18px; flex-wrap:wrap;}
+  .swatch-btn{width:28px; height:28px; border-radius:50%; border:2px solid transparent; box-shadow:0 0 0 1px var(--line);}
+  .swatch-btn.active{border-color:#fff; box-shadow:0 0 0 2px var(--accent);}
+  .seg{display:flex; background:var(--fill-2); border-radius:8px; padding:3px; margin:8px 0 16px; width:fit-content;}
+  .seg button{border:none; background:transparent; color:var(--text-2); padding:5px 12px; border-radius:6px; font-size:13px;}
+  .seg button.active{background:var(--window-solid); color:var(--text); box-shadow:0 1px 3px rgba(0,0,0,.15);}
+  .toggle-row{display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line-2); font-size:13.5px;}
+  .toggle{appearance:none; width:42px; height:24px; border-radius:99px; background:#636366; position:relative; border:none; cursor:pointer;}
+  .toggle:checked{background:var(--accent);}
+  .toggle::after{content:""; position:absolute; top:2px; left:2px; width:20px; height:20px; background:#fff; border-radius:50%; transition:left .15s;}
+  .toggle:checked::after{left:20px;}
+
+  /* Resume / Preview */
+  #win-resume{width:min(780px,94vw);}
+  #win-resume .wbody{padding:0; display:flex; flex-direction:column; height:70vh; background:#6b6b6f;}
   .pdf-toolbar{
-    display:flex; align-items:center; gap:10px; padding:9px 14px;
-    background:rgba(255,255,255,0.03); border-bottom:1px solid var(--border);
+    display:flex; align-items:center; gap:10px; padding:8px 14px;
+    background:var(--chrome-solid); color:var(--text); border-bottom:1px solid var(--line);
   }
-  .pdf-toolbar .pdf-badge{
-    background:#ff5f57; color:#fff; font-family:var(--mono); font-weight:700; font-size:10px;
-    padding:3px 6px; border-radius:4px; letter-spacing:.03em;
+  .pdf-badge{background:var(--system-red); color:#fff; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;}
+  .pdf-name{font-size:13px; flex:1;}
+  .pdf-toolbar button, .pdf-toolbar a{
+    background:var(--fill-2); border:1px solid var(--line); color:var(--text);
+    font-size:12px; padding:5px 10px; border-radius:6px; text-decoration:none !important;
   }
-  .pdf-toolbar .pdf-name{ font-family:var(--mono); font-size:12.5px; color:var(--text); flex:1; }
-  .pdf-toolbar .pdf-actions{ display:flex; gap:8px; }
-  .pdf-toolbar button{
-    background:rgba(255,255,255,0.06); border:1px solid var(--border); color:var(--text);
-    font-family:var(--mono); font-size:11.5px; padding:6px 10px; border-radius:7px; display:flex; align-items:center; gap:5px;
+  #resume-paper{
+    margin:16px auto; width:min(680px,92%); background:var(--paper); color:var(--paper-text);
+    border-radius:4px; padding:36px 40px; overflow:auto; flex:1; box-shadow:0 8px 30px rgba(0,0,0,.25);
+    user-select:text; cursor:auto;
   }
-  .pdf-toolbar button:hover{ background:rgba(255,255,255,0.12); }
-  .pdf-toolbar button.primary{ background:var(--accent); color:#04120f; border-color:transparent; font-weight:600; }
-  #resume-frame{ flex:1; width:100%; border:none; background:#e9ebee; }
+  #resume-paper h2{margin:0 0 4px; font-size:26px; letter-spacing:-.03em;}
+  #resume-paper .sub{color:#6e6e73; margin-bottom:14px; font-size:13px;}
+  #resume-paper h3{color:#0a84ff; font-size:12px; letter-spacing:.08em; text-transform:uppercase; margin:16px 0 6px; border-bottom:1px solid #eee; padding-bottom:4px;}
+  #resume-paper p,#resume-paper li{font-size:12.5px; line-height:1.5; color:#3a3a3c;}
 
-  /* Toast notification */
+  /* Spotlight */
+  #spotlight{
+    position:fixed; inset:0; z-index:120; display:none; align-items:flex-start; justify-content:center;
+    padding-top:18vh; background:rgba(0,0,0,.18);
+  }
+  #spotlight.show{display:flex;}
+  .spot-box{
+    width:min(640px,90vw); background:var(--chrome);
+    backdrop-filter:saturate(180%) blur(40px);
+    border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); overflow:hidden;
+  }
+  #spot-input{
+    width:100%; border:none; background:transparent; color:var(--text);
+    font-size:22px; padding:16px 18px; outline:none;
+  }
+  #spot-results{border-top:1px solid var(--line-2); max-height:280px; overflow:auto;}
+  .spot-row{
+    display:flex; align-items:center; gap:10px; padding:8px 16px; font-size:14px; border:none;
+    width:100%; background:transparent; color:var(--text); text-align:left;
+  }
+  .spot-row.active, .spot-row:hover{background:var(--accent); color:#fff;}
+  .spot-row small{margin-left:auto; color:var(--text-3); font-size:12px;}
+  .spot-row.active small{color:rgba(255,255,255,.8);}
+
+  /* Control center */
+  #cc{
+    display:none; position:fixed; top:34px; right:12px; z-index:95; width:320px;
+    background:var(--chrome); backdrop-filter:saturate(180%) blur(40px);
+    border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:12px;
+  }
+  #cc.show{display:block;}
+  .cc-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;}
+  .cc-tile{
+    background:var(--fill); border:1px solid var(--line-2); border-radius:14px; padding:12px;
+    display:flex; align-items:center; gap:10px; font-size:13px; font-weight:600;
+  }
+  .cc-tile.on{background:var(--accent); color:#fff; border-color:transparent;}
+  .cc-knob{
+    width:28px; height:28px; border-radius:50%; background:var(--fill-2); display:flex; align-items:center; justify-content:center;
+  }
+  .cc-tile.on .cc-knob{background:rgba(255,255,255,.2);}
+  .cc-slider{margin:8px 0; font-size:12px; color:var(--text-2);}
+  .cc-slider input{width:100%; accent-color:var(--accent);}
+
+  /* Toast */
   #toast{
-    position:fixed; top:48px; right:22px; z-index:200;
-    background:rgba(10,14,26,0.9); border:1px solid var(--border); border-radius:12px;
-    padding:11px 16px; display:flex; align-items:center; gap:10px; backdrop-filter: blur(16px);
-    transform:translateX(120%); transition: transform .35s ease;
-    font-family:var(--mono); font-size:12px; max-width:280px;
+    position:fixed; top:40px; right:16px; z-index:110; width:300px;
+    background:var(--chrome); border:1px solid var(--line); border-radius:14px;
+    padding:12px 14px; display:flex; gap:10px; box-shadow:var(--shadow);
+    transform:translateX(120%); transition:transform .35s ease; backdrop-filter:blur(24px);
   }
-  #toast.show{ transform:translateX(0); }
-  #toast .ticon{
-    width:26px; height:26px; border-radius:50%; background:var(--accent-soft); color:var(--accent);
-    display:flex; align-items:center; justify-content:center; flex:0 0 auto; font-size:13px;
-  }
-  #toast .ttitle{ color:var(--text-dimmer); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; }
-  #toast .tmsg{ color:var(--text); font-weight:600; }
+  #toast.show{transform:none;}
+  #toast .ticon{width:36px; height:36px; border-radius:8px; flex:0 0 auto;}
+  #toast .ttitle{font-size:11px; color:var(--text-3); font-weight:600;}
+  #toast .tmsg{font-size:13px; font-weight:600;}
 
-  /* Mobile fallback */
-  @media (max-width: 780px){
-    #widgets{ display:none; }
-    #icons{ grid-template-columns:repeat(4, 70px); left:12px; top:14px; gap:10px 2px; }
-    .icon-btn{ width:70px; }
-    .window{ width:96vw; max-height:82vh; }
-    #silhouette{ opacity:.5; }
+  /* Overlays */
+  #sleep, #shutdown{
+    position:fixed; inset:0; z-index:200; display:none; align-items:center; justify-content:center;
+    background:#000; color:#fff; flex-direction:column; gap:12px;
+  }
+  #sleep.show, #shutdown.show{display:flex;}
+  #sleep .big{font-size:64px; font-weight:200; letter-spacing:-2px;}
+  .dialog{
+    background:var(--chrome); color:var(--text); border-radius:14px; padding:22px 24px; width:min(360px,90vw);
+    text-align:center; box-shadow:var(--shadow); border:1px solid var(--line);
+  }
+  .dialog h2{margin:0 0 8px; font-size:17px;}
+  .dialog p{color:var(--text-2); font-size:13px; margin:0 0 16px;}
+  .dialog .row{display:flex; gap:8px; justify-content:flex-end;}
+  .dialog button{border:none; border-radius:8px; padding:7px 14px; font-size:13px; background:var(--fill-2); color:var(--text);}
+  .dialog button.pri{background:var(--accent); color:#fff;}
+
+  .app-icon{width:100%; height:100%; display:block;}
+
+  @media (max-width:780px){
+    #widgets{display:none;}
+    #icons{flex-direction:row; flex-wrap:wrap; width:calc(100% - 24px); gap:8px;}
+    .window{width:96vw;}
+    #win-about, #win-settings{height:82vh;}
+    .finder-side, .set-side{width:132px; flex-basis:132px;}
+    .wtitle{font-size:12px;}
+  }
+  @media print{
+    body *{visibility:hidden;}
+    #resume-paper, #resume-paper *{visibility:visible;}
+    #resume-paper{position:absolute; inset:0; margin:0; width:100%; box-shadow:none;}
   }
 </style>
 </head>
 <body>
 
-<div id="bg"></div>
-<div id="stars"></div>
-<div id="horizon"></div>
-<svg id="silhouette" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-  <ellipse cx="200" cy="290" rx="190" ry="10" fill="rgba(0,0,0,0.35)"/>
-  <rect x="150" y="150" width="100" height="60" rx="4" fill="#060a12"/>
-  <rect x="160" y="120" width="80" height="34" rx="3" fill="#060a12"/>
-  <circle cx="205" cy="60" r="16" fill="#060a12"/>
-  <rect x="196" y="76" width="18" height="46" fill="#060a12"/>
-  <path d="M188 100 L170 130" stroke="#060a12" stroke-width="9" stroke-linecap="round"/>
-  <path d="M222 100 L242 118" stroke="#060a12" stroke-width="9" stroke-linecap="round"/>
-  <rect x="150" y="122" width="34" height="20" rx="2" fill="#060a12" transform="rotate(-8 167 132)"/>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gFinderA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ac8fa"/><stop offset="1" stop-color="#007aff"/></linearGradient>
+    <linearGradient id="gFinderB" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5f5f7"/><stop offset="1" stop-color="#d1d1d6"/></linearGradient>
+    <linearGradient id="gSaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#64d2ff"/><stop offset="1" stop-color="#0a84ff"/></linearGradient>
+    <linearGradient id="gMail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5ac8fa"/><stop offset="1" stop-color="#0a84ff"/></linearGradient>
+    <linearGradient id="gMsg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#32d74b"/><stop offset="1" stop-color="#30d158"/></linearGradient>
+    <linearGradient id="gCode" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5e5ce6"/><stop offset="1" stop-color="#bf5af2"/></linearGradient>
+    <linearGradient id="gTerm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a3c"/><stop offset="1" stop-color="#1c1c1e"/></linearGradient>
+    <linearGradient id="gPhoto" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff375f"/><stop offset="1" stop-color="#bf5af2"/></linearGradient>
+    <linearGradient id="gSet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d1d1d6"/><stop offset="1" stop-color="#8e8e93"/></linearGradient>
+    <linearGradient id="gPrev" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#64d2ff"/><stop offset="1" stop-color="#30d158"/></linearGradient>
+    <linearGradient id="gTrash" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e5e5ea"/><stop offset="1" stop-color="#8e8e93"/></linearGradient>
+    <linearGradient id="gCred" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bf5af2"/><stop offset="1" stop-color="#5e5ce6"/></linearGradient>
+    <clipPath id="squircle"><rect width="100" height="100" rx="22"/></clipPath>
+  </defs>
+  <symbol id="ic-finder" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="url(#gFinderA)"/>
+    <path d="M0 22 C0 10 10 0 22 0 H100 V100 H22 C10 100 0 90 0 78 Z" fill="url(#gFinderB)" clip-path="url(#squircle)"/>
+    <path d="M0 0 L100 100" stroke="rgba(0,0,0,.12)" stroke-width="6"/>
+    <circle cx="34" cy="42" r="5" fill="#1d1d1f"/><circle cx="66" cy="42" r="5" fill="#1d1d1f"/>
+    <path d="M32 62 Q50 74 68 62" fill="none" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="ic-safari" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="url(#gSaf)"/>
+    <circle cx="50" cy="50" r="32" fill="#f5f5f7"/>
+    <circle cx="50" cy="50" r="28" fill="#0a84ff"/>
+    <g fill="#fff" opacity=".85">
+      <rect x="48.5" y="22" width="3" height="8" rx="1"/><rect x="48.5" y="70" width="3" height="8" rx="1"/>
+      <rect x="22" y="48.5" width="8" height="3" rx="1"/><rect x="70" y="48.5" width="8" height="3" rx="1"/>
+    </g>
+    <path d="M50 50 L38 62 L62 28 Z" fill="#ff3b30"/>
+    <path d="M50 50 L62 38 L38 72 Z" fill="#f5f5f7"/>
+  </symbol>
+  <symbol id="ic-mail" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="url(#gMail)"/>
+    <rect x="18" y="28" width="64" height="44" rx="6" fill="#fff"/>
+    <path d="M18 34 L50 54 L82 34" fill="none" stroke="#0a84ff" stroke-width="4"/>
+  </symbol>
+  <symbol id="ic-msg" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="url(#gMsg)"/>
+    <path d="M22 30 h56 a10 10 0 0 1 10 10 v22 a10 10 0 0 1-10 10 H44 l-16 12 V72 H22 a10 10 0 0 1-10-10 V40 a10 10 0 0 1 10-10z" fill="#fff"/>
+  </symbol>
+  <symbol id="ic-code" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="url(#gCode)"/>
+    <path d="M38 30 L22 50 L38 70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M62 30 L78 50 L62 70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="ic-term" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="url(#gTerm)"/>
+    <path d="M28 38 L42 50 L28 62" fill="none" stroke="#30d158" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M50 62 H74" stroke="#30d158" stroke-width="6" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="ic-photo" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#1c1c1e"/>
+    <circle cx="38" cy="40" r="14" fill="#ff375f"/>
+    <circle cx="62" cy="40" r="14" fill="#ffd60a"/>
+    <circle cx="50" cy="58" r="14" fill="#30d158"/>
+    <circle cx="32" cy="58" r="12" fill="#64d2ff"/>
+    <circle cx="68" cy="58" r="12" fill="#bf5af2"/>
+  </symbol>
+  <symbol id="ic-set" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="url(#gSet)"/>
+    <circle cx="50" cy="50" r="16" fill="none" stroke="#3a3a3c" stroke-width="7"/>
+    <g fill="#3a3a3c">
+      <rect x="46" y="14" width="8" height="16" rx="2"/><rect x="46" y="70" width="8" height="16" rx="2"/>
+      <rect x="14" y="46" width="16" height="8" rx="2"/><rect x="70" y="46" width="16" height="8" rx="2"/>
+    </g>
+  </symbol>
+  <symbol id="ic-prev" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#e8e8ed"/>
+    <rect x="18" y="22" width="50" height="56" rx="6" fill="#fff" stroke="#c7c7cc"/>
+    <rect x="32" y="30" width="50" height="56" rx="6" fill="url(#gPrev)"/>
+    <circle cx="50" cy="50" r="8" fill="#fff" opacity=".9"/>
+  </symbol>
+  <symbol id="ic-trash" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#6e6e73"/>
+    <rect x="30" y="32" width="40" height="46" rx="6" fill="url(#gTrash)"/>
+    <rect x="26" y="26" width="48" height="10" rx="3" fill="#e5e5ea"/>
+    <rect x="42" y="20" width="16" height="8" rx="2" fill="#e5e5ea"/>
+  </symbol>
+  <symbol id="ic-cred" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="url(#gCred)"/>
+    <path d="M50 22 L78 34 V52 c0 16-12 28-28 34 C24 80 12 68 12 52 V34 Z" fill="#fff" opacity=".95" transform="translate(10,6) scale(.8)"/>
+    <path d="M42 52 l8 8 16-16" fill="none" stroke="#5e5ce6" stroke-width="5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="ic-pdf" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#ff3b30"/>
+    <path d="M32 18 h28 l18 18 v48 a6 6 0 0 1-6 6 H32 a6 6 0 0 1-6-6 V24 a6 6 0 0 1 6-6z" fill="#fff"/>
+    <path d="M60 18 v16 h16" fill="#ffd0d0"/>
+    <text x="50" y="64" text-anchor="middle" font-size="18" font-family="Inter,sans-serif" font-weight="700" fill="#ff3b30">PDF</text>
+  </symbol>
 </svg>
 
+<div id="wallpaper"></div>
+<div id="stars"></div>
+<svg id="hills" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+  <path fill="rgba(8,6,18,.55)" d="M0,224 C180,180 280,260 480,210 C700,150 820,250 1040,200 C1200,160 1320,210 1440,180 L1440,320 L0,320 Z"/>
+  <path fill="rgba(4,4,12,.75)" d="M0,260 C220,220 400,280 620,240 C860,190 1020,270 1440,230 L1440,320 L0,320 Z"/>
+</svg>
+<div id="grain"></div>
+
 <div id="toast">
-  <span class="ticon">🔔</span>
+  <svg class="ticon" viewBox="0 0 100 100"><use href="#ic-prev"></use></svg>
   <div>
-    <div class="ttitle">System Update</div>
+    <div class="ttitle">Preview</div>
     <div class="tmsg" id="toast-msg">Opened Resume.pdf</div>
   </div>
 </div>
 
-<div id="menubar">
-  <div class="left">
-    <span class="brand"><span class="dot"></span>StuceyOS</span>
-    <span class="menu-item">File</span>
-    <span class="menu-item">Automations</span>
-    <span class="menu-item">View</span>
-    <span class="menu-item">Help</span>
-  </div>
-  <div class="right">
-    <span class="icon">📶</span>
-    <span class="icon">🔊</span>
-    <span class="icon" id="search-toggle">🔍</span>
-    <span id="clock">--:--</span>
+<div id="spotlight">
+  <div class="spot-box">
+    <input id="spot-input" placeholder="Search StuceyOS" autocomplete="off" spellcheck="false">
+    <div id="spot-results"></div>
   </div>
 </div>
 
+<div id="cc">
+  <div class="cc-grid">
+    <div class="cc-tile on" id="cc-wifi"><div class="cc-knob">📶</div>Wi‑Fi</div>
+    <div class="cc-tile" id="cc-bt"><div class="cc-knob">⬡</div>Bluetooth</div>
+    <div class="cc-tile" id="cc-air"><div class="cc-knob">📡</div>AirDrop</div>
+    <div class="cc-tile" id="cc-focus"><div class="cc-knob">🌙</div>Focus</div>
+  </div>
+  <div class="cc-slider">Display<br><input id="cc-bright" type="range" min="55" max="100" value="100"></div>
+  <div class="cc-slider">Sound<br><input type="range" min="0" max="100" value="72"></div>
+  <div class="cc-tile" style="margin-top:6px;"><div class="cc-knob">🤖</div><div style="line-height:1.2"><div>Now Playing</div><div style="font-weight:400;font-size:12px;opacity:.8">Building automations…</div></div></div>
+</div>
+
+<div id="sleep"><div class="big" id="sleep-clock">12:00</div><div style="opacity:.6">Click to wake</div></div>
+<div id="shutdown">
+  <div class="dialog" id="shutdown-dialog">
+    <h2>Are you sure you want to shut down your computer?</h2>
+    <p>Unsaved windows will be restored next time you open StuceyOS.</p>
+    <div class="row">
+      <button type="button" onclick="hideOverlay('shutdown')">Cancel</button>
+      <button type="button" class="pri" onclick="doShutdown()">Shut Down</button>
+    </div>
+  </div>
+  <div id="off-screen" style="display:none;text-align:center">
+    <svg width="48" height="56" fill="#fff" viewBox="0 0 14 18"><path d="M10.5.5c.62.75 1.04 1.79.92 2.83-.9-.04-1.98-.6-2.62-1.35C8.22 1.31 7.72.23 7.86-.8c1 .08 2.02.51 2.64 1.3zM13.07 6.13c-.1.08-1.85 1.07-1.85 3.28 0 2.56 2.28 3.46 2.35 3.48-.04.12-.36 1.26-1.2 2.49-.72 1.06-1.48 2.12-2.7 2.14-1.2.02-1.58-.71-2.96-.71s-1.82.69-2.98.73c-1.18.04-2.08-1.15-2.82-2.2C-.9 13.1-1.66 9.3.7 6.72c1.17-1.28 2.92-2.04 4.67-2.06 1.16-.02 2.25.78 2.96.78.7 0 2.02-.96 3.4-.82.58.02 2.2.23 3.24 1.76-.08.05-.54.32-.9.75z"/></svg>
+    <p style="opacity:.5;margin-top:16px">Click to start StuceyOS</p>
+  </div>
+</div>
+
+<header id="menubar">
+  <div class="left">
+    <div class="apple-btn" id="apple-btn" role="button" tabindex="0" aria-label="Apple menu">
+      <svg viewBox="0 0 384 512" fill="currentColor" width="13" height="16"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      <div class="menu-panel">
+        <button type="button" data-open="about">About This Mac</button>
+        <div class="sep"></div>
+        <button type="button" data-open="settings">System Settings…</button>
+        <div class="sep"></div>
+        <button type="button" onclick="goSleep()">Sleep</button>
+        <button type="button" onclick="location.reload()">Restart…</button>
+        <button type="button" onclick="showShutdown()">Shut Down…</button>
+      </div>
+    </div>
+    <div class="menu-item bold" id="app-menu" role="button" tabindex="0"><span id="app-name">Finder</span>
+      <div class="menu-panel">
+        <button type="button" data-open="about">About Stucey</button>
+        <div class="sep"></div>
+        <button type="button" onclick="hideMenus(); closeFocused()">Hide <span class="kbd">⌘H</span></button>
+        <button type="button" onclick="hideMenus(); closeFocused()">Quit <span class="kbd">⌘Q</span></button>
+      </div>
+    </div>
+    <div class="menu-item" role="button" tabindex="0">File
+      <div class="menu-panel">
+        <button type="button" data-open="resume">Open Resume.pdf <span class="kbd">⌘O</span></button>
+        <button type="button" onclick="hideMenus(); closeFocused()">Close Window <span class="kbd">⌘W</span></button>
+      </div>
+    </div>
+    <div class="menu-item" role="button" tabindex="0">View
+      <div class="menu-panel">
+        <button type="button" onclick="hideMenus(); toggleWidgets()">Toggle Widgets</button>
+        <button type="button" onclick="hideMenus(); zoomFocused()">Enter Full Screen <span class="kbd">⌃⌘F</span></button>
+      </div>
+    </div>
+    <div class="menu-item" role="button" tabindex="0">Window
+      <div class="menu-panel">
+        <button type="button" onclick="hideMenus(); minimizeFocused()">Minimize <span class="kbd">⌘M</span></button>
+        <button type="button" data-open="about">Bring All to Front</button>
+      </div>
+    </div>
+    <div class="menu-item" role="button" tabindex="0">Help
+      <div class="menu-panel">
+        <button type="button" onclick="hideMenus(); openSpotlight()">Search StuceyOS <span class="kbd">⌘Space</span></button>
+        <button type="button" data-open="terminal">Terminal Help</button>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <button class="status-btn" title="Wi‑Fi" aria-label="Wi‑Fi">
+      <svg viewBox="0 0 24 24"><path d="M12 18.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-4.2-3.3a6 6 0 0 1 8.4 0l-1.4 1.4a4 4 0 0 0-5.6 0l-1.4-1.4zm-3-3.1a10 10 0 0 1 14.4 0l-1.4 1.4a8 8 0 0 0-11.6 0L4.8 12.1z"/></svg>
+    </button>
+    <button class="status-btn" id="cc-toggle" title="Control Center" aria-label="Control Center">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="8" rx="2"/><rect x="13" y="4" width="8" height="8" rx="2"/><rect x="3" y="14" width="8" height="6" rx="2"/><rect x="13" y="14" width="8" height="6" rx="2"/></svg>
+    </button>
+    <button class="status-btn" id="search-toggle" title="Spotlight" aria-label="Spotlight">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="status-btn" id="clock">Wed Aug 19 11:15 PM</button>
+  </div>
+</header>
+
 <div id="desktop">
   <div id="icons">
-    <button class="icon-btn" onclick="openWin('resume')">
-      <span class="glyph" style="background:linear-gradient(150deg,#ff8bb2,var(--pink));">📄</span>
-      <span class="lbl">Resume.pdf</span>
-    </button>
-    <button class="icon-btn" onclick="openWin('projects')">
-      <span class="glyph" style="background:linear-gradient(150deg,#7fd8ff,#3aa9ff);">🗂</span>
-      <span class="lbl">Projects</span>
-    </button>
-    <button class="icon-btn" onclick="openWin('terminal')">
-      <span class="glyph" style="background:linear-gradient(150deg,#2b3242,#12151f); color:var(--accent);">&gt;_</span>
-      <span class="lbl">Terminal.sh</span>
-    </button>
-    <button class="icon-btn" onclick="openWin('messages')">
-      <span class="glyph" style="background:linear-gradient(150deg,#ff8bb2,var(--pink));">💬<span class="badge">4</span></span>
-      <span class="lbl">Messages</span>
-    </button>
-    <button class="icon-btn" onclick="openWin('skills')">
-      <span class="glyph" style="background:linear-gradient(150deg,#c1b6ff,var(--violet));">⚙</span>
-      <span class="lbl">Skills.js</span>
-    </button>
+    <button class="desk-icon" data-win="resume"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-pdf"/></svg><span class="lbl">Resume.pdf</span></button>
+    <button class="desk-icon" data-win="projects"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-photo"/></svg><span class="lbl">Projects</span></button>
+    <button class="desk-icon" data-win="terminal"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-term"/></svg><span class="lbl">Terminal</span></button>
+    <button class="desk-icon" data-win="messages"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-msg"/></svg><span class="lbl">Messages</span></button>
+    <button class="desk-icon" data-win="skills"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-code"/></svg><span class="lbl">Skills.js</span></button>
   </div>
 
   <div id="widgets">
     <div class="widget" id="note">
-      <div class="whead"><span>⭐ Sticky Note</span><span class="tag">Auto-saved</span></div>
+      <div class="whead"><span>Stickies</span><span>Auto-saved</span></div>
       <p>📍 Hey, thanks for dropping by! I'm Stucey — AI Automation Specialist under <b>Huggy Bear Digital</b>. I build n8n/Make.com systems &amp; integrate Claude/OpenAI into real workflows for US clients.</p>
       <p>
         - Email: <a href="mailto:Stuceyrosal15@gmail.com">Stuceyrosal15@gmail.com</a><br>
         - Phone: <a href="tel:+639507536207">+63 950 753 6207</a><br>
         - Based in Zambales, PH · remote-ready
       </p>
-      <p>- Open Gallery to see my flagship n8n builds (incl. a HIPAA-compliant healthcare system).<br>
-         - Open Terminal.sh and type <b>help</b> to explore.<br>
+      <p>- Click a desktop icon or the Dock to open apps.<br>
+         - Open Photos to see my flagship n8n builds (incl. a HIPAA-compliant healthcare system).<br>
+         - Open Terminal and type <b>help</b> to explore.<br>
          - Leave a note in Messages — I read every one!</p>
     </div>
 
     <div class="widget" id="weather">
-      <div class="whead"><span>🌤 Weather</span><span id="w-loc">Zambales, PH</span></div>
+      <div class="whead"><span>Weather</span><span id="w-loc">Zambales, PH</span></div>
       <div class="wrow">
         <div>
           <div class="wtemp" id="w-temp">--°</div>
@@ -405,19 +870,19 @@
         </div>
         <div class="wicon" id="w-icon">⛅</div>
       </div>
-      <div class="waqi" id="w-extra" style="margin-top:8px;">Fetching live data…</div>
+      <div class="wextra" id="w-extra">Fetching live data…</div>
     </div>
 
     <div class="widget" id="calendar">
-      <div class="whead"><span>📅 Calendar</span><span class="cmonth" id="cal-month">Month</span></div>
+      <div class="whead"><span class="cmonth" id="cal-month">Month</span></div>
       <table>
-        <thead><tr><th>SU</th><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th></tr></thead>
+        <thead><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr></thead>
         <tbody id="cal-body"></tbody>
       </table>
     </div>
 
     <div class="widget" id="sysres">
-      <div class="whead"><span>📊 Automation Metrics</span><span class="live">● Live</span></div>
+      <div class="whead"><span>Automation</span><span class="live">● Live</span></div>
       <div class="sr-row">
         <div class="sr-label"><span>Workflow Uptime</span><b id="m1val">99%</b></div>
         <div class="bar"><i id="m1bar" style="width:99%"></i></div>
@@ -433,151 +898,156 @@
     </div>
 
     <div class="widget" id="visitors">
-      <div class="whead"><span>👥 Visitor Tracker</span><span>Real-time sync</span></div>
+      <div class="whead"><span>Visitors</span><span>This session</span></div>
       <div class="vnum" id="vcount">00000</div>
-      <div class="vsub">Total profile visits this session</div>
+      <div class="vsub">Total profile visits</div>
     </div>
   </div>
 </div>
 
-<div id="dock">
-  <button class="dock-btn" onclick="openWin('about')">
-    <span class="glyph swatch-blue">📁</span><span class="dlbl">Finder</span>
-  </button>
-  <button class="dock-btn" onclick="openWin('contact')">
-    <span class="glyph swatch-teal">🌐</span><span class="dlbl">Safari</span>
-  </button>
-  <button class="dock-btn" onclick="openWin('skills')">
-    <span class="glyph swatch-violet">{ }</span><span class="dlbl">VS Code</span>
-  </button>
-  <button class="dock-btn" onclick="openWin('terminal')">
-    <span class="glyph" style="background:linear-gradient(150deg,#2b3242,#12151f); color:var(--accent);">&gt;_</span><span class="dlbl">Terminal</span>
-  </button>
-  <button class="dock-btn" onclick="openWin('messages')">
-    <span class="glyph swatch-pink">💬</span><span class="dlbl">Messages</span>
-  </button>
-  <button class="dock-btn" onclick="openWin('services')">
-    <span class="glyph swatch-amber">✉</span><span class="dlbl">Mail</span>
-  </button>
-  <button class="dock-btn" onclick="openWin('projects')">
-    <span class="glyph swatch-blue">🖼</span><span class="dlbl">Gallery</span>
-  </button>
-  <button class="dock-btn" onclick="openWin('education')">
-    <span class="glyph swatch-violet">🎓</span><span class="dlbl">Credentials</span>
-  </button>
-  <button class="dock-btn" onclick="openWin('settings')">
-    <span class="glyph swatch-gray">⚙</span><span class="dlbl">Settings</span>
-  </button>
-  <button class="dock-btn" onclick="openWin('resume')">
-    <span class="glyph swatch-pink">📄</span><span class="dlbl">Resume</span>
-  </button>
-  <button class="dock-btn" onclick="openWin('trash')">
-    <span class="glyph swatch-gray">🗑</span><span class="dlbl">Trash</span>
-  </button>
-</div>
-
-<!-- ================= WINDOWS ================= -->
-
-<div class="window" id="win-about">
-  <div class="titlebar" data-win="about"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">Finder — About Stucey</div><div style="width:44px"></div></div>
-  <div class="wbody">
-    <h3>Who I Am</h3>
-    <p>Freelance AI Automation Specialist & Virtual Assistant operating under <b style="color:var(--text)">Huggy Bear Digital</b>. I design and build n8n / Make.com automation systems, integrate Claude & OpenAI into real business workflows, and support US-based clients end-to-end — from architecture to handover documentation.</p>
-    <p>My most recent build is a HIPAA-compliant automation system for a US healthcare home-care agency: 8 interconnected n8n workflows handling patient intake, caregiver onboarding, payroll/EVV, and care-plan monitoring — integrated with AWS, Airtable, Twilio, SendGrid, and Claude/OpenAI. I also design multi-agent e-commerce automation architectures (Shopify, Meta Ads, Klaviyo) with built-in governance and reporting layers.</p>
-
-    <h4 style="margin-top:18px; margin-bottom:8px;">🎥 Video Introduction</h4>
-    <div style="position:relative; padding-bottom:56.25%; height:0; border-radius:10px; overflow:hidden; border:1px solid var(--border); margin:0 0 16px;">
-      <iframe src="https://www.loom.com/embed/4acfb3fda90c4a5387101fdbaa43d603"
-        frameborder="0"
-        webkitallowfullscreen
-        mozallowfullscreen
-        allowfullscreen
-        style="position:absolute; top:0; left:0; width:100%; height:100%;">
-      </iframe>
-    </div>
-
-    <table class="info-table">
-      <tr><td>Full Name</td><td>Stucey Rosal</td></tr>
-      <tr><td>Brand</td><td>Huggy Bear Digital</td></tr>
-      <tr><td>Degree</td><td>BS Industrial Technology — Computer Technology, 2025</td></tr>
-      <tr><td>Location</td><td>Zambales, Philippines</td></tr>
-      <tr><td>Work Setup</td><td>Remote · US client hours · Async-friendly</td></tr>
-      <tr><td>Core Focus</td><td>n8n / Make.com Automation · Claude & OpenAI API Integration · HIPAA-Compliant System Design</td></tr>
-      <tr><td>Also Available</td><td>Virtual Assistant · Prompt Engineering · IT Helpdesk & Network Support</td></tr>
-    </table>
-    <div class="stat-row">
-      <div class="stat"><b>8</b><span>n8n Workflows (KHH build)</span></div>
-      <div class="stat"><b>3</b><span>Agent Architecture (E-com build)</span></div>
-      <div class="stat"><b>10+</b><span>Integrations Shipped</span></div>
-      <div class="stat"><b>1yr</b><span>IT Field Experience</span></div>
-    </div>
-    <h4>Work History</h4>
-    <p><b style="color:var(--text)">Freelance AI Automation Specialist & VA</b><br>Huggy Bear Digital · 2025–Present · Remote, US clients<br>n8n/Make.com workflow architecture, Claude/OpenAI API integration, HIPAA-compliant system design, VA support, prompt engineering.</p>
-    <p><b style="color:var(--text)">IT Staff — Technical Support</b><br>Beyond Infinity Connection Philippines · 2024–2025 · Full-time<br>Hardware setup &amp; maintenance, helpdesk support, network/IP administration, internal systems deployment, technical documentation.</p>
+<div id="dock-wrap">
+  <div id="dock">
+    <button class="dock-btn" data-win="about" data-label="Finder"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-finder"/></svg></span><i class="dot"></i><span class="tip">Finder</span></button>
+    <button class="dock-btn" data-win="contact" data-label="Safari"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-safari"/></svg></span><i class="dot"></i><span class="tip">Safari</span></button>
+    <button class="dock-btn" data-win="skills" data-label="Code"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-code"/></svg></span><i class="dot"></i><span class="tip">Code</span></button>
+    <button class="dock-btn" data-win="terminal" data-label="Terminal"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-term"/></svg></span><i class="dot"></i><span class="tip">Terminal</span></button>
+    <button class="dock-btn" data-win="messages" data-label="Messages"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-msg"/></svg></span><i class="dot"></i><span class="tip">Messages</span></button>
+    <button class="dock-btn" data-win="services" data-label="Mail"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-mail"/></svg></span><i class="dot"></i><span class="tip">Mail</span></button>
+    <button class="dock-btn" data-win="projects" data-label="Photos"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-photo"/></svg></span><i class="dot"></i><span class="tip">Photos</span></button>
+    <button class="dock-btn" data-win="education" data-label="Credentials"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-cred"/></svg></span><i class="dot"></i><span class="tip">Credentials</span></button>
+    <button class="dock-btn" data-win="settings" data-label="System Settings"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-set"/></svg></span><i class="dot"></i><span class="tip">System Settings</span></button>
+    <button class="dock-btn" data-win="resume" data-label="Preview"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-prev"/></svg></span><i class="dot"></i><span class="tip">Preview</span></button>
+    <div class="dock-sep"></div>
+    <button class="dock-btn" data-win="trash" data-label="Trash"><span class="bounce"><svg class="glyph" viewBox="0 0 100 100"><use href="#ic-trash"/></svg></span><i class="dot"></i><span class="tip">Trash</span></button>
   </div>
 </div>
 
-<div class="window" id="win-projects">
-  <div class="titlebar" data-win="projects"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">Gallery — Selected Work</div><div style="width:44px"></div></div>
+<!-- WINDOWS -->
+<div class="window" id="win-about" data-app="Finder">
+  <div class="titlebar" data-win="about">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">About Stucey</div>
+  </div>
+  <div class="tb">
+    <button class="tb-btn" type="button">◀</button>
+    <button class="tb-btn" type="button">▶</button>
+    <input class="tb-search" placeholder="Search" onfocus="openSpotlight()">
+  </div>
+  <div class="finder">
+    <aside class="finder-side">
+      <div class="side-lab">Favorites</div>
+      <button class="side-item active" type="button">📁 About Stucey</button>
+      <button class="side-item" type="button" data-open="projects">🖼 Projects</button>
+      <button class="side-item" type="button" data-open="resume">📄 Resume.pdf</button>
+      <button class="side-item" type="button" data-open="skills">{} Skills.js</button>
+      <div class="side-lab">iCloud</div>
+      <button class="side-item" type="button" data-open="services">✉ Services</button>
+      <button class="side-item" type="button" data-open="education">🎓 Credentials</button>
+      <button class="side-item" type="button" data-open="contact">🌐 Contact</button>
+    </aside>
+    <div class="finder-main">
+      <h3>Who I Am</h3>
+      <p>Freelance AI Automation Specialist &amp; Virtual Assistant operating under <b>Huggy Bear Digital</b>. I design and build n8n / Make.com automation systems, integrate Claude &amp; OpenAI into real business workflows, and support US-based clients end-to-end — from architecture to handover documentation.</p>
+      <p>My most recent build is a HIPAA-compliant automation system for a US healthcare home-care agency: 8 interconnected n8n workflows handling patient intake, caregiver onboarding, payroll/EVV, and care-plan monitoring — integrated with AWS, Airtable, Twilio, SendGrid, and Claude/OpenAI. I also design multi-agent e-commerce automation architectures (Shopify, Meta Ads, Klaviyo) with built-in governance and reporting layers.</p>
+      <h4 style="margin-top:18px;margin-bottom:8px;">Video Introduction</h4>
+      <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:10px;overflow:hidden;border:1px solid var(--line);margin:0 0 16px;">
+        <iframe src="https://www.loom.com/embed/4acfb3fda90c4a5387101fdbaa43d603" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"></iframe>
+      </div>
+      <table class="info-table">
+        <tr><td>Full Name</td><td>Stucey Rosal</td></tr>
+        <tr><td>Brand</td><td>Huggy Bear Digital</td></tr>
+        <tr><td>Degree</td><td>BS Industrial Technology — Computer Technology, 2025</td></tr>
+        <tr><td>Location</td><td>Zambales, Philippines</td></tr>
+        <tr><td>Work Setup</td><td>Remote · US client hours · Async-friendly</td></tr>
+        <tr><td>Core Focus</td><td>n8n / Make.com Automation · Claude &amp; OpenAI API Integration · HIPAA-Compliant System Design</td></tr>
+        <tr><td>Also Available</td><td>Virtual Assistant · Prompt Engineering · IT Helpdesk &amp; Network Support</td></tr>
+      </table>
+      <div class="stat-row">
+        <div class="stat"><b>8</b><span>n8n Workflows (KHH build)</span></div>
+        <div class="stat"><b>3</b><span>Agent Architecture (E-com build)</span></div>
+        <div class="stat"><b>10+</b><span>Integrations Shipped</span></div>
+        <div class="stat"><b>1yr</b><span>IT Field Experience</span></div>
+      </div>
+      <h4>Work History</h4>
+      <p><b>Freelance AI Automation Specialist &amp; VA</b><br>Huggy Bear Digital · 2025–Present · Remote, US clients<br>n8n/Make.com workflow architecture, Claude/OpenAI API integration, HIPAA-compliant system design, VA support, prompt engineering.</p>
+      <p><b>IT Staff — Technical Support</b><br>Beyond Infinity Connection Philippines · 2024–2025 · Full-time<br>Hardware setup &amp; maintenance, helpdesk support, network/IP administration, internal systems deployment, technical documentation.</p>
+    </div>
+  </div>
+  <div class="resize" data-win="about"></div>
+</div>
+
+<div class="window" id="win-projects" data-app="Photos">
+  <div class="titlebar" data-win="projects">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">Photos — Selected Work</div>
+  </div>
   <div class="wbody">
     <h3>Flagship Client Work</h3>
     <p>Production automation systems built for real businesses — architected, integrated, and documented end-to-end.</p>
-
-    <div class="proj-card"><div class="ptitle"><span class="pnum">01</span> 🏥 Kind Home Help — HIPAA-Compliant Healthcare Automation</div><p style="margin:0 0 8px">8 interconnected n8n workflows (WF01–WF08) covering patient intake, caregiver enrollment, payroll/EVV tracking, PCP form dispatch, care plan monitoring, and case closure. Integrated AWS SES/SNS/S3, Airtable, Adobe PDF Services, Signaturely, RingCentral, Twilio, SendGrid, Checkr, and Claude + OpenAI APIs. HIPAA-compliant S3 architecture with encryption, versioning, and lifecycle rules.</p><span class="tag">n8n</span><span class="tag">HIPAA</span><span class="tag">AWS</span><span class="tag">Healthcare</span></div>
-
-    <div class="proj-card"><div class="ptitle"><span class="pnum">02</span> 🛍 E-Commerce AI Automation System</div><p style="margin:0 0 8px">Three-workflow architecture — Orchestrator & Governance, Department Agents, and Reporting & Strategist — built in n8n and integrating Shopify, Funnelish, Meta Ads, and Klaviyo into one coordinated, self-reporting automation system.</p><span class="tag">n8n</span><span class="tag">Multi-Agent</span><span class="tag">E-commerce</span></div>
-
-    <div class="proj-card"><div class="ptitle"><span class="pnum">03</span> 🤖 Client Chatbot Deployments</div><p style="margin:0 0 8px">Prompt-engineered chatbots for real businesses: Sophie & Eve (beauty booking bot), Bite & Go (order-intake bot with structured JSON output), and a Taglish chatbot script template pack.</p><span class="tag">Prompt Eng</span><span class="tag">Chatbase</span></div>
-
+    <div class="proj-card"><div class="ptitle"><span class="pnum">01</span> Kind Home Help — HIPAA-Compliant Healthcare Automation</div><p style="margin:0 0 8px">8 interconnected n8n workflows (WF01–WF08) covering patient intake, caregiver enrollment, payroll/EVV tracking, PCP form dispatch, care plan monitoring, and case closure. Integrated AWS SES/SNS/S3, Airtable, Adobe PDF Services, Signaturely, RingCentral, Twilio, SendGrid, Checkr, and Claude + OpenAI APIs. HIPAA-compliant S3 architecture with encryption, versioning, and lifecycle rules.</p><span class="tag">n8n</span><span class="tag">HIPAA</span><span class="tag">AWS</span><span class="tag">Healthcare</span></div>
+    <div class="proj-card"><div class="ptitle"><span class="pnum">02</span> E-Commerce AI Automation System</div><p style="margin:0 0 8px">Three-workflow architecture — Orchestrator &amp; Governance, Department Agents, and Reporting &amp; Strategist — built in n8n and integrating Shopify, Funnelish, Meta Ads, and Klaviyo into one coordinated, self-reporting automation system.</p><span class="tag">n8n</span><span class="tag">Multi-Agent</span><span class="tag">E-commerce</span></div>
+    <div class="proj-card"><div class="ptitle"><span class="pnum">03</span> Client Chatbot Deployments</div><p style="margin:0 0 8px">Prompt-engineered chatbots for real businesses: Sophie &amp; Eve (beauty booking bot), Bite &amp; Go (order-intake bot with structured JSON output), and a Taglish chatbot script template pack.</p><span class="tag">Prompt Eng</span><span class="tag">Chatbase</span></div>
     <h3 style="margin-top:22px">Earlier / Foundational Work</h3>
-    <div class="proj-card"><div class="ptitle"><span class="pnum">04</span> 🌐 IP Address Automation System</div><p style="margin:0 0 8px">Automated IP address management and assignment across a company network — eliminating manual errors and reducing admin time.</p><span class="tag">Network</span></div>
-    <div class="proj-card"><div class="ptitle"><span class="pnum">05</span> 🛡 Compliance Automation System</div><p style="margin:0 0 8px">Automates compliance checks and generates structured reports for a manufacturing environment.</p><span class="tag">Compliance</span></div>
-    <div class="proj-card"><div class="ptitle"><span class="pnum">06</span> 📷 AI Camera — IoT System</div><p style="margin:0 0 8px">AI-powered IoT camera integrating computer vision for real-time monitoring and detection — capstone engineering project.</p><span class="tag">IoT</span><span class="tag">Computer Vision</span></div>
+    <div class="proj-card"><div class="ptitle"><span class="pnum">04</span> IP Address Automation System</div><p style="margin:0 0 8px">Automated IP address management and assignment across a company network — eliminating manual errors and reducing admin time.</p><span class="tag">Network</span></div>
+    <div class="proj-card"><div class="ptitle"><span class="pnum">05</span> Compliance Automation System</div><p style="margin:0 0 8px">Automates compliance checks and generates structured reports for a manufacturing environment.</p><span class="tag">Compliance</span></div>
+    <div class="proj-card"><div class="ptitle"><span class="pnum">06</span> AI Camera — IoT System</div><p style="margin:0 0 8px">AI-powered IoT camera integrating computer vision for real-time monitoring and detection — capstone engineering project.</p><span class="tag">IoT</span><span class="tag">Computer Vision</span></div>
   </div>
+  <div class="resize" data-win="projects"></div>
 </div>
 
-<div class="window" id="win-skills">
-  <div class="titlebar" data-win="skills"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">VS Code — skills.js</div><div style="width:44px"></div></div>
+<div class="window" id="win-skills" data-app="Code">
+  <div class="titlebar" data-win="skills">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">Skills.js — Edited</div>
+  </div>
   <div class="wbody">
     <div class="code-block"><span class="c">// Automation Platforms</span>
 const automation = [<span class="s">"n8n (advanced)"</span>, <span class="s">"Make.com"</span>, <span class="s">"Zapier"</span>, <span class="s">"Webhook Architecture"</span>, <span class="s">"Multi-Agent Orchestration"</span>];
 
-<span class="c">// AI & Prompt Engineering</span>
-const ai = [<span class="s">"Claude API (Anthropic)"</span>, <span class="s">"OpenAI API"</span>, <span class="s">"System Prompt Design"</span>, <span class="s">"Structured JSON Output"</span>, <span class="s">"Chain-of-Thought"</span>, <span class="s">"Guardrails & Fallbacks"</span>];
+<span class="c">// AI &amp; Prompt Engineering</span>
+const ai = [<span class="s">"Claude API (Anthropic)"</span>, <span class="s">"OpenAI API"</span>, <span class="s">"System Prompt Design"</span>, <span class="s">"Structured JSON Output"</span>, <span class="s">"Chain-of-Thought"</span>, <span class="s">"Guardrails &amp; Fallbacks"</span>];
 
 <span class="c">// Integrations Shipped</span>
 const integrations = [<span class="s">"AWS SES / SNS / S3"</span>, <span class="s">"Airtable"</span>, <span class="s">"Adobe PDF Services"</span>, <span class="s">"Signaturely"</span>, <span class="s">"RingCentral"</span>, <span class="s">"Twilio"</span>, <span class="s">"SendGrid"</span>, <span class="s">"Checkr"</span>, <span class="s">"Shopify"</span>, <span class="s">"Klaviyo"</span>, <span class="s">"Meta Ads"</span>];
 
-<span class="c">// Compliance & Systems Design</span>
-const systemsDesign = [<span class="s">"HIPAA-Compliant Architecture"</span>, <span class="s">"S3 Encryption & Lifecycle Rules"</span>, <span class="s">"Governance & Orchestration Layers"</span>];
+<span class="c">// Compliance &amp; Systems Design</span>
+const systemsDesign = [<span class="s">"HIPAA-Compliant Architecture"</span>, <span class="s">"S3 Encryption &amp; Lifecycle Rules"</span>, <span class="s">"Governance &amp; Orchestration Layers"</span>];
 
-<span class="c">// Virtual Assistant & IT</span>
-const support = [<span class="s">"Calendar & Inbox Management"</span>, <span class="s">"SOPs & Documentation"</span>, <span class="s">"Helpdesk & Network Support"</span>, <span class="s">"Microsoft 365"</span>];
+<span class="c">// Virtual Assistant &amp; IT</span>
+const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span class="s">"SOPs &amp; Documentation"</span>, <span class="s">"Helpdesk &amp; Network Support"</span>, <span class="s">"Microsoft 365"</span>];
 
 <span class="k">export default</span> { automation, ai, integrations, systemsDesign, support };</div>
     <p>A remote-ready specialist who builds the automation <i>and</i> supports the ops behind it.</p>
   </div>
+  <div class="resize" data-win="skills"></div>
 </div>
 
-<div class="window" id="win-services">
-  <div class="titlebar" data-win="services"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">Mail — What I Offer</div><div style="width:44px"></div></div>
+<div class="window" id="win-services" data-app="Mail">
+  <div class="titlebar" data-win="services">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">Inbox — What I Offer</div>
+  </div>
   <div class="wbody">
     <h3>Services</h3>
-    <div class="svc-card"><div class="stitle">⚙ n8n / Make.com Workflow Automation</div><p style="margin:0">Multi-workflow automation architectures — orchestration, department-level agents, and reporting layers — built to replace manual ops with reliable, monitored systems. Documented and handed over with clear runbooks.</p></div>
-    <div class="svc-card"><div class="stitle">🔒 HIPAA-Compliant System Design</div><p style="margin:0">Healthcare and regulated-industry automation with proper encryption, access control, and audit-ready architecture — proven on a live 8-workflow healthcare deployment.</p></div>
-    <div class="svc-card"><div class="stitle">🧠 AI Integration & Prompt Engineering</div><p style="margin:0">Claude and OpenAI API integration into real business workflows — chatbots, structured-output extraction, and production-grade system prompts with guardrails.</p></div>
-    <div class="svc-card"><div class="stitle">🤝 Virtual Assistant</div><p style="margin:0">Executive-level admin support with a technical edge — calendar/inbox management, research, reporting, and documentation, backed by an IT troubleshooting background.</p></div>
+    <div class="svc-card"><div class="stitle">n8n / Make.com Workflow Automation</div><p style="margin:0">Multi-workflow automation architectures — orchestration, department-level agents, and reporting layers — built to replace manual ops with reliable, monitored systems. Documented and handed over with clear runbooks.</p></div>
+    <div class="svc-card"><div class="stitle">HIPAA-Compliant System Design</div><p style="margin:0">Healthcare and regulated-industry automation with proper encryption, access control, and audit-ready architecture — proven on a live 8-workflow healthcare deployment.</p></div>
+    <div class="svc-card"><div class="stitle">AI Integration &amp; Prompt Engineering</div><p style="margin:0">Claude and OpenAI API integration into real business workflows — chatbots, structured-output extraction, and production-grade system prompts with guardrails.</p></div>
+    <div class="svc-card"><div class="stitle">Virtual Assistant</div><p style="margin:0">Executive-level admin support with a technical edge — calendar/inbox management, research, reporting, and documentation, backed by an IT troubleshooting background.</p></div>
     <p style="margin-top:14px">Available individually or as a bundled automation package for growing businesses.</p>
-    <a class="cta-btn" href="mailto:Stuceyrosal15@gmail.com">✉ Discuss a project</a>
+    <a class="cta-btn" href="mailto:Stuceyrosal15@gmail.com">Discuss a project</a>
   </div>
+  <div class="resize" data-win="services"></div>
 </div>
 
-<div class="window" id="win-education">
-  <div class="titlebar" data-win="education"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">Credentials</div><div style="width:44px"></div></div>
+<div class="window" id="win-education" data-app="Credentials">
+  <div class="titlebar" data-win="education">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">Credentials</div>
+  </div>
   <div class="wbody">
     <h3>Education</h3>
-    <p><b style="color:var(--text)">BS Industrial Technology — Major in Computer Technology</b><br>President Ramon Magsaysay State University · 2021–2025 · Graduate</p>
-    <p><b style="color:var(--text)">Secondary Education</b><br>Palauig Academy Educational Foundation · Completed</p>
+    <p><b>BS Industrial Technology — Major in Computer Technology</b><br>President Ramon Magsaysay State University · 2021–2025 · Graduate</p>
+    <p><b>Secondary Education</b><br>Palauig Academy Educational Foundation · Completed</p>
     <h4>Certifications &amp; Training</h4>
     <p style="margin:0">
       · Microsoft Licensing Certification<br>
@@ -589,332 +1059,873 @@ const support = [<span class="s">"Calendar & Inbox Management"</span>, <span cla
       · Microsoft 365 Productivity Suite
     </p>
   </div>
+  <div class="resize" data-win="education"></div>
 </div>
 
-<div class="window" id="win-contact">
-  <div class="titlebar" data-win="contact"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">Safari — Let's Work Together</div><div style="width:44px"></div></div>
+<div class="window" id="win-contact" data-app="Safari">
+  <div class="titlebar" data-win="contact">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">Safari</div>
+  </div>
+  <div class="safari-bar">
+    <button class="tb-btn" type="button">◀</button>
+    <button class="tb-btn" type="button">▶</button>
+    <div class="url-field"><span>🔒</span> huggybear.digital/hello</div>
+  </div>
   <div class="wbody">
-    <h3>Get In Touch</h3>
+    <h3>Favorites</h3>
     <p>Open to IT roles, AI automation projects, Virtual Assistant engagements, prompt engineering contracts, and freelance work. Remote-ready and available immediately.</p>
-    <a class="cta-btn" href="mailto:Stuceyrosal15@gmail.com">✉ Stuceyrosal15@gmail.com</a>
-    <a class="cta-btn alt" href="tel:+639507536207">📞 +63 950 753 6207</a>
+    <div class="fav-grid">
+      <a class="fav" href="mailto:Stuceyrosal15@gmail.com"><i>✉</i><span>Mail</span></a>
+      <a class="fav" href="tel:+639507536207"><i>📞</i><span>Phone</span></a>
+      <button class="fav" type="button" data-open="resume"><i>📄</i><span>Resume</span></button>
+      <button class="fav" type="button" data-open="services"><i>🛠</i><span>Services</span></button>
+    </div>
+    <a class="cta-btn" href="mailto:Stuceyrosal15@gmail.com">Stuceyrosal15@gmail.com</a>
+    <a class="cta-btn alt" href="tel:+639507536207">+63 950 753 6207</a>
     <p style="margin-top:14px">San Juan, Palauig, Zambales, Philippines</p>
   </div>
+  <div class="resize" data-win="contact"></div>
 </div>
 
-<div class="window" id="win-settings">
-  <div class="titlebar" data-win="settings"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">System Settings</div><div style="width:44px"></div></div>
-  <div class="wbody">
-    <h3>Accent Color</h3>
-    <div class="swatches">
-      <button class="swatch-btn active" style="background:#38e1c9" onclick="setAccent('#38e1c9', this)"></button>
-      <button class="swatch-btn" style="background:#ff5d8f" onclick="setAccent('#ff5d8f', this)"></button>
-      <button class="swatch-btn" style="background:#ffd166" onclick="setAccent('#ffd166', this)"></button>
-      <button class="swatch-btn" style="background:#9b8cff" onclick="setAccent('#9b8cff', this)"></button>
-      <button class="swatch-btn" style="background:#3aa9ff" onclick="setAccent('#3aa9ff', this)"></button>
-    </div>
-    <div class="toggle-row"><span>Twinkling stars</span><input type="checkbox" id="toggle-stars" checked onchange="toggleStars(this.checked)"></div>
-    <div class="toggle-row" style="border-bottom:none;"><span>Reduce motion</span><input type="checkbox" id="toggle-motion" onchange="toggleMotion(this.checked)"></div>
-    <p style="margin-top:16px">This portfolio is a fully custom, single-file build — no frameworks, no build step. Tinker with it in Terminal.sh 👀</p>
+<div class="window" id="win-settings" data-app="System Settings">
+  <div class="titlebar" data-win="settings">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">System Settings</div>
   </div>
+  <div class="settings">
+    <aside class="set-side">
+      <div class="side-lab">System</div>
+      <button class="side-item active" type="button">Appearance</button>
+    </aside>
+    <div class="set-main">
+      <h3>Appearance</h3>
+      <p style="margin-bottom:6px">Light / Dark</p>
+      <div class="seg" id="theme-seg">
+        <button type="button" data-theme="light">Light</button>
+        <button type="button" data-theme="dark" class="active">Dark</button>
+        <button type="button" data-theme="auto">Auto</button>
+      </div>
+      <p style="margin-bottom:6px">Accent color</p>
+      <div class="swatches">
+        <button class="swatch-btn active" style="background:#0a84ff" data-accent="#0a84ff" title="Blue"></button>
+        <button class="swatch-btn" style="background:#38e1c9" data-accent="#38e1c9" title="Teal"></button>
+        <button class="swatch-btn" style="background:#bf5af2" data-accent="#bf5af2" title="Purple"></button>
+        <button class="swatch-btn" style="background:#ff375f" data-accent="#ff375f" title="Pink"></button>
+        <button class="swatch-btn" style="background:#ff9f0a" data-accent="#ff9f0a" title="Orange"></button>
+        <button class="swatch-btn" style="background:#30d158" data-accent="#30d158" title="Green"></button>
+      </div>
+      <div class="toggle-row"><span>Twinkling stars</span><input class="toggle" type="checkbox" id="toggle-stars" checked></div>
+      <div class="toggle-row" style="border-bottom:none;"><span>Reduce motion</span><input class="toggle" type="checkbox" id="toggle-motion"></div>
+      <p style="margin-top:16px;color:var(--text-2)">This portfolio is a custom, single-file macOS-style desktop — no frameworks, no build step. Try Spotlight (⌘Space) or Terminal.</p>
+    </div>
+  </div>
+  <div class="resize" data-win="settings"></div>
 </div>
 
-<div class="window" id="win-resume">
-  <div class="titlebar" data-win="resume"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">PDF Previewer — Resume.pdf</div><div style="width:44px"></div></div>
+<div class="window" id="win-resume" data-app="Preview">
+  <div class="titlebar" data-win="resume">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">Preview — Resume.pdf</div>
+  </div>
   <div class="wbody">
     <div class="pdf-toolbar">
       <span class="pdf-badge">PDF</span>
       <span class="pdf-name">Stucey_Rosal_Resume.pdf</span>
-      <div class="pdf-actions">
-        <button onclick="document.getElementById('resume-frame').contentWindow.print()">🖨 Print</button>
-        <a class="cta-btn" style="padding:6px 10px; font-size:11.5px; margin:0;" href="Resume.pdf" download="Stucey_Rosal_Resume.pdf">⬇ Download</a>
-      </div>
+      <button type="button" onclick="window.print()">Print</button>
+      <a href="Resume.pdf" download="Stucey_Rosal_Resume.pdf">Download</a>
     </div>
-    <iframe id="resume-frame" src="Resume.pdf"></iframe>
+    <article id="resume-paper">
+      <h2>Stucey Rosal</h2>
+      <div class="sub">AI Automation Specialist · Huggy Bear Digital · Zambales, PH<br>
+        <a href="mailto:Stuceyrosal15@gmail.com">Stuceyrosal15@gmail.com</a> · +63 950 753 6207</div>
+      <h3>Profile</h3>
+      <p>Freelance AI Automation Specialist &amp; Virtual Assistant. Designs n8n / Make.com systems, integrates Claude &amp; OpenAI into production workflows, and supports US clients from architecture through handover documentation.</p>
+      <h3>Experience</h3>
+      <p><strong>Freelance AI Automation Specialist &amp; VA — Huggy Bear Digital</strong> · 2025–Present<br>n8n/Make.com workflow architecture, Claude/OpenAI API integration, HIPAA-compliant system design, VA support, prompt engineering.</p>
+      <p><strong>IT Staff — Technical Support — Beyond Infinity Connection Philippines</strong> · 2024–2025<br>Hardware setup &amp; maintenance, helpdesk, network/IP administration, internal systems deployment, technical documentation.</p>
+      <h3>Selected work</h3>
+      <p><strong>Kind Home Help</strong> — 8 interconnected n8n workflows for a US healthcare home-care agency (intake, onboarding, payroll/EVV, care-plan monitoring). AWS, Airtable, Twilio, SendGrid, Claude/OpenAI. HIPAA-compliant S3.</p>
+      <p><strong>E-Commerce AI Automation</strong> — Three-agent n8n architecture integrating Shopify, Meta Ads, and Klaviyo.</p>
+      <h3>Education</h3>
+      <p>BS Industrial Technology — Computer Technology, President Ramon Magsaysay State University, 2021–2025.</p>
+    </article>
   </div>
+  <div class="resize" data-win="resume"></div>
 </div>
 
-<div class="window" id="win-trash">
-  <div class="titlebar" data-win="trash"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">Trash</div><div style="width:44px"></div></div>
+<div class="window" id="win-trash" data-app="Trash">
+  <div class="titlebar" data-win="trash">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">Trash</div>
+  </div>
   <div class="wbody">
     <h3>Empty</h3>
-    <p>Nothing here — I keep things automated &amp; tidy. That's kind of the whole pitch. 🤖</p>
+    <p>Nothing here — I keep things automated &amp; tidy. That's kind of the whole pitch.</p>
   </div>
+  <div class="resize" data-win="trash"></div>
 </div>
 
-<div class="window" id="win-messages">
-  <div class="titlebar" data-win="messages"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">Messages — Prompt Engineering Samples</div><div style="width:44px"></div></div>
+<div class="window" id="win-messages" data-app="Messages">
+  <div class="titlebar" data-win="messages">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">Messages</div>
+  </div>
   <div class="wbody">
-    <h3>Real Prompts From Deployed Projects</h3>
-
-    <div class="msg-row"><div class="msg-avatar" style="background:var(--accent)">SE</div><div class="msg-bubble"><div class="msender">Sophie &amp; Eve Beauty Bot — System Prompt</div><pre>You are Sophia, a friendly beauty consultant for
-Sophie & Eve Beauty and Wellness. Help with service
-bookings, product recs, and appointment follow-ups.
-Respond warmly. Keep replies under 80 words.
-Never discuss competitors.</pre></div></div>
-
-    <div class="msg-row"><div class="msg-avatar" style="background:var(--violet)">BG</div><div class="msg-bubble"><div class="msender">Bite &amp; Go Order Bot — Structured Output</div><pre>Extract order intent, return JSON only:
-{ "intent":"order|inquiry|complaint",
-  "items":[...], "quantity":0,
-  "special_request":"..." }
-If unclear, set intent to "clarify".</pre></div></div>
-
-    <div class="msg-row"><div class="msg-avatar" style="background:var(--pink)">SR</div><div class="msg-bubble"><div class="msender">Portfolio AI Assistant — Persona Prompt</div><pre>You are an AI assistant representing Stucey Rosal —
-IT Specialist, VA, and AI Automation expert based in
-Zambales, PH. Be concise. Always end with a CTA to
-Stuceyrosal15@gmail.com.</pre></div></div>
-
-    <div class="msg-row"><div class="msg-avatar" style="background:var(--amber); color:#04120f">CR</div><div class="msg-bubble"><div class="msender">Compliance Report Generator — Chain-of-Thought</div><pre>Step 1: Identify non-compliant entries
-Step 2: Group by category and severity
-Step 3: Suggest corrective actions
-Output: Summary → Issues Found → Recommendations</pre></div></div>
-
-    <p style="margin-top:6px">Want a prompt system like these for your own bot or workflow? <a href="mailto:Stuceyrosal15@gmail.com" style="color:var(--accent)">Send me a message.</a></p>
+    <div class="imsg">
+      <aside class="imsg-list">
+        <button class="imsg-conv active" type="button" data-thread="stucey">
+          <span class="av" style="background:linear-gradient(180deg,#5ac8fa,#007aff)">SR</span>
+          <span class="meta"><b>Stucey Rosal</b><span id="imsg-preview">Hey — send a project note…</span></span>
+        </button>
+        <button class="imsg-conv" type="button" data-thread="prompts">
+          <span class="av" style="background:linear-gradient(180deg,#bf5af2,#5e5ce6)">PL</span>
+          <span class="meta"><b>Prompt Lab</b><span>Samples from shipped bots</span></span>
+        </button>
+      </aside>
+      <div class="imsg-thread">
+        <div class="imsg-header">
+          <span class="av" id="imsg-face">SR</span>
+          <b id="imsg-name">Stucey Rosal</b>
+          <small id="imsg-sub">iMessage</small>
+        </div>
+        <div class="imsg-scroll" id="msg-scroll"></div>
+        <div class="imsg-status" id="imsg-status"></div>
+        <form class="imsg-compose" id="msg-form">
+          <textarea id="msg-input" rows="1" placeholder="iMessage" autocomplete="off"></textarea>
+          <button class="imsg-send" id="imsg-send" type="submit" aria-label="Send" disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5l-7 7M12 5l7 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+        <div class="imsg-readonly" id="imsg-readonly" style="display:none">Read-only samples from deployed prompt systems.</div>
+      </div>
+    </div>
   </div>
+  <div class="resize" data-win="messages"></div>
 </div>
 
-<div class="window" id="win-terminal">
-  <div class="titlebar" data-win="terminal"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="wtitle">Terminal — stucey@portfolio:~</div><div style="width:44px"></div></div>
+<div class="window" id="win-terminal" data-app="Terminal">
+  <div class="titlebar" data-win="terminal">
+    <div class="traffic"><button class="tl close" data-act="close"><span>×</span></button><button class="tl min" data-act="min"><span>−</span></button><button class="tl zoom" data-act="zoom"><span>+</span></button></div>
+    <div class="wtitle">stucey@portfolio — zsh</div>
+  </div>
   <div class="wbody">
     <div id="term-screen"></div>
     <div id="term-input-row">
-      <span class="prompt">stucey@portfolio:~$</span>
-      <input id="term-input" autocomplete="off" spellcheck="false" placeholder="type 'help'">
+      <span class="prompt">stucey@portfolio ~ %</span>
+      <input id="term-input" autocomplete="off" spellcheck="false" placeholder="type help">
     </div>
   </div>
+  <div class="resize" data-win="terminal"></div>
 </div>
 
 <script>
-/* ---------- Stars ---------- */
-function buildStars(){
-  const layer = document.getElementById('stars');
-  layer.innerHTML = '';
-  const n = window.innerWidth < 780 ? 60 : 130;
-  for(let i=0;i<n;i++){
-    const s = document.createElement('div');
-    s.className = 'star';
-    const size = Math.random()*2 + 1;
-    s.style.width = size+'px';
-    s.style.height = size+'px';
-    s.style.left = Math.random()*100+'%';
-    s.style.top = Math.random()*70+'%';
-    s.style.animationDelay = (Math.random()*4)+'s';
-    s.style.animationDuration = (3+Math.random()*3)+'s';
-    layer.appendChild(s);
-  }
-}
-buildStars();
-window.addEventListener('resize', buildStars);
-function toggleStars(on){ document.getElementById('stars').style.display = on ? 'block' : 'none'; }
-function toggleMotion(reduce){
-  document.querySelectorAll('.star').forEach(s=> s.style.animationPlayState = reduce ? 'paused' : 'running');
-}
-
-/* ---------- Clock ---------- */
-function tickClock(){
-  const now = new Date();
-  const opts = { weekday:'short', month:'short', day:'numeric' };
-  const dateStr = now.toLocaleDateString('en-US', opts);
-  const timeStr = now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
-  document.getElementById('clock').textContent = dateStr + ', ' + timeStr;
-}
-tickClock(); setInterval(tickClock, 1000*15);
-
-/* ---------- Calendar ---------- */
-function buildCalendar(){
-  const now = new Date();
-  const y = now.getFullYear(), m = now.getMonth();
-  const monthName = now.toLocaleDateString('en-US', {month:'long', year:'numeric'});
-  document.getElementById('cal-month').textContent = monthName;
-  const firstDay = new Date(y,m,1).getDay();
-  const daysInMonth = new Date(y,m+1,0).getDate();
-  let html = '<tr>';
-  for(let i=0;i<firstDay;i++) html += '<td></td>';
-  let col = firstDay;
-  for(let d=1; d<=daysInMonth; d++){
-    if(col === 7){ html += '</tr><tr>'; col = 0; }
-    if(d === now.getDate()) html += `<td class="today"><span>${d}</span></td>`;
-    else html += `<td>${d}</td>`;
-    col++;
-  }
-  html += '</tr>';
-  document.getElementById('cal-body').innerHTML = html;
-}
-buildCalendar();
-
-/* ---------- Weather (Open-Meteo, no API key) ---------- */
-async function loadWeather(){
-  try{
-    const lat = 15.485, lon = 119.845; // Palauig, Zambales, PH
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FManila&temperature_unit=fahrenheit`;
-    const res = await fetch(url);
-    const data = await res.json();
-    const t = Math.round(data.current.temperature_2m);
-    const hum = data.current.relative_humidity_2m;
-    const code = data.current.weather_code;
-    const hi = Math.round(data.daily.temperature_2m_max[0]);
-    const lo = Math.round(data.daily.temperature_2m_min[0]);
-    const map = {
-      0:['☀️','Clear sky'],1:['🌤','Mostly clear'],2:['⛅','Partly cloudy'],3:['☁️','Overcast'],
-      45:['🌫','Foggy'],48:['🌫','Foggy'],51:['🌦','Light drizzle'],61:['🌧','Light rain'],
-      63:['🌧','Rain'],65:['🌧','Heavy rain'],80:['🌦','Rain showers'],95:['⛈','Thunderstorm']
-    };
-    const [icon, desc] = map[code] || ['⛅','Partly cloudy'];
-    document.getElementById('w-temp').textContent = t+'°F';
-    document.getElementById('w-icon').textContent = icon;
-    document.getElementById('w-desc').textContent = desc + ' · Humid & warm';
-    document.getElementById('w-extra').textContent = `H: ${hi}° L: ${lo}°  ·  Humidity ${hum}%`;
-  }catch(e){
-    document.getElementById('w-temp').textContent = '—';
-    document.getElementById('w-desc').textContent = 'Weather unavailable offline';
-    document.getElementById('w-extra').textContent = '';
-  }
-}
-loadWeather();
-
-/* ---------- Visitor counter (session-local, playful) ---------- */
 (function(){
-  const base = 1800 + Math.floor(Math.random()*300);
-  let n = 0;
-  const el = document.getElementById('vcount');
-  const step = Math.ceil(base/40);
-  const timer = setInterval(()=>{
-    n += step;
-    if(n >= base){ n = base; clearInterval(timer); }
-    el.textContent = String(n).padStart(5,'0');
-  }, 30);
-})();
+  const APPS = {
+    about:'Finder', contact:'Safari', skills:'Code', terminal:'Terminal',
+    messages:'Messages', services:'Mail', projects:'Photos', education:'Credentials',
+    settings:'System Settings', resume:'Preview', trash:'Trash'
+  };
+  const SPOT = [
+    {q:'about finder stucey who', id:'about', label:'About Stucey', kind:'Application'},
+    {q:'safari contact email phone', id:'contact', label:'Safari — Contact', kind:'Application'},
+    {q:'skills code javascript n8n', id:'skills', label:'Skills.js', kind:'Document'},
+    {q:'terminal help shell', id:'terminal', label:'Terminal', kind:'Application'},
+    {q:'messages prompt chatbot', id:'messages', label:'Messages', kind:'Application'},
+    {q:'mail services offer', id:'services', label:'Mail — Services', kind:'Application'},
+    {q:'photos projects gallery n8n hipaa', id:'projects', label:'Photos — Projects', kind:'Application'},
+    {q:'education credentials degree', id:'education', label:'Credentials', kind:'Document'},
+    {q:'settings appearance dark light', id:'settings', label:'System Settings', kind:'Application'},
+    {q:'resume pdf preview cv', id:'resume', label:'Resume.pdf', kind:'Document'},
+    {q:'trash empty', id:'trash', label:'Trash', kind:'Application'}
+  ];
 
-/* ---------- Automation metrics (subtle live feel) ---------- */
-setInterval(()=>{
-  const j = () => (95 + Math.random()*5).toFixed(0);
-  const v = j();
-  document.getElementById('m1val').textContent = v+'%';
-  document.getElementById('m1bar').style.width = v+'%';
-}, 4000);
+  let zTop = 40, focused = null, termBooted = false;
+  const openedOnce = {};
+  const savedGeom = {};
+  const termHistory = []; let histIdx = -1;
 
-/* ---------- Window manager ---------- */
-let zTop = 100;
-function openWin(id){
-  const el = document.getElementById('win-'+id);
-  if(!el) return;
-  el.classList.add('open');
-  el.style.zIndex = ++zTop;
-  if(!el.style.left){
-    const offset = (Object.keys(openedOnce).length % 5) * 24;
-    el.style.left = (window.innerWidth/2 - el.offsetWidth/2 + offset) + 'px';
-    el.style.top = (70 + offset) + 'px';
+  function $(sel, root=document){ return root.querySelector(sel); }
+  function $all(sel, root=document){ return [...root.querySelectorAll(sel)]; }
+
+  /* Stars */
+  function buildStars(){
+    const layer = $('#stars');
+    layer.innerHTML = '';
+    const n = innerWidth < 780 ? 50 : 110;
+    for(let i=0;i<n;i++){
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random()*2+1;
+      s.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*62}%;animation-delay:${Math.random()*4}s;animation-duration:${3+Math.random()*3}s`;
+      layer.appendChild(s);
+    }
   }
-  openedOnce[id] = true;
-  if(id === 'terminal' && !termBooted) bootTerminal();
-  if(id === 'resume') showToast('Opened Resume.pdf');
-}
+  buildStars();
+  addEventListener('resize', buildStars);
 
-function showToast(msg){
-  const t = document.getElementById('toast');
-  document.getElementById('toast-msg').textContent = msg;
-  t.classList.add('show');
-  clearTimeout(showToast._timer);
-  showToast._timer = setTimeout(()=> t.classList.remove('show'), 3200);
-}
-function closeWin(id){ document.getElementById('win-'+id).classList.remove('open'); }
-const openedOnce = {};
+  /* Clock */
+  function tickClock(){
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'});
+    const timeStr = now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'});
+    $('#clock').textContent = dateStr + '  ' + timeStr;
+    const sc = $('#sleep-clock');
+    if(sc) sc.textContent = timeStr;
+  }
+  tickClock(); setInterval(tickClock, 15000);
 
-document.querySelectorAll('.titlebar').forEach(bar=>{
-  const id = bar.dataset.win;
-  bar.querySelector('.r').addEventListener('click', (e)=>{ e.stopPropagation(); closeWin(id); });
-  bar.addEventListener('mousedown', (e)=>{
-    if(e.target.closest('.dots')) return;
-    const win = document.getElementById('win-'+id);
-    win.style.zIndex = ++zTop;
-    const startX = e.clientX, startY = e.clientY;
-    const rect = win.getBoundingClientRect();
-    const startLeft = rect.left, startTop = rect.top;
-    function onMove(ev){
-      win.style.left = (startLeft + ev.clientX - startX) + 'px';
-      win.style.top = (startTop + ev.clientY - startY) + 'px';
+  /* Calendar */
+  function buildCalendar(){
+    const now = new Date();
+    const y = now.getFullYear(), m = now.getMonth();
+    $('#cal-month').textContent = now.toLocaleDateString('en-US', {month:'long'}).toUpperCase();
+    const firstDay = new Date(y,m,1).getDay();
+    const daysInMonth = new Date(y,m+1,0).getDate();
+    let html = '<tr>', col = firstDay;
+    for(let i=0;i<firstDay;i++) html += '<td></td>';
+    for(let d=1; d<=daysInMonth; d++){
+      if(col===7){ html += '</tr><tr>'; col=0; }
+      html += d===now.getDate() ? `<td class="today"><span>${d}</span></td>` : `<td>${d}</td>`;
+      col++;
     }
-    function onUp(){ document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp); }
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup', onUp);
+    html += '</tr>';
+    $('#cal-body').innerHTML = html;
+  }
+  buildCalendar();
+
+  /* Weather */
+  async function loadWeather(){
+    try{
+      const lat=15.485, lon=119.845;
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FManila&temperature_unit=fahrenheit`;
+      const data = await (await fetch(url)).json();
+      const t = Math.round(data.current.temperature_2m);
+      const hum = data.current.relative_humidity_2m;
+      const code = data.current.weather_code;
+      const hi = Math.round(data.daily.temperature_2m_max[0]);
+      const lo = Math.round(data.daily.temperature_2m_min[0]);
+      const map = {0:['☀️','Clear'],1:['🌤','Mostly clear'],2:['⛅','Partly cloudy'],3:['☁️','Overcast'],45:['🌫','Foggy'],48:['🌫','Foggy'],51:['🌦','Drizzle'],61:['🌧','Rain'],63:['🌧','Rain'],65:['🌧','Heavy rain'],80:['🌦','Showers'],95:['⛈','Storm']};
+      const [icon, desc] = map[code] || ['⛅','Partly cloudy'];
+      $('#w-temp').textContent = t+'°';
+      $('#w-icon').textContent = icon;
+      $('#w-desc').textContent = desc;
+      $('#w-extra').textContent = `H:${hi}°  L:${lo}°  ·  Humidity ${hum}%`;
+    }catch(e){
+      $('#w-temp').textContent = '—';
+      $('#w-desc').textContent = 'Weather unavailable';
+      $('#w-extra').textContent = '';
+    }
+  }
+  loadWeather();
+
+  (function visitors(){
+    const base = 1800 + Math.floor(Math.random()*300);
+    let n=0; const el=$('#vcount'); const step=Math.ceil(base/40);
+    const timer=setInterval(()=>{ n+=step; if(n>=base){ n=base; clearInterval(timer);} el.textContent=String(n).padStart(5,'0'); },30);
+  })();
+  setInterval(()=>{
+    const v=(95+Math.random()*5).toFixed(0);
+    $('#m1val').textContent=v+'%'; $('#m1bar').style.width=v+'%';
+  },4000);
+
+  /* Menus */
+  function hideMenus(){
+    $all('.apple-btn.open, .menu-item.open, .status-btn.open').forEach(el=>el.classList.remove('open'));
+    $('#cc').classList.remove('show');
+  }
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.apple-btn, .menu-item, .status-btn');
+    if(btn && btn.closest('#menubar')){
+      const isCC = btn.id==='cc-toggle';
+      const isSearch = btn.id==='search-toggle';
+      const isClock = btn.id==='clock';
+      if(isSearch){ hideMenus(); openSpotlight(); return; }
+      if(isClock) return;
+      if(isCC){
+        const on = $('#cc').classList.toggle('show');
+        $all('.apple-btn.open, .menu-item.open').forEach(el=>el.classList.remove('open'));
+        btn.classList.toggle('open', on);
+        return;
+      }
+      const was = btn.classList.contains('open');
+      hideMenus();
+      if(!was && btn.querySelector('.menu-panel')) btn.classList.add('open');
+      return;
+    }
+    if(!e.target.closest('#cc') && !e.target.closest('.menu-panel')) hideMenus();
+    if(!e.target.closest('.desk-icon')) $all('.desk-icon.selected').forEach(i=>i.classList.remove('selected'));
   });
-  // touch drag
-  bar.addEventListener('touchstart', (e)=>{
-    const win = document.getElementById('win-'+id);
-    win.style.zIndex = ++zTop;
-    const t = e.touches[0];
-    const rect = win.getBoundingClientRect();
-    const startX = t.clientX, startY = t.clientY, startLeft = rect.left, startTop = rect.top;
-    function onMove(ev){
-      const tt = ev.touches[0];
-      win.style.left = (startLeft + tt.clientX - startX) + 'px';
-      win.style.top = (startTop + tt.clientY - startY) + 'px';
+
+  /* Window manager */
+  function dockBtn(id){ return $(`.dock-btn[data-win="${id}"]`); }
+  function refreshDock(){
+    $all('.dock-btn[data-win]').forEach(btn=>{
+      const id = btn.dataset.win;
+      const win = $('#win-'+id);
+      const running = win && (win.classList.contains('open') || win.classList.contains('minimized'));
+      btn.classList.toggle('running', !!running);
+    });
+  }
+  function focusWin(id){
+    const el = $('#win-'+id);
+    if(!el || !el.classList.contains('open')) return;
+    $all('.window').forEach(w=>w.classList.remove('focused'));
+    el.classList.add('focused');
+    el.style.zIndex = ++zTop;
+    focused = id;
+    const name = el.dataset.app || APPS[id] || 'Finder';
+    const label = $('#app-name');
+    if(label) label.textContent = name;
+  }
+  window.openWin = function openWin(id){
+    const el = $('#win-'+id);
+    if(!el) return;
+    hideMenus();
+    const wasMin = el.classList.contains('minimized');
+    el.classList.remove('minimized');
+    el.classList.add('open');
+    if(!openedOnce[id]){
+      const offset = (Object.keys(openedOnce).length % 5) * 22;
+      const w = el.offsetWidth || 640;
+      el.style.left = Math.max(12, innerWidth/2 - w/2 + offset) + 'px';
+      el.style.top = (46 + offset) + 'px';
+      el.classList.add('anim');
+      setTimeout(()=>el.classList.remove('anim'), 220);
+      openedOnce[id] = true;
     }
-    function onEnd(){ document.removeEventListener('touchmove', onMove); document.removeEventListener('touchend', onEnd); }
-    document.addEventListener('touchmove', onMove, {passive:true});
-    document.addEventListener('touchend', onEnd);
-  }, {passive:true});
-});
+    focusWin(id);
+    refreshDock();
+    const btn = dockBtn(id);
+    if(btn && !wasMin){
+      btn.classList.remove('bounce-on');
+      void btn.offsetWidth;
+      btn.classList.add('bounce-on');
+      setTimeout(()=>btn.classList.remove('bounce-on'), 800);
+    }
+    if(id==='terminal'){
+      if(!termBooted) bootTerminal();
+      setTimeout(()=>$('#term-input').focus(), 50);
+    }
+    if(id==='messages') setTimeout(()=>{ const t=$('#msg-input'); if(t && $('#msg-form').style.display!=='none') t.focus(); }, 50);
+    if(id==='resume') showToast('Opened Resume.pdf');
+  };
+  window.closeWin = function closeWin(id){
+    const el = $('#win-'+id);
+    if(!el) return;
+    el.classList.remove('open','minimized','focused','zoomed');
+    if(focused===id) focused=null;
+    refreshDock();
+  };
+  window.minimizeWin = function minimizeWin(id){
+    const el = $('#win-'+id);
+    if(!el) return;
+    el.classList.add('minimized');
+    el.classList.remove('focused');
+    if(focused===id) focused=null;
+    refreshDock();
+  };
+  window.zoomWin = function zoomWin(id){
+    const el = $('#win-'+id);
+    if(!el) return;
+    if(el.classList.contains('zoomed')){
+      el.classList.remove('zoomed');
+      const g = savedGeom[id];
+      if(g){ el.style.left=g.left; el.style.top=g.top; el.style.width=g.width; el.style.height=g.height; }
+    } else {
+      savedGeom[id] = {left:el.style.left, top:el.style.top, width:el.style.width||el.offsetWidth+'px', height:el.style.height||el.offsetHeight+'px'};
+      el.classList.add('zoomed');
+      el.style.left='8px';
+      el.style.top='32px';
+      el.style.width = (innerWidth-16)+'px';
+      el.style.height = (innerHeight-32-80)+'px';
+    }
+    focusWin(id);
+  };
+  window.closeFocused = function(){ if(focused) closeWin(focused); };
+  window.minimizeFocused = function(){ if(focused) minimizeWin(focused); };
+  window.zoomFocused = function(){ if(focused) zoomWin(focused); };
 
-/* ---------- Accent color ---------- */
-function setAccent(hex, btn){
-  document.documentElement.style.setProperty('--accent', hex);
-  document.querySelectorAll('.swatch-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
+  document.addEventListener('click', (e)=>{
+    const open = e.target.closest('[data-open]');
+    if(open){ hideMenus(); openWin(open.dataset.open); }
+  });
 
-/* ---------- Terminal ---------- */
-const termScreen = document.getElementById('term-screen');
-const termInput = document.getElementById('term-input');
-let termBooted = false;
-function termPrint(html){
-  const d = document.createElement('div');
-  d.className = 'line out';
-  d.innerHTML = html;
-  termScreen.appendChild(d);
-  termScreen.scrollTop = termScreen.scrollHeight;
-}
-function termPrompt(cmd){
-  const d = document.createElement('div');
-  d.className = 'line';
-  d.innerHTML = `<span class="prompt">stucey@portfolio:~$</span> ${cmd}`;
-  termScreen.appendChild(d);
-}
-function bootTerminal(){
-  termBooted = true;
-  termPrint("StuceyOS Terminal v1.0 — type <b>help</b> to see available commands.");
-}
-const TERM_CMDS = {
-  help: () => `Available commands:<br>
-  whoami · about · skills · projects · experience · services · education · contact · resume · clear · sudo make-coffee`,
-  whoami: () => `Stucey Rosal — AI Automation Specialist (Huggy Bear Digital) · n8n/Make.com · Claude & OpenAI integration · VA · IT Support. Based in Zambales, PH.`,
-  about: () => `Freelance AI Automation Specialist & VA building n8n/Make.com systems for US clients — flagship build is an 8-workflow HIPAA-compliant healthcare automation system. Open Finder for the full bio.`,
-  skills: () => `n8n, Make.com, Claude API, OpenAI API, AWS SES/SNS/S3, Airtable, Twilio, SendGrid, HIPAA-compliant system design, prompt engineering. Open VS Code (skills.js) for the full list.`,
-  projects: () => `Flagship: Kind Home Help HIPAA-compliant healthcare automation (8 n8n workflows) & an E-Commerce AI automation system (3-agent architecture). Plus chatbot deployments and earlier IT/IoT projects. Open Gallery for details.`,
-  experience: () => `Freelance AI Automation Specialist @ Huggy Bear Digital (2025–Present). Prior: IT Staff — Technical Support @ Beyond Infinity Connection Philippines (2024–2025). Open Finder for full history.`,
-  services: () => `n8n/Make.com Automation · HIPAA-Compliant System Design · AI Integration & Prompt Engineering · Virtual Assistant — individually or bundled. Open Mail for details.`,
-  education: () => `BS Industrial Technology (Computer Technology), President Ramon Magsaysay State University, 2021–2025. Open Credentials for certifications.`,
-  contact: () => `Email: Stuceyrosal15@gmail.com · Phone: +63 950 753 6207 · San Juan, Palauig, Zambales, PH.`,
-  resume: () => `Opening Resume.pdf…`,
-  'sudo make-coffee': () => `☕ Nice try — automating that one is still on the roadmap.`,
-};
-termInput.addEventListener('keydown', (e)=>{
-  if(e.key !== 'Enter') return;
-  const raw = termInput.value.trim();
-  if(raw === '') return;
-  termPrompt(raw);
-  termInput.value = '';
-  const key = raw.toLowerCase();
-  if(key === 'clear'){ termScreen.innerHTML = ''; return; }
-  if(key === 'resume'){ termPrint(TERM_CMDS.resume()); openWin('resume'); return; }
-  if(TERM_CMDS[key]){ termPrint(TERM_CMDS[key]()); }
-  else{ termPrint(`command not found: ${raw} — type <b>help</b>`); }
-});
+  $all('.window').forEach(win=>{
+    win.addEventListener('mousedown', ()=>{
+      const id = win.id.replace('win-','');
+      if(win.classList.contains('open')) focusWin(id);
+    });
+  });
 
-/* Open About by default on desktop first load, keep it light on mobile */
-if(window.innerWidth > 780){
-  setTimeout(()=> openWin('about'), 400);
-}
+  document.addEventListener('click', (e)=>{
+    const tl = e.target.closest('.tl');
+    if(!tl) return;
+    e.stopPropagation();
+    const id = tl.closest('.window').id.replace('win-','');
+    if(tl.dataset.act==='close') closeWin(id);
+    if(tl.dataset.act==='min') minimizeWin(id);
+    if(tl.dataset.act==='zoom') zoomWin(id);
+  });
+
+  $all('.titlebar').forEach(bar=>{
+    const id = bar.dataset.win;
+    bar.addEventListener('dblclick', (e)=>{
+      if(e.target.closest('.traffic')) return;
+      zoomWin(id);
+    });
+    function startDrag(clientX, clientY){
+      const win = $('#win-'+id);
+      if(win.classList.contains('zoomed')) return;
+      focusWin(id);
+      const rect = win.getBoundingClientRect();
+      const sl = rect.left, st = rect.top;
+      function move(x,y){
+        win.style.left = (sl + x - clientX)+'px';
+        win.style.top = (st + y - clientY)+'px';
+      }
+      function onMouse(ev){ move(ev.clientX, ev.clientY); }
+      function onTouch(ev){ const t=ev.touches[0]; move(t.clientX, t.clientY); }
+      function up(){
+        document.removeEventListener('mousemove', onMouse);
+        document.removeEventListener('mouseup', up);
+        document.removeEventListener('touchmove', onTouch);
+        document.removeEventListener('touchend', up);
+      }
+      document.addEventListener('mousemove', onMouse);
+      document.addEventListener('mouseup', up);
+      document.addEventListener('touchmove', onTouch, {passive:true});
+      document.addEventListener('touchend', up);
+    }
+    bar.addEventListener('mousedown', (e)=>{
+      if(e.target.closest('.traffic') || e.button!==0) return;
+      startDrag(e.clientX, e.clientY);
+    });
+    bar.addEventListener('touchstart', (e)=>{
+      if(e.target.closest('.traffic')) return;
+      const t=e.touches[0]; startDrag(t.clientX, t.clientY);
+    }, {passive:true});
+  });
+
+  $all('.resize').forEach(h=>{
+    h.addEventListener('mousedown', (e)=>{
+      e.preventDefault();
+      const id = h.dataset.win;
+      const win = $('#win-'+id);
+      const startX=e.clientX, startY=e.clientY;
+      const startW=win.offsetWidth, startH=win.offsetHeight;
+      function move(ev){
+        win.style.width = Math.max(420, startW + ev.clientX - startX)+'px';
+        win.style.height = Math.max(260, startH + ev.clientY - startY)+'px';
+      }
+      function up(){ document.removeEventListener('mousemove', move); document.removeEventListener('mouseup', up); }
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', up);
+    });
+  });
+
+  /* Dock */
+  $all('.dock-btn[data-win]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const id = btn.dataset.win;
+      const win = $('#win-'+id);
+      if(win.classList.contains('minimized')) openWin(id);
+      else if(win.classList.contains('open') && win.classList.contains('focused')) minimizeWin(id);
+      else openWin(id);
+    });
+  });
+  const dock = $('#dock');
+  dock.addEventListener('mousemove', (e)=>{
+    if(document.body.classList.contains('reduce-motion')) return;
+    $all('.dock-btn .glyph').forEach(g=>{
+      const r = g.getBoundingClientRect();
+      const dist = Math.abs(e.clientX - (r.left + r.width/2));
+      const scale = 1 + Math.max(0, 1 - dist/90) * 0.55;
+      g.style.setProperty('--scale', scale);
+    });
+  });
+  dock.addEventListener('mouseleave', ()=>{
+    $all('.dock-btn .glyph').forEach(g=> g.style.setProperty('--scale', 1));
+  });
+
+  /* Desktop icons */
+  $all('.desk-icon').forEach(icon=>{
+    icon.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      $all('.desk-icon').forEach(i=>i.classList.remove('selected'));
+      icon.classList.add('selected');
+      openWin(icon.dataset.win);
+    });
+  });
+
+  /* Toast */
+  window.showToast = function(msg){
+    $('#toast-msg').textContent = msg;
+    $('#toast').classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(()=> $('#toast').classList.remove('show'), 3000);
+  };
+
+  /* Spotlight */
+  window.openSpotlight = function(){
+    hideMenus();
+    $('#spotlight').classList.add('show');
+    $('#spot-input').value='';
+    renderSpot('');
+    setTimeout(()=>$('#spot-input').focus(), 20);
+  };
+  function closeSpotlight(){ $('#spotlight').classList.remove('show'); }
+  function renderSpot(q){
+    const s = q.trim().toLowerCase();
+    const items = SPOT.filter(x => !s || x.q.includes(s) || x.label.toLowerCase().includes(s));
+    $('#spot-results').innerHTML = items.slice(0,7).map((x,i)=>`<button class="spot-row${i===0?' active':''}" data-open="${x.id}">${x.label}<small>${x.kind}</small></button>`).join('') || `<div class="spot-row">No results</div>`;
+  }
+  $('#spot-input').addEventListener('input', ()=> renderSpot($('#spot-input').value));
+  $('#spot-input').addEventListener('keydown', (e)=>{
+    const rows = $all('.spot-row[data-open]');
+    let i = rows.findIndex(r=>r.classList.contains('active'));
+    if(e.key==='ArrowDown'){ e.preventDefault(); i=Math.min(rows.length-1, i+1); rows.forEach(r=>r.classList.remove('active')); rows[i]?.classList.add('active'); }
+    if(e.key==='ArrowUp'){ e.preventDefault(); i=Math.max(0, i-1); rows.forEach(r=>r.classList.remove('active')); rows[i]?.classList.add('active'); }
+    if(e.key==='Enter'){ e.preventDefault(); const id = rows.find(r=>r.classList.contains('active'))?.dataset.open; closeSpotlight(); if(id) openWin(id); }
+    if(e.key==='Escape') closeSpotlight();
+  });
+  $('#spotlight').addEventListener('click', (e)=>{ if(e.target.id==='spotlight') closeSpotlight(); });
+  $('#spot-results').addEventListener('click', (e)=>{
+    const row = e.target.closest('[data-open]');
+    if(row){ closeSpotlight(); openWin(row.dataset.open); }
+  });
+
+  /* Theme / settings */
+  function applyTheme(mode){
+    const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+    const t = mode==='auto' ? (dark?'dark':'light') : mode;
+    document.documentElement.dataset.theme = t;
+    localStorage.setItem('stucey-theme', mode);
+    $all('#theme-seg button').forEach(b=> b.classList.toggle('active', b.dataset.theme===mode));
+  }
+  applyTheme(localStorage.getItem('stucey-theme') || 'dark');
+  $('#theme-seg').addEventListener('click', (e)=>{
+    const b = e.target.closest('[data-theme]'); if(b) applyTheme(b.dataset.theme);
+  });
+  $all('.swatch-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.documentElement.style.setProperty('--accent', btn.dataset.accent);
+      $all('.swatch-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  $('#toggle-stars').addEventListener('change', (e)=>{ $('#stars').style.display = e.target.checked ? 'block' : 'none'; });
+  $('#toggle-motion').addEventListener('change', (e)=>{ document.body.classList.toggle('reduce-motion', e.target.checked); });
+
+  /* Control center */
+  $all('#cc-wifi, #cc-bt, #cc-air, #cc-focus').forEach(t=>{
+    t.addEventListener('click', ()=> t.classList.toggle('on'));
+  });
+  $('#cc-bright').addEventListener('input', (e)=>{
+    $('#wallpaper').style.filter = `brightness(${e.target.value/100})`;
+  });
+
+  /* Sleep / shutdown */
+  window.goSleep = function(){ hideMenus(); $('#sleep').classList.add('show'); };
+  $('#sleep').addEventListener('click', ()=> $('#sleep').classList.remove('show'));
+  window.showShutdown = function(){ hideMenus(); $('#shutdown').classList.add('show'); $('#shutdown-dialog').style.display='block'; $('#off-screen').style.display='none'; };
+  window.hideOverlay = function(id){ $('#'+id).classList.remove('show'); };
+  window.doShutdown = function(){ $('#shutdown-dialog').style.display='none'; $('#off-screen').style.display='block'; };
+  $('#shutdown').addEventListener('click', (e)=>{
+    if($('#off-screen').style.display==='block' && !e.target.closest('.dialog')){
+      $('#shutdown').classList.remove('show');
+    }
+  });
+  window.toggleWidgets = function(){
+    const w = $('#widgets');
+    w.style.display = w.style.display==='none' ? 'flex' : 'none';
+  };
+
+  /* Messages — iMessage inbox */
+  const INBOX = 'Stuceyrosal15@gmail.com';
+  const EMAIL_RE = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
+  const PROMPT_SAMPLES = [
+    {label:'Sophie & Eve Beauty Bot', text:'You are Sophia, a friendly beauty consultant for Sophie & Eve Beauty and Wellness. Help with service bookings, product recs, and appointment follow-ups. Respond warmly. Keep replies under 80 words. Never discuss competitors.'},
+    {label:'Bite & Go Order Bot', text:'Extract order intent, return JSON only:\n{ "intent":"order|inquiry|complaint",\n  "items":[...], "quantity":0,\n  "special_request":"..." }\nIf unclear, set intent to "clarify".'},
+    {label:'Portfolio AI Assistant', text:'You are an AI assistant representing Stucey Rosal — IT Specialist, VA, and AI Automation expert based in Zambales, PH. Be concise. Always end with a CTA to Stuceyrosal15@gmail.com.'},
+    {label:'Compliance Report Generator', text:'Step 1: Identify non-compliant entries\nStep 2: Group by category and severity\nStep 3: Suggest corrective actions\nOutput: Summary → Issues Found → Recommendations'}
+  ];
+  const chat = {
+    thread: 'stucey',
+    email: sessionStorage.getItem('stucey-imsg-email') || '',
+    asked: false,
+    busy: false,
+    lines: [
+      {side:'them', text:"Hey — I'm Stucey. Drop a note about your project and it lands in my real inbox."},
+      {side:'them', text:"Include your email so I can write back."}
+    ]
+  };
+
+  function scrollChat(){
+    const el = $('#msg-scroll');
+    el.scrollTop = el.scrollHeight;
+  }
+  function addBubble(side, text, label){
+    const box = $('#msg-scroll');
+    if(label){
+      const lab = document.createElement('div');
+      lab.className = 'imsg-label';
+      lab.textContent = label;
+      box.appendChild(lab);
+    }
+    const row = document.createElement('div');
+    row.className = 'imsg-row ' + side;
+    const b = document.createElement('div');
+    b.className = 'imsg-bubble';
+    b.textContent = text;
+    row.appendChild(b);
+    box.appendChild(row);
+    scrollChat();
+  }
+  function setStatus(t){ $('#imsg-status').textContent = t || ''; }
+  function setTyping(on){
+    let el = $('#imsg-typing');
+    if(!el){
+      el = document.createElement('div');
+      el.id = 'imsg-typing';
+      el.className = 'imsg-typing';
+      el.innerHTML = '<i></i><i></i><i></i>';
+      $('#msg-scroll').appendChild(el);
+    }
+    el.classList.toggle('show', on);
+    if(on) $('#msg-scroll').appendChild(el);
+    scrollChat();
+  }
+  function renderThread(){
+    const scroll = $('#msg-scroll');
+    scroll.innerHTML = '';
+    const stucey = chat.thread === 'stucey';
+    $('#imsg-name').textContent = stucey ? 'Stucey Rosal' : 'Prompt Lab';
+    $('#imsg-sub').textContent = stucey ? 'iMessage' : 'Samples';
+    $('#imsg-face').textContent = stucey ? 'SR' : 'PL';
+    $('#imsg-face').style.background = stucey ? 'linear-gradient(180deg,#5ac8fa,#007aff)' : 'linear-gradient(180deg,#bf5af2,#5e5ce6)';
+    $('#msg-form').style.display = stucey ? 'flex' : 'none';
+    $('#imsg-readonly').style.display = stucey ? 'none' : 'block';
+    const day = document.createElement('div');
+    day.className = 'imsg-day';
+    day.textContent = 'Today';
+    scroll.appendChild(day);
+    if(stucey){
+      chat.lines.forEach(l => addBubble(l.side, l.text));
+      setStatus(chat.email ? 'Delivered' : '');
+    } else {
+      PROMPT_SAMPLES.forEach(p => addBubble('them', p.text, p.label));
+      setStatus('');
+    }
+    scrollChat();
+  }
+  function lastVisitorText(){
+    return chat.lines.filter(l=>l.side==='me').map(l=>l.text).join('\n\n');
+  }
+  async function sendInbox(visitorEmail){
+    const payload = {
+      _subject: 'New StuceyOS iMessage',
+      _template: 'table',
+      _captcha: 'false',
+      _replyto: visitorEmail,
+      name: 'StuceyOS visitor',
+      email: visitorEmail,
+      message: lastVisitorText(),
+      page: location.href
+    };
+    try{
+      const res = await fetch('https://formsubmit.co/ajax/' + INBOX, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json().catch(()=>({}));
+      return res.ok && (data.success === true || data.success === 'true' || !('success' in data));
+    }catch(e){
+      return false;
+    }
+  }
+  function replyLater(text, delay, after){
+    setTyping(true);
+    setTimeout(()=>{
+      setTyping(false);
+      chat.lines.push({side:'them', text});
+      addBubble('them', text);
+      if(after) after();
+    }, delay);
+  }
+  function syncSendBtn(){
+    const on = !!$('#msg-input').value.trim() && !chat.busy;
+    $('#imsg-send').disabled = !on;
+    $('#imsg-send').classList.toggle('on', on);
+  }
+  function renderPreview(){
+    const last = [...chat.lines].reverse().find(l=>l.side==='me') || chat.lines[0];
+    if(last) $('#imsg-preview').textContent = last.text;
+  }
+
+  $all('.imsg-conv').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      chat.thread = btn.dataset.thread;
+      $all('.imsg-conv').forEach(b=>b.classList.toggle('active', b===btn));
+      renderThread();
+      if(chat.thread==='stucey') $('#msg-input').focus();
+    });
+  });
+
+  $('#msg-input').addEventListener('input', ()=>{
+    const ta = $('#msg-input');
+    ta.style.height = 'auto';
+    ta.style.height = Math.min(88, ta.scrollHeight) + 'px';
+    syncSendBtn();
+  });
+  $('#msg-input').addEventListener('keydown', (e)=>{
+    if(e.key==='Enter' && !e.shiftKey){
+      e.preventDefault();
+      $('#msg-form').requestSubmit();
+    }
+  });
+
+  $('#msg-form').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    if(chat.thread!=='stucey' || chat.busy) return;
+    const text = $('#msg-input').value.trim();
+    if(!text) return;
+    $('#msg-input').value = '';
+    $('#msg-input').style.height = 'auto';
+    syncSendBtn();
+    chat.lines.push({side:'me', text});
+    addBubble('me', text);
+    setStatus('Sending…');
+    renderPreview();
+
+    const found = (text.match(EMAIL_RE) || [])[0] || '';
+    if(found){
+      chat.email = found;
+      sessionStorage.setItem('stucey-imsg-email', found);
+    }
+
+    chat.busy = true;
+    syncSendBtn();
+
+    if(!chat.email && !chat.asked){
+      chat.asked = true;
+      setStatus('Delivered');
+      replyLater("What's the best email so I can reply?", 850);
+      chat.busy = false;
+      syncSendBtn();
+      return;
+    }
+    if(!chat.email){
+      setStatus('Delivered');
+      replyLater("I need an email in the message — like name@company.com — so I can write back.", 850);
+      chat.busy = false;
+      syncSendBtn();
+      return;
+    }
+
+    const ok = await sendInbox(chat.email);
+    if(ok){
+      setStatus('Delivered');
+      replyLater("Got it — that just landed in my inbox. I'll write you at " + chat.email + ".", 900);
+    } else {
+      setStatus('');
+      const fail = "Couldn't send automatically. Email me at " + INBOX + " and I'll still see it.";
+      chat.lines.push({side:'them', text: fail});
+      addBubble('them', fail);
+      const link = document.createElement('a');
+      link.href = 'mailto:' + INBOX + '?subject=' + encodeURIComponent('StuceyOS message') + '&body=' + encodeURIComponent(lastVisitorText() + '\n\nFrom: ' + chat.email);
+      link.textContent = 'Open Mail';
+      link.className = 'cta-btn';
+      link.style.alignSelf = 'flex-start';
+      link.style.margin = '8px 0';
+      $('#msg-scroll').appendChild(link);
+      scrollChat();
+    }
+    chat.busy = false;
+    syncSendBtn();
+  });
+
+  renderThread();
+
+  /* Terminal */
+  const termScreen = $('#term-screen');
+  const termInput = $('#term-input');
+  function termPrint(html){
+    const d=document.createElement('div'); d.className='line out'; d.innerHTML=html;
+    termScreen.appendChild(d); termScreen.scrollTop=termScreen.scrollHeight;
+  }
+  function termPrompt(cmd){
+    const d=document.createElement('div'); d.className='line';
+    d.innerHTML = `<span class="prompt">stucey@portfolio ~ %</span> ${cmd.replace(/</g,'&lt;')}`;
+    termScreen.appendChild(d);
+  }
+  function bootTerminal(){
+    termBooted = true;
+    termPrint("StuceyOS Darwin Kernel · type <b>help</b>");
+  }
+  const TERM_CMDS = {
+    help: () => `Available commands:<br>  whoami · about · skills · projects · experience · services · education · contact · resume · clear · open · sudo make-coffee`,
+    whoami: () => `Stucey Rosal — AI Automation Specialist (Huggy Bear Digital) · n8n/Make.com · Claude & OpenAI integration · VA · IT Support. Based in Zambales, PH.`,
+    about: () => `Freelance AI Automation Specialist & VA building n8n/Make.com systems for US clients — flagship build is an 8-workflow HIPAA-compliant healthcare automation system. Open Finder for the full bio.`,
+    skills: () => `n8n, Make.com, Claude API, OpenAI API, AWS SES/SNS/S3, Airtable, Twilio, SendGrid, HIPAA-compliant system design, prompt engineering.`,
+    projects: () => `Flagship: Kind Home Help HIPAA-compliant healthcare automation (8 n8n workflows) & an E-Commerce AI automation system (3-agent architecture).`,
+    experience: () => `Freelance AI Automation Specialist @ Huggy Bear Digital (2025–Present). Prior: IT Staff @ Beyond Infinity Connection Philippines (2024–2025).`,
+    services: () => `n8n/Make.com Automation · HIPAA-Compliant System Design · AI Integration & Prompt Engineering · Virtual Assistant.`,
+    education: () => `BS Industrial Technology (Computer Technology), President Ramon Magsaysay State University, 2021–2025.`,
+    contact: () => `Email: Stuceyrosal15@gmail.com · Phone: +63 950 753 6207 · San Juan, Palauig, Zambales, PH.`,
+    resume: () => `Opening Resume.pdf…`,
+    open: () => `Usage: open finder|safari|photos|mail|messages|settings`,
+    ls: () => `About.rtf  Resume.pdf  Projects/  Skills.js  Messages  Terminal.app`,
+    pwd: () => `/Users/stucey`,
+    date: () => new Date().toString(),
+    'sudo make-coffee': () => `Nice try — automating that one is still on the roadmap.`
+  };
+  termInput.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowUp'){
+      e.preventDefault();
+      if(!termHistory.length) return;
+      histIdx = histIdx<0 ? termHistory.length-1 : Math.max(0, histIdx-1);
+      termInput.value = termHistory[histIdx];
+      return;
+    }
+    if(e.key==='ArrowDown'){
+      e.preventDefault();
+      if(histIdx<0) return;
+      histIdx++;
+      termInput.value = histIdx>=termHistory.length ? (histIdx=-1,'') : termHistory[histIdx];
+      return;
+    }
+    if(e.key!=='Enter') return;
+    const raw = termInput.value.trim();
+    if(raw==='') return;
+    termPrompt(raw); termInput.value=''; termHistory.push(raw); histIdx=-1;
+    const key = raw.toLowerCase();
+    if(key==='clear'){ termScreen.innerHTML=''; return; }
+    if(key==='resume' || key==='open resume'){ termPrint(TERM_CMDS.resume()); openWin('resume'); return; }
+    if(key.startsWith('open ')){
+      const map={finder:'about',safari:'contact',photos:'projects',mail:'services',messages:'messages',settings:'settings',terminal:'terminal',preview:'resume'};
+      const t=map[key.slice(5).trim()];
+      if(t){ termPrint('opening '+key.slice(5)+'…'); openWin(t); } else termPrint(TERM_CMDS.open());
+      return;
+    }
+    if(TERM_CMDS[key]) termPrint(TERM_CMDS[key]());
+    else termPrint(`zsh: command not found: ${raw.replace(/</g,'&lt;')} — type <b>help</b>`);
+  });
+
+  /* Keyboard */
+  document.addEventListener('keydown', (e)=>{
+    const meta = e.metaKey || e.ctrlKey;
+    if(meta && e.key.toLowerCase()===' '){ e.preventDefault(); $('#spotlight').classList.contains('show') ? closeSpotlight() : openSpotlight(); }
+    if(meta && e.key.toLowerCase()==='k'){ e.preventDefault(); openSpotlight(); }
+    if(meta && e.key.toLowerCase()==='w'){ e.preventDefault(); closeFocused(); }
+    if(meta && e.key.toLowerCase()==='m'){ e.preventDefault(); minimizeFocused(); }
+    if(meta && e.key.toLowerCase()==='o'){ e.preventDefault(); openWin('resume'); }
+    if(e.key==='Escape'){ closeSpotlight(); hideMenus(); }
+  });
+
+  if(innerWidth > 780) setTimeout(()=> openWin('about'), 380);
+})();
 </script>
 </body>
 </html>
