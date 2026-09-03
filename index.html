@@ -5,6 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StuceyOS — Stucey Rosal · AI Automation Specialist (Huggy Bear Digital)</title>
 <meta name="description" content="Stucey Rosal — AI Automation Specialist under Huggy Bear Digital. n8n & Make.com workflow automation, Claude/OpenAI integration, HIPAA-compliant system design, Virtual Assistant. An interactive macOS-style portfolio.">
+<link rel="canonical" href="https://stucey-rosal.github.io/">
+<meta name="author" content="Stucey Rosal">
+<meta name="theme-color" content="#0a84ff">
+
+<!-- Social preview. og:image must be an absolute URL; update these if the
+     site moves to a custom domain. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="StuceyOS — Stucey Rosal">
+<meta property="og:url" content="https://stucey-rosal.github.io/">
+<meta property="og:title" content="Stucey Rosal — AI Automation Specialist">
+<meta property="og:description" content="n8n &amp; Make.com automation, Claude/OpenAI integration, and HIPAA-compliant system design. An interactive macOS-style portfolio.">
+<meta property="og:image" content="https://stucey-rosal.github.io/assets/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Stucey Rosal — AI Automation Specialist, Huggy Bear Digital">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stucey Rosal — AI Automation Specialist">
+<meta name="twitter:description" content="n8n &amp; Make.com automation, Claude/OpenAI integration, and HIPAA-compliant system design.">
+<meta name="twitter:image" content="https://stucey-rosal.github.io/assets/og-card.jpg">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -233,8 +257,12 @@
   #sysres .sr-label b{color:var(--text); font-weight:600;}
   #sysres .bar{height:5px; border-radius:99px; background:var(--fill-2); overflow:hidden;}
   #sysres .bar i{display:block; height:100%; border-radius:99px; background:var(--accent); transition:width .6s ease;}
-  #visitors .vnum{font-size:34px; font-weight:700; letter-spacing:1px; font-variant-numeric:tabular-nums;}
-  #visitors .vsub{font-size:12px; color:var(--text-2); margin-top:2px;}
+  #stats .st-row{display:flex; align-items:baseline; gap:10px; padding:5px 0;}
+  #stats .st-row b{
+    font-size:26px; font-weight:700; letter-spacing:-.02em; color:var(--accent);
+    font-variant-numeric:tabular-nums; min-width:52px;
+  }
+  #stats .st-row span{font-size:12px; color:var(--text-2); line-height:1.3;}
 
   /* Dock */
   #dock-wrap{
@@ -329,6 +357,21 @@
     display:inline-block; font-size:11px; background:var(--accent-soft); color:var(--accent);
     padding:3px 8px; border-radius:99px; margin:2px 4px 2px 0; font-weight:500;
   }
+  .avail{
+    display:block; border:1px solid var(--accent); border-radius:12px; padding:14px 16px;
+    background:var(--accent-soft); margin:0 0 18px;
+  }
+  .avail b{
+    display:inline-flex; align-items:center; gap:7px; font-size:13px; color:var(--accent);
+    font-weight:700; margin-bottom:6px;
+  }
+  .avail b::before{
+    content:""; width:8px; height:8px; border-radius:50%; background:#30d158;
+    box-shadow:0 0 0 3px rgba(48,209,88,.25);
+  }
+  .avail span{display:block; font-size:13px; color:var(--text-2); line-height:1.55;}
+  .avail .avail-links{margin-top:9px;}
+  .avail .avail-links a{font-weight:600; font-size:13px; margin-right:14px;}
   .info-table{width:100%; border-collapse:collapse; margin:8px 0 14px;}
   .info-table td{padding:7px 0; border-bottom:1px solid var(--line-2); font-size:13px;}
   .info-table td:first-child{color:var(--text-3); width:36%;}
@@ -410,6 +453,12 @@
   .pd-shot svg, .pd-shot img{width:100%; height:100%; display:block; object-fit:cover;}
   .pd-title{font-size:18px; font-weight:700; letter-spacing:-.02em; margin:0 0 4px;}
   .pd-sub{font-size:11.5px; color:var(--text-3); margin:0 0 12px; font-variant-numeric:tabular-nums;}
+  .cs-block{margin:0 0 14px;}
+  .cs-block h5{
+    margin:0 0 4px; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--accent); font-weight:700;
+  }
+  .cs-block p{margin:0; color:var(--text-2);}
   .pd-nav{display:flex; gap:8px; margin-top:16px;}
 
   /* Finder */
@@ -669,6 +718,18 @@
   .app-icon{width:100%; height:100%; display:block;}
 
   @media (max-width:780px){
+    /* The dock holds 11 items - at phone widths the right-hand ones were
+       clipped off-screen and unreachable. Let it scroll instead. */
+    #dock-wrap{
+      left:0; right:0; transform:none; max-width:100vw;
+      padding:0 10px; overflow-x:auto; overflow-y:hidden;
+      scrollbar-width:none; -webkit-overflow-scrolling:touch;
+    }
+    #dock-wrap::-webkit-scrollbar{display:none;}
+    #dock{width:max-content; margin:0 auto; border-radius:18px;}
+    .dock-btn .glyph{width:42px; height:42px;}
+    .dock-sep{height:28px; margin:0 4px 8px;}
+    .dock-btn .tip{display:none;}
     #widgets{display:none;}
     #icons{flex-direction:row; flex-wrap:wrap; width:calc(100% - 24px); gap:8px;}
     .window{width:96vw;}
@@ -676,6 +737,14 @@
     .finder-side, .set-side{width:132px; flex-basis:132px;}
     .wtitle{font-size:12px;}
     .gal-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px;}
+  }
+  @media (max-width:560px){
+    /* On a phone the Finder/Settings sidebars ate a third of the width and
+       left the prose in a narrow column. The Dock already covers navigation. */
+    .finder-side, .set-side{display:none;}
+    .finder-main, .set-main{padding:16px 18px;}
+    .wbody{padding:16px 18px;}
+    .tb{padding-left:52px;}
   }
   @media print{
     body *{visibility:hidden;}
@@ -952,10 +1021,11 @@
       </div>
     </div>
 
-    <div class="widget" id="visitors">
-      <div class="whead"><span>Visitors</span><span>This session</span></div>
-      <div class="vnum" id="vcount">00000</div>
-      <div class="vsub">Total profile visits</div>
+    <div class="widget" id="stats">
+      <div class="whead"><span>Portfolio</span><span>Live</span></div>
+      <div class="st-row"><b id="st-projects">—</b><span>projects documented</span></div>
+      <div class="st-row"><b id="st-tools">—</b><span>skills &amp; tools tagged</span></div>
+      <div class="st-row"><b>Remote</b><span>US client hours · async-friendly</span></div>
     </div>
   </div>
 </div>
@@ -1001,6 +1071,16 @@
       <button class="side-item" type="button" data-open="contact">🌐 Contact</button>
     </aside>
     <div class="finder-main">
+      <div class="avail">
+        <b>Available now</b>
+        <span>Open to AI automation projects, VA engagements, prompt-engineering contracts and IT roles.
+        Remote, working US client hours from Zambales, PH.</span>
+        <span class="avail-links">
+          <a href="mailto:huggynetto@gmail.com">huggynetto@gmail.com</a>
+          <a href="https://wa.me/639948968491" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://github.com/Stucey-Rosal" target="_blank" rel="noopener">GitHub</a>
+        </span>
+      </div>
       <h3>Who I Am</h3>
       <p>Freelance AI Automation Specialist &amp; Virtual Assistant operating under <b>Huggy Bear Digital</b>. I design and build n8n / Make.com automation systems, integrate Claude &amp; OpenAI into real business workflows, and support US-based clients end-to-end — from architecture to handover documentation.</p>
       <p>My most recent build is a HIPAA-compliant automation system for a US healthcare home-care agency: 8 interconnected n8n workflows handling patient intake, caregiver onboarding, payroll/EVV, and care-plan monitoring — integrated with AWS, Airtable, Twilio, SendGrid, and Claude/OpenAI. I also design multi-agent e-commerce automation architectures (Shopify, Meta Ads, Klaviyo) with built-in governance and reporting layers.</p>
@@ -1053,6 +1133,7 @@
       <p class="pd-sub" id="pd-sub"></p>
       <span class="pd-draft" id="pd-draft" hidden>Draft entry — the description below is placeholder text, not a record of the real work. Replace it before publishing.</span>
       <p id="pd-body"></p>
+      <div id="pd-case"></div>
       <div id="pd-tags"></div>
       <div class="pd-nav">
         <button class="cta-btn alt" id="pd-prev" type="button">‹ Previous</button>
@@ -1148,6 +1229,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
       <a class="fav" href="https://wa.me/639948968491" target="_blank" rel="noopener"><i>💬</i><span>WhatsApp</span></a>
       <button class="fav" type="button" data-open="resume"><i>📄</i><span>Resume</span></button>
       <button class="fav" type="button" data-open="services"><i>🛠</i><span>Services</span></button>
+      <a class="fav" href="https://github.com/Stucey-Rosal" target="_blank" rel="noopener"><i>⚙</i><span>GitHub</span></a>
     </div>
     <a class="cta-btn" href="mailto:huggynetto@gmail.com">huggynetto@gmail.com</a>
     <a class="cta-btn alt" href="https://wa.me/639948968491" target="_blank" rel="noopener">WhatsApp +63 994 896 8491</a>
@@ -1387,11 +1469,6 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
   }
   loadWeather();
 
-  (function visitors(){
-    const base = 1800 + Math.floor(Math.random()*300);
-    let n=0; const el=$('#vcount'); const step=Math.ceil(base/40);
-    const timer=setInterval(()=>{ n+=step; if(n>=base){ n=base; clearInterval(timer);} el.textContent=String(n).padStart(5,'0'); },30);
-  })();
   setInterval(()=>{
     const v=(95+Math.random()*5).toFixed(0);
     $('#m1val').textContent=v+'%'; $('#m1bar').style.width=v+'%';
@@ -1862,7 +1939,10 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
       title:'Kind Home Help — HIPAA-Compliant Healthcare Automation',
       short:'8 interconnected n8n workflows for a US home-care agency.',
       meta:'2025 · Client build · In production',
-      body:'8 interconnected n8n workflows (WF01–WF08) covering patient intake, caregiver enrollment, payroll/EVV tracking, PCP form dispatch, care plan monitoring, and case closure. Integrated AWS SES/SNS/S3, Airtable, Adobe PDF Services, Signaturely, RingCentral, Twilio, SendGrid, Checkr, and Claude + OpenAI APIs. HIPAA-compliant S3 architecture with encryption, versioning, and lifecycle rules.',
+      body:'A production automation system for a US healthcare home-care agency, covering the full case lifecycle from intake to closure.',
+      problem:'Patient intake, caregiver onboarding, payroll/EVV tracking and care-plan monitoring were separate processes that needed to work as one system — in a domain where every record is regulated.',
+      approach:'Eight interconnected n8n workflows (WF01–WF08) covering intake, caregiver enrollment, payroll/EVV tracking, PCP form dispatch, care-plan monitoring and case closure. Wired into AWS SES/SNS/S3, Airtable, Adobe PDF Services, Signaturely, RingCentral, Twilio, SendGrid, Checkr, and the Claude and OpenAI APIs.',
+      outcome:'Running in production on a HIPAA-compliant S3 architecture with encryption, versioning and lifecycle rules, handed over with documentation.',
       tags:['n8n','HIPAA','AWS','Airtable','Twilio','Claude API','Healthcare']
     },
     {
@@ -1872,7 +1952,10 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
       title:'E-Commerce AI Automation System',
       short:'Three-workflow agent architecture with a governance layer.',
       meta:'2025 · Client build · Multi-agent',
-      body:'Three-workflow architecture — Orchestrator &amp; Governance, Department Agents, and Reporting &amp; Strategist — built in n8n and integrating Shopify, Funnelish, Meta Ads, and Klaviyo into one coordinated, self-reporting automation system. The governance layer handles routing, guardrails, and scheduling so each department agent stays in its lane, and the strategist layer turns raw platform data into a KPI digest.',
+      body:'A three-layer agent architecture in n8n that runs Shopify, Funnelish, Meta Ads and Klaviyo as one coordinated system.',
+      problem:'Four platforms — Shopify, Funnelish, Meta Ads and Klaviyo — each doing their own job, with no coordinating layer between them and no single view of results.',
+      approach:'Three n8n workflows in layers: an orchestrator handling routing, guardrails and scheduling; department agents for each platform; and a reporting strategist that turns raw platform data into a KPI digest.',
+      outcome:'A self-reporting system where each department agent stays in its lane and the reporting layer summarises results without manual collation.',
       tags:['n8n','Multi-Agent','Shopify','Meta Ads','Klaviyo','E-commerce']
     },
     {
@@ -1971,6 +2054,28 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
   /* --- Render --- */
   /* `draft:true` on a project still renders an amber DRAFT badge and a
      warning banner in the detail view. No entry sets it at the moment. */
+  /* Titles carry HTML entities; decode them for alt text and aria-labels. */
+  function plain(html){
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    return d.textContent || '';
+  }
+
+  /* Covers total ~857KB. They are not fetched on page load - Photos starts
+     closed, so a visitor who never opens it never pays for them. Each card
+     parks a loader on the node and loadGalleryShots() runs them when the
+     window first opens.
+     Note: do NOT set loading="lazy" on a detached Image() - it has no layout
+     box, so the browser never fetches it and onload never fires. */
+  function loadGalleryShots(){
+    $all('.gal-shot').forEach(host => {
+      const run = host._loadShot;
+      if(!run) return;
+      host._loadShot = null;
+      run();
+    });
+  }
+
   function addPills(host, p, big){
     if(big) return;
     if(p.badge){
@@ -1990,13 +2095,17 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
     const uid = p.id + (big ? 'D' : 'T');
     host.innerHTML = (SHOTS[p.shot] || SHOTS.workflow)(uid);
     addPills(host, p, big);
-    // Swap in a real screenshot if one exists at p.img
-    if(p.img){
+    if(!p.img) return;
+    const load = () => {
       const im = new Image();
-      im.alt = p.title + ' — screenshot';
+      im.alt = plain(p.title) + ' — project cover';
+      im.decoding = 'async';
       im.onload = ()=>{ host.innerHTML = ''; host.appendChild(im); addPills(host, p, big); };
       im.src = p.img;
-    }
+    };
+    // The detail view is user-triggered, so load it straight away.
+    if(big) load();
+    else host._loadShot = load;
   }
   function buildGallery(){
     GROUPS.forEach(group=>{
@@ -2007,6 +2116,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
         card.type = 'button';
         card.className = 'gal-card';
         card.dataset.proj = p.id;
+        card.setAttribute('aria-label', 'Open project: ' + plain(p.title));
         const shot = document.createElement('span');
         shot.className = 'gal-shot';
         const meta = document.createElement('span');
@@ -2020,7 +2130,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
       });
     });
   }
-  function openProject(id){
+  function openProject(id, push){
     const i = ORDERED.findIndex(p=>p.id===id);
     if(i < 0) return;
     const p = ORDERED[i];
@@ -2029,22 +2139,57 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
     $('#pd-sub').innerHTML = p.meta;
     $('#pd-draft').hidden = !p.draft;
     $('#pd-body').innerHTML = p.body;
+    const CASE = [['problem','Problem'],['approach','Approach'],['outcome','Outcome']];
+    $('#pd-case').innerHTML = CASE
+      .filter(([k]) => p[k])
+      .map(([k, lbl]) => `<div class="cs-block"><h5>${lbl}</h5><p>${p[k]}</p></div>`)
+      .join('');
     $('#pd-tags').innerHTML = p.tags.map(t=>`<span class="tag">${t}</span>`).join('');
     $('#pd-prev').dataset.go = ORDERED[(i - 1 + ORDERED.length) % ORDERED.length].id;
     $('#pd-next').dataset.go = ORDERED[(i + 1) % ORDERED.length].id;
     $('#proj-gallery').hidden = true;
     $('#proj-detail').hidden = false;
+    if(push !== false) syncURL(p.id);
     $('#win-projects .wbody').scrollTop = 0;
     $('.window#win-projects .wtitle').textContent = 'Photos — ' + p.num;
   }
-  function backToGallery(){
+  function backToGallery(push){
     $('#proj-detail').hidden = true;
     $('#proj-gallery').hidden = false;
+    if(push !== false) syncURL(null);
     $('#win-projects .wbody').scrollTop = 0;
     $('.window#win-projects .wtitle').textContent = 'Photos — Selected Work';
   }
+  /* Deep links: /?p=<id> opens one project, so a single piece of work can be
+     shared on its own instead of "open the site and click around". */
+  function syncURL(id){
+    if(!history.pushState) return;
+    const url = new URL(location.href);
+    if(id) url.searchParams.set('p', id); else url.searchParams.delete('p');
+    if(url.href !== location.href) history.pushState({ p: id || null }, '', url);
+  }
+  function routeFromURL(push){
+    const id = new URLSearchParams(location.search).get('p');
+    if(id && ORDERED.some(p => p.id === id)){ openWin('projects'); openProject(id, push); return true; }
+    return false;
+  }
+  addEventListener('popstate', ()=>{
+    const id = new URLSearchParams(location.search).get('p');
+    if(id && ORDERED.some(p => p.id === id)) openProject(id, false);
+    else if(!$('#proj-detail').hidden) backToGallery(false);
+  });
+
+  /* Real numbers, derived from the project data itself. */
+  (function stats(){
+    const tools = new Set();
+    PROJECTS.forEach(p => (p.tags || []).forEach(t => tools.add(t)));
+    const a = $('#st-projects'), b = $('#st-tools');
+    if(a) a.textContent = PROJECTS.length;
+    if(b) b.textContent = tools.size;
+  })();
+
   buildGallery();
-  $('#pd-back').addEventListener('click', backToGallery);
+  $('#pd-back').addEventListener('click', ()=> backToGallery());
   $('#pd-prev').addEventListener('click', (e)=> openProject(e.currentTarget.dataset.go));
   $('#pd-next').addEventListener('click', (e)=> openProject(e.currentTarget.dataset.go));
 
@@ -2135,6 +2280,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
       setTimeout(()=>$('#term-input').focus(), 50);
     }
     if(id==='messages') setTimeout(()=>{ const t=$('#msg-input'); if(t && $('#msg-form').style.display!=='none') t.focus(); }, 50);
+    if(id==='projects') loadGalleryShots();
     if(id==='resume') showToast('Opened Resume.pdf');
   };
   window.closeWin = function closeWin(id){
@@ -2676,7 +2822,18 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
       .catch(() => link.remove());
   })();
 
-  if(innerWidth > 780) setTimeout(()=> openWin('about'), 380);
+  /* Windows are dialog-like; name them for screen readers. */
+  $all('.window').forEach(w => {
+    w.setAttribute('role', 'dialog');
+    const t = w.querySelector('.wtitle');
+    if(t) w.setAttribute('aria-label', t.textContent.trim());
+  });
+  const st = $('#imsg-status');
+  if(st){ st.setAttribute('role', 'status'); st.setAttribute('aria-live', 'polite'); }
+
+  /* Open something on load on every screen size. Phones previously landed on
+     a bare desktop with no indication that the icons were tappable. */
+  if(!routeFromURL(false)) setTimeout(()=> openWin('about'), 380);
 })();
 </script>
 </body>
