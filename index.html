@@ -1041,6 +1041,9 @@
       <h3>Flagship Client Work</h3>
       <p>Client builds and product work — automation systems, web platforms, bots, and AI tooling. Click any preview for the full write-up.</p>
       <div class="gal-grid" id="gal-flagship"></div>
+      <h3 style="margin-top:24px">Personal Project</h3>
+      <p>Self-initiated work — built for myself, not for a client.</p>
+      <div class="gal-grid" id="gal-self"></div>
       <h3 style="margin-top:24px">Earlier / Foundational Work</h3>
       <div class="gal-grid" id="gal-earlier"></div>
     </div>
@@ -1939,14 +1942,14 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
       tags:['Bot','Automation']
     },
     {
-      id:'quoz', group:'flagship', shot:'quoz',
+      id:'quoz', group:'self', shot:'quoz',
       img:'assets/projects/quoz-ai.jpg',
-      badge:'ai',
+      badge:'personal',
       title:'QUOZ AI',
-      short:'AI product build.',
-      meta:'AI product',
-      body:'An AI product build under the QUOZ name. Full scope and stack available on request.',
-      tags:['AI','Automation']
+      short:'My main personal project &mdash; a self-initiated AI product build.',
+      meta:'Personal project &middot; self-initiated',
+      body:'My main personal project: a self-initiated AI product build under the QUOZ name &mdash; not client work. Full scope and stack available on request.',
+      tags:['AI','Personal Project','Automation']
     },
     {
       id:'camera', group:'earlier', shot:'vision',
@@ -1962,7 +1965,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
   /* Display order = flagship group, then earlier group. Numbering and the
      Previous/Next buttons both follow this, so inserting a project anywhere
      in the array above never produces out-of-sequence labels. */
-  const GROUPS = ['flagship','earlier'];
+  const GROUPS = ['flagship','self','earlier'];
   const ORDERED = GROUPS.flatMap(g => PROJECTS.filter(p => p.group === g));
   ORDERED.forEach((p, i)=>{ p.num = String(i + 1).padStart(2, '0'); });
 
@@ -1997,7 +2000,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
     }
   }
   function buildGallery(){
-    ['flagship','earlier'].forEach(group=>{
+    GROUPS.forEach(group=>{
       const grid = $('#gal-' + group);
       grid.innerHTML = '';
       PROJECTS.filter(p=>p.group===group).forEach(p=>{
