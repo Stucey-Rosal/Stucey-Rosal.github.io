@@ -358,6 +358,60 @@
     border-bottom-right-radius:12px;
   }
 
+  /* Photos — project gallery */
+  #win-projects{width:min(880px,94vw); height:min(640px,80vh); max-height:none;}
+  .gal-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(212px,1fr)); gap:14px;
+    margin:12px 0 6px;
+  }
+  .gal-card{
+    background:var(--fill); border:1px solid var(--line); border-radius:12px;
+    padding:0; overflow:hidden; text-align:left; color:var(--text); font:inherit;
+    display:flex; flex-direction:column; transition:transform .14s ease, border-color .14s ease;
+  }
+  .gal-card:hover{border-color:var(--accent); transform:translateY(-2px);}
+  .gal-shot{
+    display:block; position:relative; aspect-ratio:16/10; background:#0e1117;
+    overflow:hidden; border-bottom:1px solid var(--line-2);
+  }
+  .gal-shot svg, .gal-shot img{width:100%; height:100%; display:block; object-fit:cover;}
+  .gal-shot .shot-pill{
+    position:absolute; top:8px; right:8px; font-size:9px; font-weight:700; letter-spacing:.05em;
+    background:rgba(0,0,0,.55); color:#fff; padding:2px 7px; border-radius:99px;
+    backdrop-filter:blur(6px); text-transform:uppercase;
+  }
+  .gal-shot .shot-pill.is-draft{
+    left:8px; right:auto; background:rgba(255,159,10,.94); color:#2a1a00;
+  }
+  .pd-draft{
+    display:block; background:rgba(255,159,10,.14); border:1px solid rgba(255,159,10,.5);
+    color:#ffb340; font-size:11.5px; font-weight:600; padding:8px 12px; border-radius:8px;
+    margin:0 0 12px; max-width:520px;
+  }
+  .pd-draft[hidden]{display:none;}
+  .gal-meta{display:block; padding:10px 12px 12px;}
+  .gal-meta b{display:block; font-size:12.5px; line-height:1.35; margin-bottom:3px;}
+  .gal-meta i{display:block; font-style:normal; font-size:11.5px; color:var(--text-2); line-height:1.4;}
+  .gal-meta .gal-num{
+    float:right; font-size:10px; color:var(--text-3); font-variant-numeric:tabular-nums;
+    margin-left:8px; font-weight:600;
+  }
+
+  #proj-detail[hidden]{display:none;}
+  .pd-back{
+    display:inline-flex; align-items:center; gap:5px; background:var(--fill-2); border:1px solid var(--line);
+    color:var(--text); font-size:12px; font-weight:600; padding:5px 11px; border-radius:7px; margin-bottom:14px;
+  }
+  .pd-back:hover{background:var(--accent); color:#fff; border-color:transparent;}
+  .pd-shot{
+    border-radius:12px; overflow:hidden; border:1px solid var(--line); background:#0e1117;
+    aspect-ratio:16/10; width:100%; max-width:520px; margin:0 0 16px;
+  }
+  .pd-shot svg, .pd-shot img{width:100%; height:100%; display:block; object-fit:cover;}
+  .pd-title{font-size:18px; font-weight:700; letter-spacing:-.02em; margin:0 0 4px;}
+  .pd-sub{font-size:11.5px; color:var(--text-3); margin:0 0 12px; font-variant-numeric:tabular-nums;}
+  .pd-nav{display:flex; gap:8px; margin-top:16px;}
+
   /* Finder */
   #win-about{width:min(820px,94vw); height:min(620px,78vh); max-height:none;}
   .finder{display:flex; flex:1; min-height:0;}
@@ -618,9 +672,10 @@
     #widgets{display:none;}
     #icons{flex-direction:row; flex-wrap:wrap; width:calc(100% - 24px); gap:8px;}
     .window{width:96vw;}
-    #win-about, #win-settings{height:82vh;}
+    #win-about, #win-settings, #win-projects{height:82vh;}
     .finder-side, .set-side{width:132px; flex-basis:132px;}
     .wtitle{font-size:12px;}
+    .gal-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px;}
   }
   @media print{
     body *{visibility:hidden;}
@@ -856,7 +911,7 @@
         - Based in Zambales, PH · remote-ready
       </p>
       <p>- Click a desktop icon or the Dock to open apps.<br>
-         - Open Photos to see my flagship n8n builds (incl. a HIPAA-compliant healthcare system).<br>
+         - Open Photos to browse my builds — each one has a screenshot you can click into.<br>
          - Open Terminal and type <b>help</b> to explore.<br>
          - Leave a note in Messages — I read every one!</p>
     </div>
@@ -982,15 +1037,26 @@
     <div class="wtitle">Photos — Selected Work</div>
   </div>
   <div class="wbody">
-    <h3>Flagship Client Work</h3>
-    <p>Production automation systems built for real businesses — architected, integrated, and documented end-to-end.</p>
-    <div class="proj-card"><div class="ptitle"><span class="pnum">01</span> Kind Home Help — HIPAA-Compliant Healthcare Automation</div><p style="margin:0 0 8px">8 interconnected n8n workflows (WF01–WF08) covering patient intake, caregiver enrollment, payroll/EVV tracking, PCP form dispatch, care plan monitoring, and case closure. Integrated AWS SES/SNS/S3, Airtable, Adobe PDF Services, Signaturely, RingCentral, Twilio, SendGrid, Checkr, and Claude + OpenAI APIs. HIPAA-compliant S3 architecture with encryption, versioning, and lifecycle rules.</p><span class="tag">n8n</span><span class="tag">HIPAA</span><span class="tag">AWS</span><span class="tag">Healthcare</span></div>
-    <div class="proj-card"><div class="ptitle"><span class="pnum">02</span> E-Commerce AI Automation System</div><p style="margin:0 0 8px">Three-workflow architecture — Orchestrator &amp; Governance, Department Agents, and Reporting &amp; Strategist — built in n8n and integrating Shopify, Funnelish, Meta Ads, and Klaviyo into one coordinated, self-reporting automation system.</p><span class="tag">n8n</span><span class="tag">Multi-Agent</span><span class="tag">E-commerce</span></div>
-    <div class="proj-card"><div class="ptitle"><span class="pnum">03</span> Client Chatbot Deployments</div><p style="margin:0 0 8px">Prompt-engineered chatbots for real businesses: Sophie &amp; Eve (beauty booking bot), Bite &amp; Go (order-intake bot with structured JSON output), and a Taglish chatbot script template pack.</p><span class="tag">Prompt Eng</span><span class="tag">Chatbase</span></div>
-    <h3 style="margin-top:22px">Earlier / Foundational Work</h3>
-    <div class="proj-card"><div class="ptitle"><span class="pnum">04</span> IP Address Automation System</div><p style="margin:0 0 8px">Automated IP address management and assignment across a company network — eliminating manual errors and reducing admin time.</p><span class="tag">Network</span></div>
-    <div class="proj-card"><div class="ptitle"><span class="pnum">05</span> Compliance Automation System</div><p style="margin:0 0 8px">Automates compliance checks and generates structured reports for a manufacturing environment.</p><span class="tag">Compliance</span></div>
-    <div class="proj-card"><div class="ptitle"><span class="pnum">06</span> AI Camera — IoT System</div><p style="margin:0 0 8px">AI-powered IoT camera integrating computer vision for real-time monitoring and detection — capstone engineering project.</p><span class="tag">IoT</span><span class="tag">Computer Vision</span></div>
+    <div id="proj-gallery">
+      <h3>Flagship Client Work</h3>
+      <p>Client builds and product work — automation systems, web platforms, bots, and AI tooling. Click any preview for the full write-up.</p>
+      <div class="gal-grid" id="gal-flagship"></div>
+      <h3 style="margin-top:24px">Earlier / Foundational Work</h3>
+      <div class="gal-grid" id="gal-earlier"></div>
+    </div>
+    <div id="proj-detail" hidden>
+      <button class="pd-back" id="pd-back" type="button">‹ All Projects</button>
+      <div class="pd-shot" id="pd-shot"></div>
+      <h4 class="pd-title" id="pd-title"></h4>
+      <p class="pd-sub" id="pd-sub"></p>
+      <span class="pd-draft" id="pd-draft" hidden>Draft entry — the description below is placeholder text, not a record of the real work. Replace it before publishing.</span>
+      <p id="pd-body"></p>
+      <div id="pd-tags"></div>
+      <div class="pd-nav">
+        <button class="cta-btn alt" id="pd-prev" type="button">‹ Previous</button>
+        <button class="cta-btn alt" id="pd-next" type="button">Next ›</button>
+      </div>
+    </div>
   </div>
   <div class="resize" data-win="projects"></div>
 </div>
@@ -1133,7 +1199,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
       <span class="pdf-badge">PDF</span>
       <span class="pdf-name">Stucey_Rosal_Resume.pdf</span>
       <button type="button" onclick="window.print()">Print</button>
-      <a href="Resume.pdf" download="Stucey_Rosal_Resume.pdf">Download</a>
+      <a id="resume-dl" href="Resume.pdf" download="Stucey_Rosal_Resume.pdf">Download</a>
     </div>
     <article id="resume-paper">
       <h2>Stucey Rosal</h2>
@@ -1328,6 +1394,665 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
     const v=(95+Math.random()*5).toFixed(0);
     $('#m1val').textContent=v+'%'; $('#m1bar').style.width=v+'%';
   },4000);
+
+  /* ============================================================
+     PROJECT GALLERY
+     Each project gets a generated SVG "screenshot" mockup.
+     To use a REAL screenshot instead: drop the file into
+     assets/projects/ and set the `img` field. If the file loads,
+     it replaces the mockup automatically; if it's missing, the
+     mockup stays. Nothing breaks either way.
+     ============================================================ */
+
+  /* --- Reusable SVG mockup pieces --- */
+  function chrome(u, label){
+    return `<rect width="320" height="200" fill="#0e1117"/>
+      <rect width="320" height="200" fill="url(#dot${u})"/>
+      <rect width="320" height="20" fill="rgba(255,255,255,.05)"/>
+      <circle cx="11" cy="10" r="3" fill="#ff5f57"/><circle cx="22" cy="10" r="3" fill="#febc2e"/><circle cx="33" cy="10" r="3" fill="#28c840"/>
+      <text x="46" y="13.5" font-size="7" font-family="monospace" fill="rgba(255,255,255,.42)">${label}</text>`;
+  }
+  function dotDef(u){
+    return `<pattern id="dot${u}" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r=".9" fill="rgba(255,255,255,.09)"/></pattern>`;
+  }
+  function node(x, y, w, h, text, color, sub){
+    const t = sub
+      ? `<text x="${x+w/2}" y="${y+h/2-1}" font-size="6.4" font-weight="600" fill="#fff" text-anchor="middle">${text}</text>
+         <text x="${x+w/2}" y="${y+h/2+7}" font-size="5.2" fill="rgba(255,255,255,.55)" text-anchor="middle">${sub}</text>`
+      : `<text x="${x+w/2}" y="${y+h/2+2.4}" font-size="6.4" font-weight="600" fill="#fff" text-anchor="middle">${text}</text>`;
+    return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="5" fill="rgba(255,255,255,.08)" stroke="${color}" stroke-width="1"/>
+      <rect x="${x}" y="${y}" width="3" height="${h}" rx="1.5" fill="${color}"/>${t}`;
+  }
+  function pill(x, y, w, text, color){
+    return `<rect x="${x}" y="${y}" width="${w}" height="14" rx="7" fill="${color}22" stroke="${color}" stroke-width=".8"/>
+      <text x="${x+w/2}" y="${y+9.6}" font-size="5.6" font-weight="700" fill="${color}" text-anchor="middle" letter-spacing=".4">${text}</text>`;
+  }
+
+  /* --- One mockup per project --- */
+  const SHOTS = {
+    /* n8n workflow canvas — healthcare */
+    workflow: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>${dotDef(u)}</defs>
+      ${chrome(u, 'n8n · kind-home-help · WF01–WF08')}
+      <g fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1.1">
+        <path d="M64 104 C80 104 80 62 96 62"/><path d="M64 104 H96"/><path d="M64 104 C80 104 80 146 96 146"/>
+        <path d="M156 62 C174 62 174 104 190 104"/><path d="M156 104 H190"/><path d="M156 146 C174 146 174 104 190 104"/>
+        <path d="M246 104 C258 104 258 72 270 72"/><path d="M246 104 C258 104 258 136 270 136"/>
+      </g>
+      ${node(20, 92, 44, 24, 'Intake', '#0a84ff', 'webhook')}
+      ${node(96, 51, 60, 22, 'Caregiver', '#5e5ce6')}
+      ${node(96, 93, 60, 22, 'Payroll/EVV', '#ff9f0a')}
+      ${node(96, 135, 60, 22, 'Care Plan', '#bf5af2')}
+      ${node(190, 92, 56, 24, 'AI Extract', '#30d158', 'Claude')}
+      ${node(270, 62, 40, 20, 'S3', '#64d2ff')}
+      ${node(270, 126, 40, 20, 'Twilio', '#ff375f')}
+      ${pill(20, 172, 96, 'HIPAA · S3 ENCRYPTED', '#30d158')}
+      ${pill(122, 172, 62, '8 WORKFLOWS', '#0a84ff')}
+    </svg>`,
+
+    /* Three-lane multi-agent architecture */
+    agents: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>${dotDef(u)}</defs>
+      ${chrome(u, 'n8n · ecom-ai-system · 3 agents')}
+      <rect x="12" y="30" width="296" height="48" rx="7" fill="rgba(94,92,230,.1)" stroke="rgba(94,92,230,.45)" stroke-width=".8"/>
+      <rect x="12" y="84" width="296" height="48" rx="7" fill="rgba(255,159,10,.1)" stroke="rgba(255,159,10,.45)" stroke-width=".8"/>
+      <rect x="12" y="138" width="296" height="48" rx="7" fill="rgba(48,209,88,.1)" stroke="rgba(48,209,88,.45)" stroke-width=".8"/>
+      <text x="18" y="41" font-size="5.4" font-weight="700" fill="#8e8cf0" letter-spacing=".6">ORCHESTRATOR &amp; GOVERNANCE</text>
+      <text x="18" y="95" font-size="5.4" font-weight="700" fill="#ffb340" letter-spacing=".6">DEPARTMENT AGENTS</text>
+      <text x="18" y="149" font-size="5.4" font-weight="700" fill="#5be07c" letter-spacing=".6">REPORTING &amp; STRATEGIST</text>
+      ${node(20, 48, 56, 22, 'Router', '#5e5ce6')}
+      ${node(84, 48, 56, 22, 'Guardrails', '#5e5ce6')}
+      ${node(148, 48, 56, 22, 'Scheduler', '#5e5ce6')}
+      ${node(212, 48, 88, 22, 'Task Queue', '#5e5ce6')}
+      ${node(20, 102, 62, 22, 'Shopify', '#ff9f0a')}
+      ${node(90, 102, 62, 22, 'Meta Ads', '#ff9f0a')}
+      ${node(160, 102, 62, 22, 'Klaviyo', '#ff9f0a')}
+      ${node(230, 102, 70, 22, 'Funnelish', '#ff9f0a')}
+      ${node(20, 156, 74, 22, 'KPI Digest', '#30d158')}
+      <g>
+        <rect x="106" y="170" width="6" height="8" rx="1" fill="#30d158"/>
+        <rect x="116" y="164" width="6" height="14" rx="1" fill="#30d158"/>
+        <rect x="126" y="158" width="6" height="20" rx="1" fill="#30d158"/>
+        <rect x="136" y="166" width="6" height="12" rx="1" fill="#30d158"/>
+        <rect x="146" y="154" width="6" height="24" rx="1" fill="#30d158"/>
+      </g>
+      ${node(164, 156, 68, 22, 'Strategist', '#30d158')}
+      ${node(240, 156, 60, 22, 'Slack/Mail', '#30d158')}
+      <g stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none">
+        <path d="M160 70 V102"/><path d="M160 124 V156"/>
+      </g>
+    </svg>`,
+
+    /* Chat / chatbot deployments */
+    chat: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>${dotDef(u)}</defs>
+      ${chrome(u, 'chatbase · sophie-and-eve · live')}
+      <rect x="12" y="28" width="180" height="160" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)"/>
+      <circle cx="26" cy="42" r="7" fill="#bf5af2"/>
+      <text x="26" y="44.4" font-size="6" font-weight="700" fill="#fff" text-anchor="middle">S</text>
+      <text x="38" y="40" font-size="6.4" font-weight="700" fill="#fff">Sophia</text>
+      <text x="38" y="48" font-size="5" fill="#30d158">● online</text>
+      <rect x="20" y="58" width="118" height="26" rx="9" fill="rgba(255,255,255,.12)"/>
+      <text x="28" y="69" font-size="5.6" fill="rgba(255,255,255,.82)">Hi! Looking to book a</text>
+      <text x="28" y="78" font-size="5.6" fill="rgba(255,255,255,.82)">facial or a lash set today?</text>
+      <rect x="66" y="90" width="118" height="17" rx="9" fill="#0b93f6"/>
+      <text x="74" y="101" font-size="5.6" fill="#fff">Facial — Saturday if free?</text>
+      <rect x="20" y="113" width="132" height="35" rx="9" fill="rgba(255,255,255,.12)"/>
+      <text x="28" y="124" font-size="5.6" fill="rgba(255,255,255,.82)">Saturday 2PM and 4:30PM</text>
+      <text x="28" y="133" font-size="5.6" fill="rgba(255,255,255,.82)">are open. Which works?</text>
+      <text x="28" y="143" font-size="5.6" font-weight="700" fill="#5ac8fa">[ Book 2PM ]  [ Book 4:30 ]</text>
+      <rect x="20" y="158" width="164" height="18" rx="9" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
+      <text x="28" y="170" font-size="5.6" fill="rgba(255,255,255,.35)">Message…</text>
+      <rect x="202" y="28" width="106" height="160" rx="8" fill="rgba(0,0,0,.35)" stroke="rgba(255,255,255,.1)"/>
+      <text x="212" y="42" font-size="5.4" font-family="monospace" fill="#bf5af2">system_prompt</text>
+      <g font-family="monospace" font-size="4.6" fill="rgba(255,255,255,.5)">
+        <text x="212" y="54">role: consultant</text>
+        <text x="212" y="63">tone: warm, brief</text>
+        <text x="212" y="72">max_words: 80</text>
+        <text x="212" y="81">guardrails:</text>
+        <text x="218" y="90">- no competitors</text>
+        <text x="218" y="99">- no medical claims</text>
+        <text x="212" y="108">output: json</text>
+        <text x="212" y="117">fields:</text>
+        <text x="218" y="126">intent</text>
+        <text x="218" y="135">service</text>
+        <text x="218" y="144">datetime</text>
+        <text x="218" y="153">fallback</text>
+      </g>
+      ${pill(212, 164, 86, 'STRUCTURED OUTPUT', '#bf5af2')}
+    </svg>`,
+
+    /* Network / IP management topology */
+    network: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>${dotDef(u)}</defs>
+      ${chrome(u, 'ipam · 192.168.10.0/24 · auto-assign')}
+      <g stroke="rgba(10,132,255,.5)" stroke-width="1" fill="none">
+        <path d="M112 104 L54 52"/><path d="M112 104 L44 104"/><path d="M112 104 L54 156"/>
+        <path d="M112 104 L176 52"/><path d="M112 104 L176 156"/>
+      </g>
+      <circle cx="112" cy="104" r="17" fill="rgba(10,132,255,.18)" stroke="#0a84ff" stroke-width="1.4"/>
+      <text x="112" y="102" font-size="5.6" font-weight="700" fill="#fff" text-anchor="middle">CORE</text>
+      <text x="112" y="110" font-size="4.8" fill="#5ac8fa" text-anchor="middle">.10.1</text>
+      <g>
+        <rect x="30" y="40" width="46" height="20" rx="4" fill="rgba(255,255,255,.08)" stroke="#30d158" stroke-width=".9"/>
+        <text x="53" y="49" font-size="5.2" fill="#fff" text-anchor="middle">SW-01</text>
+        <text x="53" y="56.5" font-size="4.6" fill="#5be07c" text-anchor="middle">.10.12</text>
+        <rect x="20" y="94" width="46" height="20" rx="4" fill="rgba(255,255,255,.08)" stroke="#30d158" stroke-width=".9"/>
+        <text x="43" y="103" font-size="5.2" fill="#fff" text-anchor="middle">AP-02</text>
+        <text x="43" y="110.5" font-size="4.6" fill="#5be07c" text-anchor="middle">.10.24</text>
+        <rect x="30" y="146" width="46" height="20" rx="4" fill="rgba(255,255,255,.08)" stroke="#ff9f0a" stroke-width=".9"/>
+        <text x="53" y="155" font-size="5.2" fill="#fff" text-anchor="middle">NVR-01</text>
+        <text x="53" y="162.5" font-size="4.6" fill="#ffb340" text-anchor="middle">.10.31</text>
+        <rect x="154" y="40" width="46" height="20" rx="4" fill="rgba(255,255,255,.08)" stroke="#30d158" stroke-width=".9"/>
+        <text x="177" y="49" font-size="5.2" fill="#fff" text-anchor="middle">PC-14</text>
+        <text x="177" y="56.5" font-size="4.6" fill="#5be07c" text-anchor="middle">.10.48</text>
+        <rect x="154" y="146" width="46" height="20" rx="4" fill="rgba(255,255,255,.08)" stroke="#30d158" stroke-width=".9"/>
+        <text x="177" y="155" font-size="5.2" fill="#fff" text-anchor="middle">PRN-03</text>
+        <text x="177" y="162.5" font-size="4.6" fill="#5be07c" text-anchor="middle">.10.52</text>
+      </g>
+      <rect x="212" y="30" width="96" height="158" rx="7" fill="rgba(0,0,0,.35)" stroke="rgba(255,255,255,.1)"/>
+      <text x="220" y="43" font-size="5.2" font-weight="700" fill="#5ac8fa">LEASE TABLE</text>
+      <g font-family="monospace" font-size="4.5" fill="rgba(255,255,255,.55)">
+        <text x="220" y="56">.10.12  SW-01   OK</text>
+        <text x="220" y="67">.10.24  AP-02   OK</text>
+        <text x="220" y="78">.10.31  NVR-01  ⚠</text>
+        <text x="220" y="89">.10.48  PC-14   OK</text>
+        <text x="220" y="100">.10.52  PRN-03  OK</text>
+        <text x="220" y="111">.10.61  PC-22   OK</text>
+        <text x="220" y="122">.10.77  PC-30   OK</text>
+        <text x="220" y="133">.10.84  free</text>
+      </g>
+      <g stroke="rgba(255,255,255,.08)" stroke-width=".6">
+        <path d="M218 60 H302"/><path d="M218 71 H302"/><path d="M218 82 H302"/><path d="M218 93 H302"/><path d="M218 104 H302"/><path d="M218 115 H302"/><path d="M218 126 H302"/>
+      </g>
+      ${pill(220, 164, 80, 'NO MANUAL ENTRY', '#0a84ff')}
+    </svg>`,
+
+    /* Compliance report generator */
+    report: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>${dotDef(u)}</defs>
+      ${chrome(u, 'compliance-report · auto-generated')}
+      <rect x="12" y="30" width="164" height="158" rx="7" fill="#f6f6f8"/>
+      <text x="24" y="46" font-size="7.4" font-weight="700" fill="#1d1d1f">Compliance Summary</text>
+      <text x="24" y="55" font-size="5" fill="#8e8e93">Auto-generated · 14 checks · 2 flagged</text>
+      <g stroke="#e2e2e6" stroke-width=".8"><path d="M24 61 H164"/></g>
+      <g font-size="5.2" fill="#3a3a3c">
+        <circle cx="28" cy="72" r="3.4" fill="#30d158"/><text x="37" y="74">PPE logs complete</text>
+        <circle cx="28" cy="86" r="3.4" fill="#30d158"/><text x="37" y="88">Calibration records filed</text>
+        <circle cx="28" cy="100" r="3.4" fill="#ff9f0a"/><text x="37" y="102">Line 3 checklist — 2 gaps</text>
+        <circle cx="28" cy="114" r="3.4" fill="#30d158"/><text x="37" y="116">Waste disposal signed off</text>
+        <circle cx="28" cy="128" r="3.4" fill="#ff3b30"/><text x="37" y="130">Training expiry — 1 overdue</text>
+        <circle cx="28" cy="142" r="3.4" fill="#30d158"/><text x="37" y="144">Incident log reconciled</text>
+      </g>
+      <g stroke="#e2e2e6" stroke-width=".8"><path d="M24 152 H164"/></g>
+      <text x="24" y="164" font-size="5.2" font-weight="700" fill="#0a84ff">RECOMMENDED ACTIONS</text>
+      <g font-size="4.8" fill="#6e6e73">
+        <text x="24" y="173">1. Re-run Line 3 checklist before shift close</text>
+        <text x="24" y="181">2. Schedule refresher for 1 operator</text>
+      </g>
+      <rect x="184" y="30" width="124" height="76" rx="7" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.1)"/>
+      <text x="194" y="44" font-size="5.4" font-weight="700" fill="#5ac8fa">COMPLIANCE BY AREA</text>
+      <g>
+        <rect x="194" y="52" width="104" height="6" rx="3" fill="rgba(255,255,255,.1)"/><rect x="194" y="52" width="98" height="6" rx="3" fill="#30d158"/>
+        <rect x="194" y="64" width="104" height="6" rx="3" fill="rgba(255,255,255,.1)"/><rect x="194" y="64" width="86" height="6" rx="3" fill="#30d158"/>
+        <rect x="194" y="76" width="104" height="6" rx="3" fill="rgba(255,255,255,.1)"/><rect x="194" y="76" width="62" height="6" rx="3" fill="#ff9f0a"/>
+        <rect x="194" y="88" width="104" height="6" rx="3" fill="rgba(255,255,255,.1)"/><rect x="194" y="88" width="41" height="6" rx="3" fill="#ff3b30"/>
+      </g>
+      <rect x="184" y="114" width="124" height="74" rx="7" fill="rgba(0,0,0,.35)" stroke="rgba(255,255,255,.1)"/>
+      <text x="194" y="128" font-size="5.2" font-weight="700" fill="#bf5af2">PIPELINE</text>
+      <g font-family="monospace" font-size="4.6" fill="rgba(255,255,255,.55)">
+        <text x="194" y="140">1 · ingest checklists</text>
+        <text x="194" y="150">2 · group by severity</text>
+        <text x="194" y="160">3 · draft corrective steps</text>
+        <text x="194" y="170">4 · render + email PDF</text>
+      </g>
+      ${pill(194, 176, 74, 'ZERO MANUAL TYPING', '#bf5af2')}
+    </svg>`,
+
+    /* AI camera / computer vision */
+    vision: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        ${dotDef(u)}
+        <linearGradient id="scene${u}" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#16202e"/><stop offset="1" stop-color="#0b0f16"/>
+        </linearGradient>
+      </defs>
+      ${chrome(u, 'ai-camera · iot · inference 24 fps')}
+      <rect x="12" y="28" width="222" height="160" rx="6" fill="url(#scene${u})"/>
+      <g stroke="rgba(90,200,250,.14)" stroke-width=".6">
+        <path d="M12 108 H234"/><path d="M12 148 H234"/><path d="M84 28 V188"/><path d="M162 28 V188"/>
+      </g>
+      <path d="M12 160 H234 V188 H12 Z" fill="rgba(90,200,250,.05)"/>
+      <g fill="rgba(255,255,255,.14)">
+        <ellipse cx="66" cy="150" rx="20" ry="34"/><circle cx="66" cy="108" r="11"/>
+        <ellipse cx="150" cy="156" rx="16" ry="27"/><circle cx="150" cy="124" r="9"/>
+        <rect x="188" y="138" width="34" height="26" rx="3"/>
+      </g>
+      <g fill="none" stroke="#30d158" stroke-width="1.2">
+        <path d="M42 92 h10 M42 92 v10 M90 92 h-10 M90 92 v10 M42 184 h10 M42 184 v-10 M90 184 h-10 M90 184 v-10"/>
+      </g>
+      <g fill="none" stroke="#ffd60a" stroke-width="1.2">
+        <path d="M130 112 h8 M130 112 v8 M170 112 h-8 M170 112 v8 M130 182 h8 M130 182 v-8 M170 182 h-8 M170 182 v-8"/>
+      </g>
+      <g fill="none" stroke="#5ac8fa" stroke-width="1.2">
+        <path d="M184 134 h7 M184 134 v7 M226 134 h-7 M226 134 v7 M184 168 h7 M184 168 v-7 M226 168 h-7 M226 168 v-7"/>
+      </g>
+      <rect x="42" y="82" width="52" height="9" rx="2" fill="#30d158"/>
+      <text x="45" y="88.6" font-size="5" font-weight="700" fill="#06240e">PERSON 0.98</text>
+      <rect x="130" y="102" width="52" height="9" rx="2" fill="#ffd60a"/>
+      <text x="133" y="108.6" font-size="5" font-weight="700" fill="#2a2400">PERSON 0.91</text>
+      <rect x="184" y="124" width="46" height="9" rx="2" fill="#5ac8fa"/>
+      <text x="187" y="130.6" font-size="5" font-weight="700" fill="#03202c">CRATE 0.86</text>
+      <rect x="12" y="60" width="222" height="1.4" fill="rgba(90,200,250,.45)"/>
+      <rect x="242" y="28" width="66" height="160" rx="6" fill="rgba(0,0,0,.35)" stroke="rgba(255,255,255,.1)"/>
+      <text x="250" y="41" font-size="5" font-weight="700" fill="#5ac8fa">DETECTIONS</text>
+      <g font-family="monospace" font-size="4.4" fill="rgba(255,255,255,.55)">
+        <text x="250" y="53">person  ×2</text>
+        <text x="250" y="63">crate   ×1</text>
+        <text x="250" y="73">helmet  ×0 ⚠</text>
+        <text x="250" y="86">fps     24.1</text>
+        <text x="250" y="96">latency 41ms</text>
+        <text x="250" y="106">device  edge</text>
+        <text x="250" y="119">alerts  1 sent</text>
+      </g>
+      <circle cx="252" cy="140" r="3" fill="#ff453a"/>
+      <text x="259" y="142" font-size="4.6" fill="#ff6961">no helmet</text>
+      ${pill(248, 164, 54, 'LIVE INFER', '#30d158')}
+    </svg>`,
+
+    /* ersy.com - artist platform / "shelf" */
+    shelf: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        ${dotDef(u)}
+        <linearGradient id="a${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9f0a"/><stop offset="1" stop-color="#ff375f"/></linearGradient>
+        <linearGradient id="b${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5e5ce6"/><stop offset="1" stop-color="#bf5af2"/></linearGradient>
+        <linearGradient id="c${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#30d158"/><stop offset="1" stop-color="#64d2ff"/></linearGradient>
+        <linearGradient id="d${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#64d2ff"/><stop offset="1" stop-color="#0a84ff"/></linearGradient>
+      </defs>
+      ${chrome(u, 'ersy.com')}
+      <rect x="0" y="20" width="320" height="16" fill="rgba(255,255,255,.04)"/>
+      <text x="12" y="31" font-size="7" font-weight="800" fill="#fff" letter-spacing=".5">ersy</text>
+      <g font-size="5" fill="rgba(255,255,255,.5)">
+        <text x="44" y="31">Discover</text><text x="76" y="31">Artists</text><text x="102" y="31">Shelf</text>
+      </g>
+      <rect x="264" y="23" width="44" height="10" rx="5" fill="#0a84ff"/>
+      <text x="286" y="30.2" font-size="5" font-weight="700" fill="#fff" text-anchor="middle">Sign up</text>
+      <text x="12" y="54" font-size="11" font-weight="700" fill="#fff" letter-spacing="-.3">Every artist&apos;s full world.</text>
+      <text x="12" y="66" font-size="11" font-weight="700" fill="#8e8cf0" letter-spacing="-.3">One shelf.</text>
+      <g>
+        <rect x="12" y="80" width="46" height="40" rx="4" fill="url(#a${u})"/>
+        <rect x="66" y="80" width="46" height="40" rx="4" fill="url(#b${u})"/>
+        <rect x="120" y="80" width="46" height="40" rx="4" fill="url(#c${u})"/>
+        <rect x="174" y="80" width="46" height="40" rx="4" fill="url(#d${u})"/>
+        <rect x="228" y="80" width="46" height="40" rx="4" fill="rgba(255,255,255,.16)"/>
+        <rect x="10" y="122" width="270" height="2.4" rx="1.2" fill="rgba(255,255,255,.22)"/>
+      </g>
+      <g>
+        <rect x="12" y="136" width="46" height="34" rx="4" fill="url(#c${u})" opacity=".85"/>
+        <rect x="66" y="136" width="46" height="34" rx="4" fill="rgba(255,255,255,.16)"/>
+        <rect x="120" y="136" width="46" height="34" rx="4" fill="url(#a${u})" opacity=".85"/>
+        <rect x="174" y="136" width="46" height="34" rx="4" fill="url(#b${u})" opacity=".85"/>
+        <rect x="228" y="136" width="46" height="34" rx="4" fill="url(#d${u})" opacity=".85"/>
+        <rect x="10" y="172" width="270" height="2.4" rx="1.2" fill="rgba(255,255,255,.22)"/>
+      </g>
+      <g fill="rgba(255,255,255,.32)" font-size="4.4">
+        <text x="286" y="100">prints</text><text x="286" y="112">music</text><text x="286" y="150">zines</text><text x="286" y="162">merch</text>
+      </g>
+    </svg>`,
+
+    /* umlu.com - comedy site */
+    comedy: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        ${dotDef(u)}
+        <linearGradient id="v${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a1f5e"/><stop offset="1" stop-color="#16121f"/></linearGradient>
+      </defs>
+      ${chrome(u, 'umlu.com &#183; comedy')}
+      <rect x="0" y="20" width="320" height="16" fill="rgba(255,255,255,.04)"/>
+      <text x="12" y="31" font-size="7.4" font-weight="800" fill="#ffd60a" letter-spacing=".5">umlu</text>
+      <g font-size="5" fill="rgba(255,255,255,.5)">
+        <text x="46" y="31">Clips</text><text x="70" y="31">Specials</text><text x="104" y="31">Live</text>
+      </g>
+      <rect x="12" y="44" width="192" height="94" rx="6" fill="url(#v${u})" stroke="rgba(255,255,255,.1)"/>
+      <circle cx="108" cy="88" r="15" fill="rgba(255,255,255,.9)"/>
+      <path d="M104 81 L116 88 L104 95 Z" fill="#16121f"/>
+      <rect x="20" y="122" width="60" height="8" rx="2" fill="rgba(255,255,255,.75)"/>
+      <rect x="20" y="112" width="34" height="7" rx="3.5" fill="#ff375f"/>
+      <text x="37" y="117.4" font-size="4.4" font-weight="700" fill="#fff" text-anchor="middle">NEW SET</text>
+      <g>
+        <rect x="12" y="146" width="60" height="34" rx="4" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.08)"/>
+        <path d="M38 160 L46 164 L38 168 Z" fill="rgba(255,255,255,.7)"/>
+        <rect x="16" y="172" width="30" height="3" rx="1.5" fill="rgba(255,255,255,.4)"/>
+        <rect x="78" y="146" width="60" height="34" rx="4" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.08)"/>
+        <path d="M104 160 L112 164 L104 168 Z" fill="rgba(255,255,255,.7)"/>
+        <rect x="82" y="172" width="38" height="3" rx="1.5" fill="rgba(255,255,255,.4)"/>
+        <rect x="144" y="146" width="60" height="34" rx="4" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.08)"/>
+        <path d="M170 160 L178 164 L170 168 Z" fill="rgba(255,255,255,.7)"/>
+        <rect x="148" y="172" width="24" height="3" rx="1.5" fill="rgba(255,255,255,.4)"/>
+      </g>
+      <rect x="212" y="44" width="96" height="136" rx="6" fill="rgba(0,0,0,.35)" stroke="rgba(255,255,255,.1)"/>
+      <text x="222" y="58" font-size="5.2" font-weight="700" fill="#ffd60a">UPCOMING</text>
+      <g font-size="4.6" fill="rgba(255,255,255,.55)">
+        <text x="222" y="72">FRI &#183; Comedy Cellar</text><text x="222" y="82">SAT &#183; The Stand</text>
+        <text x="222" y="96">TUE &#183; Open Mic</text><text x="222" y="106">THU &#183; Late Show</text>
+        <text x="222" y="120">SAT &#183; Club Tour</text>
+      </g>
+      <g stroke="rgba(255,255,255,.08)" stroke-width=".6">
+        <path d="M220 88 H300"/><path d="M220 112 H300"/>
+      </g>
+      <rect x="222" y="132" width="76" height="14" rx="7" fill="#ffd60a"/>
+      <text x="260" y="141.4" font-size="5.4" font-weight="800" fill="#2a2400" text-anchor="middle">GET TICKETS</text>
+      <text x="222" y="162" font-size="4.4" fill="rgba(255,255,255,.35)">newsletter &#183; 2.4k subs</text>
+    </svg>`,
+
+    /* Bingo bot */
+    bingo: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>${dotDef(u)}</defs>
+      ${chrome(u, 'bingo-bot &#183; rooms: 3 &#183; players: 48')}
+      <rect x="12" y="30" width="150" height="158" rx="7" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)"/>
+      <circle cx="26" cy="44" r="7" fill="#30d158"/>
+      <text x="26" y="46.4" font-size="6" font-weight="700" fill="#06240e" text-anchor="middle">B</text>
+      <text x="38" y="42" font-size="6" font-weight="700" fill="#fff">BingoBot</text>
+      <text x="38" y="49.6" font-size="4.6" fill="#30d158">&#9679; hosting Room 2</text>
+      <rect x="20" y="58" width="108" height="16" rx="8" fill="rgba(255,255,255,.12)"/>
+      <text x="28" y="68.6" font-size="5.6" fill="rgba(255,255,255,.82)">Next number called: B-12</text>
+      <rect x="20" y="78" width="118" height="16" rx="8" fill="rgba(255,255,255,.12)"/>
+      <text x="28" y="88.6" font-size="5.6" fill="rgba(255,255,255,.82)">3 players are one away...</text>
+      <rect x="58" y="98" width="82" height="15" rx="7.5" fill="#0b93f6"/>
+      <text x="66" y="108" font-size="5.6" fill="#fff">!daub b12</text>
+      <rect x="20" y="117" width="118" height="26" rx="8" fill="rgba(48,209,88,.2)" stroke="#30d158" stroke-width=".8"/>
+      <text x="28" y="128" font-size="5.8" font-weight="700" fill="#5be07c">BINGO &#8212; @player_07</text>
+      <text x="28" y="137" font-size="5" fill="rgba(255,255,255,.6)">Payout queued &#183; round 14</text>
+      <rect x="20" y="150" width="112" height="15" rx="7.5" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
+      <text x="28" y="160" font-size="5.4" fill="rgba(255,255,255,.35)">!join  !card  !stats</text>
+      <rect x="172" y="30" width="136" height="158" rx="7" fill="rgba(0,0,0,.3)" stroke="rgba(255,255,255,.1)"/>
+      <g font-size="8" font-weight="800" text-anchor="middle">
+        <text x="196" y="52" fill="#ff375f">B</text><text x="220" y="52" fill="#ff9f0a">I</text>
+        <text x="244" y="52" fill="#ffd60a">N</text><text x="268" y="52" fill="#30d158">G</text>
+        <text x="292" y="52" fill="#5ac8fa">O</text>
+      </g>
+      <g>
+        <rect x="184" y="58" width="112" height="112" rx="4" fill="rgba(255,255,255,.05)"/>
+        <g stroke="rgba(255,255,255,.14)" stroke-width=".7">
+          <path d="M206.4 58 V170"/><path d="M228.8 58 V170"/><path d="M251.2 58 V170"/><path d="M273.6 58 V170"/>
+          <path d="M184 80.4 H296"/><path d="M184 102.8 H296"/><path d="M184 125.2 H296"/><path d="M184 147.6 H296"/>
+        </g>
+        <circle cx="195" cy="69" r="8" fill="#30d158" opacity=".85"/>
+        <circle cx="217" cy="91" r="8" fill="#30d158" opacity=".85"/>
+        <circle cx="240" cy="114" r="8" fill="#30d158" opacity=".85"/>
+        <circle cx="262" cy="136" r="8" fill="#30d158" opacity=".85"/>
+        <circle cx="285" cy="159" r="8" fill="#ffd60a" opacity=".9"/>
+        <g font-size="5.4" font-weight="700" fill="rgba(255,255,255,.85)" text-anchor="middle">
+          <text x="195" y="71">12</text><text x="217" y="71">28</text><text x="240" y="71">41</text><text x="262" y="71">57</text><text x="285" y="71">68</text>
+          <text x="195" y="93">3</text><text x="217" y="93">19</text><text x="240" y="93">33</text><text x="262" y="93">50</text><text x="285" y="93">72</text>
+          <text x="195" y="116">7</text><text x="217" y="116">22</text><text x="240" y="116">&#9733;</text><text x="262" y="116">49</text><text x="285" y="116">61</text>
+          <text x="195" y="138">11</text><text x="217" y="138">30</text><text x="240" y="138">38</text><text x="262" y="138">46</text><text x="285" y="138">75</text>
+          <text x="195" y="161">9</text><text x="217" y="161">17</text><text x="240" y="161">44</text><text x="262" y="161">53</text><text x="285" y="161">70</text>
+        </g>
+      </g>
+      ${pill(184, 174, 60, 'AUTO-DAUB', '#30d158')}
+      ${pill(250, 174, 46, 'ROUND 14', '#5ac8fa')}
+    </svg>`,
+
+    /* QUOZ AI */
+    quoz: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        ${dotDef(u)}
+        <linearGradient id="q${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bf5af2"/><stop offset="1" stop-color="#0a84ff"/></linearGradient>
+      </defs>
+      ${chrome(u, 'quoz &#183; ai')}
+      <rect x="12" y="30" width="26" height="158" rx="6" fill="rgba(255,255,255,.04)"/>
+      <rect x="18" y="38" width="14" height="14" rx="4" fill="url(#q${u})"/>
+      <g fill="rgba(255,255,255,.2)">
+        <rect x="18" y="58" width="14" height="4" rx="2"/><rect x="18" y="68" width="14" height="4" rx="2"/>
+        <rect x="18" y="78" width="14" height="4" rx="2"/><rect x="18" y="88" width="14" height="4" rx="2"/>
+      </g>
+      <rect x="46" y="30" width="146" height="158" rx="7" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)"/>
+      <text x="56" y="44" font-size="8" font-weight="800" fill="#fff" letter-spacing=".4">QUOZ</text>
+      <text x="92" y="44" font-size="6" font-weight="700" fill="#bf5af2">AI</text>
+      <rect x="56" y="54" width="112" height="16" rx="8" fill="#0b93f6"/>
+      <text x="64" y="64.6" font-size="5.6" fill="#fff">Summarise this thread</text>
+      <rect x="56" y="76" width="126" height="42" rx="8" fill="rgba(255,255,255,.1)"/>
+      <g font-size="5.4" fill="rgba(255,255,255,.8)">
+        <text x="64" y="88">Three decisions were made:</text>
+        <text x="64" y="98">pricing locked, launch moved</text>
+        <text x="64" y="108">to Q3, and design signs off.</text>
+      </g>
+      <g>
+        <rect x="56" y="124" width="8" height="8" rx="4" fill="rgba(255,255,255,.25)"/>
+        <rect x="68" y="124" width="8" height="8" rx="4" fill="rgba(255,255,255,.25)"/>
+        <rect x="80" y="124" width="8" height="8" rx="4" fill="rgba(255,255,255,.25)"/>
+      </g>
+      <rect x="56" y="140" width="126" height="16" rx="8" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
+      <text x="64" y="150.6" font-size="5.4" fill="rgba(255,255,255,.35)">Ask QUOZ anything...</text>
+      ${pill(56, 164, 56, 'STREAMING', '#bf5af2')}
+      ${pill(118, 164, 62, 'CITED SOURCES', '#0a84ff')}
+      <rect x="200" y="30" width="108" height="158" rx="7" fill="rgba(0,0,0,.35)" stroke="rgba(255,255,255,.1)"/>
+      <text x="210" y="44" font-size="5.2" font-weight="700" fill="#bf5af2">AGENT TRACE</text>
+      <g font-family="monospace" font-size="4.4" fill="rgba(255,255,255,.55)">
+        <text x="210" y="58">parse intent</text>
+        <text x="210" y="70">retrieve context</text>
+        <text x="210" y="82">rank sources</text>
+        <text x="210" y="94">draft answer</text>
+        <text x="210" y="106">verify claims</text>
+        <text x="210" y="118">stream tokens</text>
+      </g>
+      <g fill="#30d158">
+        <circle cx="204" cy="55" r="1.8"/><circle cx="204" cy="67" r="1.8"/><circle cx="204" cy="79" r="1.8"/>
+        <circle cx="204" cy="91" r="1.8"/><circle cx="204" cy="103" r="1.8"/>
+      </g>
+      <circle cx="204" cy="115" r="1.8" fill="#ffd60a"/>
+      <g stroke="rgba(255,255,255,.1)" stroke-width=".6"><path d="M208 128 H300"/></g>
+      <g font-family="monospace" font-size="4.4" fill="rgba(255,255,255,.45)">
+        <text x="210" y="140">latency  1.2s</text>
+        <text x="210" y="152">tokens   1,840</text>
+        <text x="210" y="164">guardrails ON</text>
+      </g>
+    </svg>`
+  };
+
+  /* --- Project data. Add a new object here to add a new project. --- */
+  const PROJECTS = [
+    {
+      id:'khh', group:'flagship', shot:'workflow',
+      img:'assets/projects/kind-home-help.jpg',
+      badge:'n8n',
+      title:'Kind Home Help — HIPAA-Compliant Healthcare Automation',
+      short:'8 interconnected n8n workflows for a US home-care agency.',
+      meta:'2025 · Client build · In production',
+      body:'8 interconnected n8n workflows (WF01–WF08) covering patient intake, caregiver enrollment, payroll/EVV tracking, PCP form dispatch, care plan monitoring, and case closure. Integrated AWS SES/SNS/S3, Airtable, Adobe PDF Services, Signaturely, RingCentral, Twilio, SendGrid, Checkr, and Claude + OpenAI APIs. HIPAA-compliant S3 architecture with encryption, versioning, and lifecycle rules.',
+      tags:['n8n','HIPAA','AWS','Airtable','Twilio','Claude API','Healthcare']
+    },
+    {
+      id:'ecom', group:'flagship', shot:'agents',
+      img:'assets/projects/ecommerce-agents.jpg',
+      badge:'multi-agent',
+      title:'E-Commerce AI Automation System',
+      short:'Three-workflow agent architecture with a governance layer.',
+      meta:'2025 · Client build · Multi-agent',
+      body:'Three-workflow architecture — Orchestrator &amp; Governance, Department Agents, and Reporting &amp; Strategist — built in n8n and integrating Shopify, Funnelish, Meta Ads, and Klaviyo into one coordinated, self-reporting automation system. The governance layer handles routing, guardrails, and scheduling so each department agent stays in its lane, and the strategist layer turns raw platform data into a KPI digest.',
+      tags:['n8n','Multi-Agent','Shopify','Meta Ads','Klaviyo','E-commerce']
+    },
+    {
+      id:'bots', group:'flagship', shot:'chat',
+      img:'assets/projects/chatbots.jpg',
+      badge:'prompt eng',
+      title:'Client Chatbot Deployments',
+      short:'Booking, order-intake, and Taglish bots shipped to live businesses.',
+      meta:'2025 · 3 deployments · Live',
+      body:'Prompt-engineered chatbots for real businesses: Sophie &amp; Eve (beauty booking bot), Bite &amp; Go (order-intake bot with structured JSON output), and a Taglish chatbot script template pack. Each one ships with a production system prompt — scoped role, tone and length limits, explicit guardrails, structured output schema, and a clarify-instead-of-guess fallback.',
+      tags:['Prompt Engineering','Chatbase','Structured JSON','Guardrails']
+    },
+    {
+      id:'ipam', group:'earlier', shot:'network',
+      img:'assets/projects/ip-automation.jpg',
+      badge:'network',
+      title:'IP Address Automation System',
+      short:'Automated IP assignment and tracking across a company network.',
+      meta:'2024–2025 · Internal build',
+      body:'Automated IP address management and assignment across a company network — replacing a hand-maintained spreadsheet with a system that assigns, tracks, and reconciles leases. Eliminated duplicate-IP errors and cut the admin time spent on network changes.',
+      tags:['Network','IPAM','Automation','Documentation']
+    },
+    {
+      id:'compliance', group:'earlier', shot:'report',
+      img:'assets/projects/compliance.jpg',
+      badge:'compliance',
+      title:'Compliance Automation System',
+      short:'Runs compliance checks and renders structured reports.',
+      meta:'2024–2025 · Manufacturing',
+      body:'Automates compliance checks and generates structured reports for a manufacturing environment. The pipeline ingests checklists, groups findings by category and severity, drafts corrective actions, then renders and emails a finished report — so the summary that used to be typed by hand arrives on its own.',
+      tags:['Compliance','Reporting','Automation','Manufacturing']
+    },
+    /* ---- NEWER WORK -------------------------------------------------
+       Copy here is deliberately short: it states only what is known and
+       claims no stack, dates, metrics or client names that were not
+       confirmed. Expand each `body` when you have the details.
+       ------------------------------------------------------------------ */
+    {
+      id:'ersy', group:'flagship', shot:'shelf',
+      img:'assets/projects/ersy.jpg',
+      badge:'web',
+      title:'ersy.com',
+      short:'Artist platform &mdash; &ldquo;Every artist&rsquo;s full world. One shelf.&rdquo;',
+      meta:'ersy.com',
+      body:'An artist platform built on a single idea: every artist&rsquo;s full world, gathered onto one shelf.',
+      tags:['Web','Creator Platform','ersy']
+    },
+    {
+      id:'umlu', group:'flagship', shot:'comedy',
+      img:'assets/projects/umlu.jpg',
+      badge:'web',
+      title:'umlu.com &mdash; ersy Comedy',
+      short:'Comedy site under the ersy umbrella.',
+      meta:'umlu.com &middot; ersy',
+      body:'The comedy side of ersy &mdash; a companion site to the main artist platform.',
+      tags:['Web','Comedy','ersy']
+    },
+    {
+      id:'bingo', group:'flagship', shot:'bingo',
+      img:'assets/projects/bingo-bot.jpg',
+      badge:'bot',
+      title:'Bingo Bot',
+      short:'Automated bingo host &mdash; rooms, calls, and win detection.',
+      meta:'Bot automation',
+      body:'An automated bingo host: it runs the rooms, calls the numbers and detects the wins, with nobody moderating the game by hand.',
+      tags:['Bot','Automation']
+    },
+    {
+      id:'quoz', group:'flagship', shot:'quoz',
+      img:'assets/projects/quoz-ai.jpg',
+      badge:'ai',
+      title:'QUOZ AI',
+      short:'AI product build.',
+      meta:'AI product',
+      body:'An AI product build under the QUOZ name. Full scope and stack available on request.',
+      tags:['AI','Automation']
+    },
+    {
+      id:'camera', group:'earlier', shot:'vision',
+      img:'assets/projects/ai-camera.jpg',
+      badge:'iot + cv',
+      title:'AI Camera — IoT System',
+      short:'Edge computer-vision camera for real-time monitoring.',
+      meta:'2025 · Capstone project',
+      body:'AI-powered IoT camera integrating computer vision for real-time monitoring and detection — the capstone engineering project for my BS Industrial Technology degree. Runs inference on-device, draws live detections, and fires an alert when a required condition is missing from the frame.',
+      tags:['IoT','Computer Vision','Edge Inference','Capstone']
+    }
+  ];
+  /* Display order = flagship group, then earlier group. Numbering and the
+     Previous/Next buttons both follow this, so inserting a project anywhere
+     in the array above never produces out-of-sequence labels. */
+  const GROUPS = ['flagship','earlier'];
+  const ORDERED = GROUPS.flatMap(g => PROJECTS.filter(p => p.group === g));
+  ORDERED.forEach((p, i)=>{ p.num = String(i + 1).padStart(2, '0'); });
+
+  /* --- Render --- */
+  /* `draft:true` on a project still renders an amber DRAFT badge and a
+     warning banner in the detail view. No entry sets it at the moment. */
+  function addPills(host, p, big){
+    if(big) return;
+    if(p.badge){
+      const b = document.createElement('span');
+      b.className = 'shot-pill';
+      b.textContent = p.badge;
+      host.appendChild(b);
+    }
+    if(p.draft){
+      const d = document.createElement('span');
+      d.className = 'shot-pill is-draft';
+      d.textContent = 'draft';
+      host.appendChild(d);
+    }
+  }
+  function mountShot(host, p, big){
+    const uid = p.id + (big ? 'D' : 'T');
+    host.innerHTML = (SHOTS[p.shot] || SHOTS.workflow)(uid);
+    addPills(host, p, big);
+    // Swap in a real screenshot if one exists at p.img
+    if(p.img){
+      const im = new Image();
+      im.alt = p.title + ' — screenshot';
+      im.onload = ()=>{ host.innerHTML = ''; host.appendChild(im); addPills(host, p, big); };
+      im.src = p.img;
+    }
+  }
+  function buildGallery(){
+    ['flagship','earlier'].forEach(group=>{
+      const grid = $('#gal-' + group);
+      grid.innerHTML = '';
+      PROJECTS.filter(p=>p.group===group).forEach(p=>{
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'gal-card';
+        card.dataset.proj = p.id;
+        const shot = document.createElement('span');
+        shot.className = 'gal-shot';
+        const meta = document.createElement('span');
+        meta.className = 'gal-meta';
+        meta.innerHTML = `<span class="gal-num">${p.num}</span><b>${p.title}</b><i>${p.short}</i>`;
+        card.appendChild(shot);
+        card.appendChild(meta);
+        grid.appendChild(card);
+        mountShot(shot, p, false);
+        card.addEventListener('click', ()=> openProject(p.id));
+      });
+    });
+  }
+  function openProject(id){
+    const i = ORDERED.findIndex(p=>p.id===id);
+    if(i < 0) return;
+    const p = ORDERED[i];
+    mountShot($('#pd-shot'), p, true);
+    $('#pd-title').innerHTML = p.title;
+    $('#pd-sub').innerHTML = p.meta;
+    $('#pd-draft').hidden = !p.draft;
+    $('#pd-body').innerHTML = p.body;
+    $('#pd-tags').innerHTML = p.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+    $('#pd-prev').dataset.go = ORDERED[(i - 1 + ORDERED.length) % ORDERED.length].id;
+    $('#pd-next').dataset.go = ORDERED[(i + 1) % ORDERED.length].id;
+    $('#proj-gallery').hidden = true;
+    $('#proj-detail').hidden = false;
+    $('#win-projects .wbody').scrollTop = 0;
+    $('.window#win-projects .wtitle').textContent = 'Photos — ' + p.num;
+  }
+  function backToGallery(){
+    $('#proj-detail').hidden = true;
+    $('#proj-gallery').hidden = false;
+    $('#win-projects .wbody').scrollTop = 0;
+    $('.window#win-projects .wtitle').textContent = 'Photos — Selected Work';
+  }
+  buildGallery();
+  $('#pd-back').addEventListener('click', backToGallery);
+  $('#pd-prev').addEventListener('click', (e)=> openProject(e.currentTarget.dataset.go));
+  $('#pd-next').addEventListener('click', (e)=> openProject(e.currentTarget.dataset.go));
+
+  // Make every project findable in Spotlight
+  PROJECTS.forEach(p=>{
+    SPOT.push({
+      q: (p.title + ' ' + p.tags.join(' ') + ' ' + p.short).toLowerCase(),
+      id: 'projects', label: p.title, kind: 'Project', proj: p.id
+    });
+  });
 
   /* Menus */
   function hideMenus(){
@@ -1578,7 +2303,15 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
   function renderSpot(q){
     const s = q.trim().toLowerCase();
     const items = SPOT.filter(x => !s || x.q.includes(s) || x.label.toLowerCase().includes(s));
-    $('#spot-results').innerHTML = items.slice(0,7).map((x,i)=>`<button class="spot-row${i===0?' active':''}" data-open="${x.id}">${x.label}<small>${x.kind}</small></button>`).join('') || `<div class="spot-row">No results</div>`;
+    $('#spot-results').innerHTML = items.slice(0,7).map((x,i)=>
+      `<button class="spot-row${i===0?' active':''}" data-open="${x.id}"${x.proj?` data-proj="${x.proj}"`:''}>${x.label}<small>${x.kind}</small></button>`
+    ).join('') || `<div class="spot-row">No results</div>`;
+  }
+  function spotLaunch(row){
+    if(!row) return;
+    closeSpotlight();
+    openWin(row.dataset.open);
+    if(row.dataset.proj) openProject(row.dataset.proj);
   }
   $('#spot-input').addEventListener('input', ()=> renderSpot($('#spot-input').value));
   $('#spot-input').addEventListener('keydown', (e)=>{
@@ -1586,24 +2319,28 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
     let i = rows.findIndex(r=>r.classList.contains('active'));
     if(e.key==='ArrowDown'){ e.preventDefault(); i=Math.min(rows.length-1, i+1); rows.forEach(r=>r.classList.remove('active')); rows[i]?.classList.add('active'); }
     if(e.key==='ArrowUp'){ e.preventDefault(); i=Math.max(0, i-1); rows.forEach(r=>r.classList.remove('active')); rows[i]?.classList.add('active'); }
-    if(e.key==='Enter'){ e.preventDefault(); const id = rows.find(r=>r.classList.contains('active'))?.dataset.open; closeSpotlight(); if(id) openWin(id); }
+    if(e.key==='Enter'){ e.preventDefault(); spotLaunch(rows.find(r=>r.classList.contains('active'))); }
     if(e.key==='Escape') closeSpotlight();
   });
   $('#spotlight').addEventListener('click', (e)=>{ if(e.target.id==='spotlight') closeSpotlight(); });
   $('#spot-results').addEventListener('click', (e)=>{
     const row = e.target.closest('[data-open]');
-    if(row){ closeSpotlight(); openWin(row.dataset.open); }
+    if(row){ e.stopPropagation(); spotLaunch(row); }
   });
 
   /* Theme / settings */
+  const store = {
+    get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+    set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  };
   function applyTheme(mode){
     const dark = matchMedia('(prefers-color-scheme: dark)').matches;
     const t = mode==='auto' ? (dark?'dark':'light') : mode;
     document.documentElement.dataset.theme = t;
-    localStorage.setItem('stucey-theme', mode);
+    store.set('stucey-theme', mode);
     $all('#theme-seg button').forEach(b=> b.classList.toggle('active', b.dataset.theme===mode));
   }
-  applyTheme(localStorage.getItem('stucey-theme') || 'dark');
+  applyTheme(store.get('stucey-theme') || 'dark');
   $('#theme-seg').addEventListener('click', (e)=>{
     const b = e.target.closest('[data-theme]'); if(b) applyTheme(b.dataset.theme);
   });
@@ -1652,7 +2389,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
   ];
   const chat = {
     thread: 'stucey',
-    email: sessionStorage.getItem('stucey-imsg-email') || '',
+    email: (function(){ try{ return sessionStorage.getItem('stucey-imsg-email') || ''; }catch(e){ return ''; } })(),
     asked: false,
     busy: false,
     lines: [
@@ -1802,7 +2539,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
     const found = (text.match(EMAIL_RE) || [])[0] || '';
     if(found){
       chat.email = found;
-      sessionStorage.setItem('stucey-imsg-email', found);
+      try{ sessionStorage.setItem('stucey-imsg-email', found); }catch(e){}
     }
 
     chat.busy = true;
@@ -1869,7 +2606,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
     whoami: () => `Stucey Rosal — AI Automation Specialist (Huggy Bear Digital) · n8n/Make.com · Claude & OpenAI integration · VA · IT Support. Based in Zambales, PH.`,
     about: () => `Freelance AI Automation Specialist & VA building n8n/Make.com systems for US clients — flagship build is an 8-workflow HIPAA-compliant healthcare automation system. Open Finder for the full bio.`,
     skills: () => `n8n, Make.com, Claude API, OpenAI API, AWS SES/SNS/S3, Airtable, Twilio, SendGrid, HIPAA-compliant system design, prompt engineering.`,
-    projects: () => `Flagship: Kind Home Help HIPAA-compliant healthcare automation (8 n8n workflows) & an E-Commerce AI automation system (3-agent architecture).`,
+    projects: () => ORDERED.map(p=>`  ${p.num}  ${p.title.replace(/&mdash;/g,'—')}${p.draft?'  (draft)':''}`).join('<br>') + `<br><br>Run <b>open photos</b> to browse them with screenshots.`,
     experience: () => `Freelance AI Automation Specialist @ Huggy Bear Digital (2025–Present). Prior: IT Staff @ Beyond Infinity Connection Philippines (2024–2025).`,
     services: () => `n8n/Make.com Automation · HIPAA-Compliant System Design · AI Integration & Prompt Engineering · Virtual Assistant.`,
     education: () => `BS Industrial Technology (Computer Technology), President Ramon Magsaysay State University, 2021–2025.`,
@@ -1904,7 +2641,7 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
     if(key==='clear'){ termScreen.innerHTML=''; return; }
     if(key==='resume' || key==='open resume'){ termPrint(TERM_CMDS.resume()); openWin('resume'); return; }
     if(key.startsWith('open ')){
-      const map={finder:'about',safari:'contact',photos:'projects',mail:'services',messages:'messages',settings:'settings',terminal:'terminal',preview:'resume'};
+      const map={finder:'about',safari:'contact',photos:'projects',projects:'projects',mail:'services',messages:'messages',settings:'settings',terminal:'terminal',preview:'resume'};
       const t=map[key.slice(5).trim()];
       if(t){ termPrint('opening '+key.slice(5)+'…'); openWin(t); } else termPrint(TERM_CMDS.open());
       return;
@@ -1921,8 +2658,21 @@ const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span
     if(meta && e.key.toLowerCase()==='w'){ e.preventDefault(); closeFocused(); }
     if(meta && e.key.toLowerCase()==='m'){ e.preventDefault(); minimizeFocused(); }
     if(meta && e.key.toLowerCase()==='o'){ e.preventDefault(); openWin('resume'); }
-    if(e.key==='Escape'){ closeSpotlight(); hideMenus(); }
+    if(e.key==='Escape'){
+      if(!$('#proj-detail').hidden && $('#win-projects').classList.contains('focused')) backToGallery();
+      closeSpotlight(); hideMenus();
+    }
   });
+
+  /* Hide the resume Download button if Resume.pdf isn't deployed, so it can
+     never 404. Skipped on file:// where HEAD requests aren't permitted. */
+  (function checkResume(){
+    const link = $('#resume-dl');
+    if(!link || !/^https?:$/.test(location.protocol)) return;
+    fetch(link.getAttribute('href'), { method:'HEAD' })
+      .then(r => { if(!r.ok) link.remove(); })
+      .catch(() => link.remove());
+  })();
 
   if(innerWidth > 780) setTimeout(()=> openWin('about'), 380);
 })();
