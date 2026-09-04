@@ -404,9 +404,14 @@
   .ptitle, .stitle{font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:8px;}
   .pnum{color:var(--text-3); font-size:12px; font-variant-numeric:tabular-nums;}
   .code-block{
-    background:rgba(0,0,0,.28); border:1px solid var(--line); border-radius:10px; padding:14px 16px;
-    font-family:var(--mono); font-size:12px; line-height:1.7; overflow-x:auto; margin:0 0 14px; user-select:text;
+    background:rgba(0,0,0,.28); border:1px solid var(--line); border-radius:10px;
+    padding:16px 18px; font-family:var(--mono); font-size:12.5px; line-height:1.65;
+    overflow-x:auto; margin:0 0 14px; user-select:text;
+    /* Without this the newlines collapse and the file renders as one paragraph. */
+    white-space:pre; tab-size:2; -moz-tab-size:2;
   }
+  .code-block .p{color:var(--text-3);}
+  @media (max-width:560px){ .code-block{font-size:11px; padding:12px 14px;} }
   html[data-theme="light"] .code-block{background:#1d1d1f; color:#e8e8ed;}
   .code-block .c{color:#86868b;} .code-block .k{color:#bf5af2;} .code-block .s{color:#ffd60a;}
   .cta-btn{
@@ -1173,22 +1178,56 @@
     <div class="wtitle">Skills.js — Edited</div>
   </div>
   <div class="wbody">
-    <div class="code-block"><span class="c">// Automation Platforms</span>
-const automation = [<span class="s">"n8n (advanced)"</span>, <span class="s">"Make.com"</span>, <span class="s">"Zapier"</span>, <span class="s">"Webhook Architecture"</span>, <span class="s">"Multi-Agent Orchestration"</span>];
+    <pre class="code-block"><span class="c">// Automation platforms</span>
+<span class="k">const</span> automation <span class="p">=</span> <span class="p">[</span>
+  <span class="s">"n8n (advanced)"</span><span class="p">,</span>
+  <span class="s">"Make.com"</span><span class="p">,</span>
+  <span class="s">"Zapier"</span><span class="p">,</span>
+  <span class="s">"Webhook architecture"</span><span class="p">,</span>
+  <span class="s">"Multi-agent orchestration"</span>
+<span class="p">];</span>
 
-<span class="c">// AI &amp; Prompt Engineering</span>
-const ai = [<span class="s">"Claude API (Anthropic)"</span>, <span class="s">"OpenAI API"</span>, <span class="s">"System Prompt Design"</span>, <span class="s">"Structured JSON Output"</span>, <span class="s">"Chain-of-Thought"</span>, <span class="s">"Guardrails &amp; Fallbacks"</span>];
+<span class="c">// AI &amp; prompt engineering</span>
+<span class="k">const</span> ai <span class="p">=</span> <span class="p">[</span>
+  <span class="s">"Claude API (Anthropic)"</span><span class="p">,</span>
+  <span class="s">"OpenAI API"</span><span class="p">,</span>
+  <span class="s">"System prompt design"</span><span class="p">,</span>
+  <span class="s">"Structured JSON output"</span><span class="p">,</span>
+  <span class="s">"Chain-of-thought"</span><span class="p">,</span>
+  <span class="s">"Guardrails &amp; fallbacks"</span>
+<span class="p">];</span>
 
-<span class="c">// Integrations Shipped</span>
-const integrations = [<span class="s">"AWS SES / SNS / S3"</span>, <span class="s">"Airtable"</span>, <span class="s">"Adobe PDF Services"</span>, <span class="s">"Signaturely"</span>, <span class="s">"RingCentral"</span>, <span class="s">"Twilio"</span>, <span class="s">"SendGrid"</span>, <span class="s">"Checkr"</span>, <span class="s">"Shopify"</span>, <span class="s">"Klaviyo"</span>, <span class="s">"Meta Ads"</span>];
+<span class="c">// Integrations shipped</span>
+<span class="k">const</span> integrations <span class="p">=</span> <span class="p">[</span>
+  <span class="s">"AWS SES / SNS / S3"</span><span class="p">,</span>
+  <span class="s">"Airtable"</span><span class="p">,</span>
+  <span class="s">"Adobe PDF Services"</span><span class="p">,</span>
+  <span class="s">"Signaturely"</span><span class="p">,</span>
+  <span class="s">"RingCentral"</span><span class="p">,</span>
+  <span class="s">"Twilio"</span><span class="p">,</span>
+  <span class="s">"SendGrid"</span><span class="p">,</span>
+  <span class="s">"Checkr"</span><span class="p">,</span>
+  <span class="s">"Shopify"</span><span class="p">,</span>
+  <span class="s">"Klaviyo"</span><span class="p">,</span>
+  <span class="s">"Meta Ads"</span>
+<span class="p">];</span>
 
-<span class="c">// Compliance &amp; Systems Design</span>
-const systemsDesign = [<span class="s">"HIPAA-Compliant Architecture"</span>, <span class="s">"S3 Encryption &amp; Lifecycle Rules"</span>, <span class="s">"Governance &amp; Orchestration Layers"</span>];
+<span class="c">// Compliance &amp; systems design</span>
+<span class="k">const</span> systemsDesign <span class="p">=</span> <span class="p">[</span>
+  <span class="s">"HIPAA-compliant architecture"</span><span class="p">,</span>
+  <span class="s">"S3 encryption &amp; lifecycle rules"</span><span class="p">,</span>
+  <span class="s">"Governance &amp; orchestration layers"</span>
+<span class="p">];</span>
 
-<span class="c">// Virtual Assistant &amp; IT</span>
-const support = [<span class="s">"Calendar &amp; Inbox Management"</span>, <span class="s">"SOPs &amp; Documentation"</span>, <span class="s">"Helpdesk &amp; Network Support"</span>, <span class="s">"Microsoft 365"</span>];
+<span class="c">// Virtual assistant &amp; IT</span>
+<span class="k">const</span> support <span class="p">=</span> <span class="p">[</span>
+  <span class="s">"Calendar &amp; inbox management"</span><span class="p">,</span>
+  <span class="s">"SOPs &amp; documentation"</span><span class="p">,</span>
+  <span class="s">"Helpdesk &amp; network support"</span><span class="p">,</span>
+  <span class="s">"Microsoft 365"</span>
+<span class="p">];</span>
 
-<span class="k">export default</span> { automation, ai, integrations, systemsDesign, support };</div>
+<span class="k">export default</span> <span class="p">{</span> automation, ai, integrations, systemsDesign, support <span class="p">};</span></pre>
     <p>A remote-ready specialist who builds the automation <i>and</i> supports the ops behind it.</p>
   </div>
   <div class="resize" data-win="skills"></div>
