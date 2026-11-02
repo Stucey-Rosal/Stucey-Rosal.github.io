@@ -476,6 +476,16 @@
     aspect-ratio:16/10; width:100%; max-width:520px; margin:0 0 16px;
   }
   .pd-shot svg, .pd-shot img{width:100%; height:100%; display:block; object-fit:cover;}
+  /* Demo video. Only a project with a `video` field renders this block, and
+     the detail view is user-triggered, so preload="metadata" keeps the file
+     off the wire until a visitor opens that project. */
+  .pd-video{
+    border-radius:12px; overflow:hidden; border:1px solid var(--line); background:#000;
+    width:100%; max-width:288px; margin:0 0 16px;
+  }
+  .pd-video[hidden]{display:none;}
+  .pd-video video{width:100%; height:auto; display:block; background:#000;}
+  .pd-video-note{display:block; padding:6px 10px; font-size:10.5px; color:var(--text-3); background:var(--fill-2);}
   .pd-title{font-size:18px; font-weight:700; letter-spacing:-.02em; margin:0 0 4px;}
   .pd-sub{font-size:11.5px; color:var(--text-3); margin:0 0 12px; font-variant-numeric:tabular-nums;}
   .cs-block{margin:0 0 14px;}
@@ -1157,6 +1167,7 @@
     <div id="proj-detail" hidden>
       <button class="pd-back" id="pd-back" type="button">‹ All Projects</button>
       <div class="pd-shot" id="pd-shot"></div>
+      <div class="pd-video" id="pd-video" hidden></div>
       <h4 class="pd-title" id="pd-title"></h4>
       <p class="pd-sub" id="pd-sub"></p>
       <span class="pd-draft" id="pd-draft" hidden>Draft entry — the description below is placeholder text, not a record of the real work. Replace it before publishing.</span>
@@ -2141,6 +2152,8 @@
       id:'ersy', group:'flagship', shot:'shelf',
       img:'assets/projects/ersy.jpg',
       badge:'web',
+      video:'assets/videos/ersy-promo-30s.mp4',
+      videoNote:'30s promo &middot; 1080&times;1920',
       title:'ersy.com',
       short:'Artist platform &mdash; &ldquo;Every artist&rsquo;s full world. One shelf.&rdquo;',
       meta:'ersy.com',
@@ -2303,6 +2316,17 @@
     if(i < 0) return;
     const p = ORDERED[i];
     mountShot($('#pd-shot'), p, true);
+    /* Demo video: present only when the project declares one, cleared on every
+       open so navigating between projects cannot leave a stale clip behind. */
+    const pv = $('#pd-video');
+    pv.hidden = !p.video;
+    pv.innerHTML = p.video
+      ? `<video controls playsinline preload="metadata" aria-label="${plain(p.title)} — demo video">`
+        + `<source src="${p.video}" type="video/mp4">`
+        + `Your browser cannot play this video. <a href="${p.video}">Download it</a> instead.`
+        + `</video>`
+        + (p.videoNote ? `<span class="pd-video-note">${p.videoNote}</span>` : '')
+      : '';
     $('#pd-title').innerHTML = p.title;
     $('#pd-sub').innerHTML = p.meta;
     $('#pd-draft').hidden = !p.draft;
