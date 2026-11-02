@@ -2004,6 +2004,73 @@
         <text x="210" y="152">tokens   1,840</text>
         <text x="210" y="164">guardrails ON</text>
       </g>
+    </svg>`,
+    /* Clip editor — hook-first vertical cut */
+    video: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>${dotDef(u)}</defs>
+      ${chrome(u, 'clip.mjs · source.mp4 · 9:16')}
+      <rect x="14" y="30" width="80" height="154" rx="6" fill="rgba(0,0,0,.4)" stroke="rgba(255,255,255,.14)"/>
+      <rect x="20" y="36" width="68" height="142" rx="4" fill="rgba(255,255,255,.05)"/>
+      <g fill="rgba(255,255,255,.22)">
+        <circle cx="54" cy="96" r="14"/>
+      </g>
+      <path d="M50 89 L63 96 L50 103 Z" fill="rgba(255,255,255,.85)"/>
+      ${pill(22, 158, 64, '9:16 · HOOK 5S', '#ff9f0a')}
+      <g font-size="5.6" fill="rgba(255,255,255,.45)">
+        <text x="22" y="46">frame 0001</text>
+      </g>
+      <text x="106" y="41" font-size="5.4" font-weight="700" fill="rgba(255,255,255,.5)" letter-spacing=".4">TIMELINE</text>
+      <rect x="106" y="48" width="198" height="20" rx="3" fill="rgba(10,132,255,.22)" stroke="#0a84ff" stroke-width=".8"/>
+      <rect x="106" y="48" width="46" height="20" rx="3" fill="rgba(255,159,10,.35)" stroke="#ff9f0a" stroke-width=".8"/>
+      <g stroke="rgba(255,255,255,.35)" stroke-width=".7">
+        <path d="M152 48 V68"/><path d="M196 48 V68"/><path d="M248 48 V68"/>
+      </g>
+      <rect x="106" y="74" width="198" height="16" rx="3" fill="rgba(191,90,242,.2)" stroke="#bf5af2" stroke-width=".8"/>
+      <rect x="150" y="74" width="58" height="16" rx="3" fill="rgba(191,90,242,.4)"/>
+      <rect x="106" y="96" width="198" height="16" rx="3" fill="rgba(48,209,88,.18)" stroke="#30d158" stroke-width=".8"/>
+      <g font-size="5" fill="rgba(255,255,255,.6)" text-anchor="end">
+        <text x="298" y="61">video</text>
+        <text x="298" y="85">b-roll</text>
+        <text x="298" y="107">audio</text>
+      </g>
+      <g stroke="#ff9f0a" stroke-width="1"><path d="M152 44 V120"/></g>
+      <circle cx="152" cy="44" r="2.4" fill="#ff9f0a"/>
+      <text x="156" y="42" font-size="4.8" fill="#ff9f0a" font-weight="700">hook cut</text>
+      ${pill(106, 126, 44, 'FLASH', '#ffd60a')}
+      ${pill(154, 126, 44, 'SHAKE', '#ff9f0a')}
+      ${pill(202, 126, 58, 'PUNCH-IN', '#0a84ff')}
+      <g font-family="monospace" font-size="4.6" fill="rgba(255,255,255,.5)">
+        <text x="106" y="154">clip.mjs source.mp4</text>
+        <text x="106" y="165">  --hook 5 --effects hard</text>
+        <text x="106" y="176">  --ratio 9:16</text>
+      </g>
+      <g font-size="4.6" fill="#30d158"><text x="256" y="176">4 cuts</text></g>
+    </svg>`,
+    /* Agent harness — plugins around one kernel */
+    harness: (u) => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>${dotDef(u)}</defs>
+      ${chrome(u, 'hammy devy · profile: developer')}
+      <g fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1">
+        <path d="M116 100 C104 100 104 48 92 48"/>
+        <path d="M116 110 C104 110 104 154 92 154"/>
+        <path d="M204 100 C216 100 216 48 228 48"/>
+        <path d="M204 110 C216 110 216 154 228 154"/>
+      </g>
+      ${node(18, 36, 74, 24, 'plugins', '#bf5af2', 'mounted')}
+      ${node(18, 142, 74, 24, 'sessions', '#30d158', 'leases')}
+      ${node(228, 36, 74, 24, 'mcp', '#ffd60a', 'servers')}
+      ${node(228, 142, 74, 24, 'ui', '#ff9f0a', 'panels')}
+      ${node(116, 84, 88, 40, 'hammy devy', '#0a84ff', 'all-plugin kernel')}
+      <g font-family="monospace" font-size="4.8" fill="rgba(255,255,255,.55)">
+        <text x="20" y="76">tools · providers</text>
+        <text x="20" y="182">write lease</text>
+        <text x="228" y="76">gmail &middot; mcp</text>
+        <text x="228" y="182">clip panel</text>
+      </g>
+      <g font-size="5" fill="rgba(255,255,255,.38)" text-anchor="middle">
+        <text x="160" y="72">profile config</text>
+        <text x="160" y="140">cordis kernel</text>
+      </g>
     </svg>`
   };
 
@@ -2119,6 +2186,30 @@
       meta:'2025 · Capstone project',
       body:'AI-powered IoT camera integrating computer vision for real-time monitoring and detection — the capstone engineering project for my BS Industrial Technology degree. Runs inference on-device, draws live detections, and fires an alert when a required condition is missing from the frame.',
       tags:['IoT','Computer Vision','Edge Inference','Capstone']
+    },
+    {
+      id:'clip', group:'self', shot:'video',
+      badge:'ffmpeg',
+      title:'Clipping Tool &mdash; Hook-First Short-Form Editor',
+      short:'Turns long footage into 9:16 clips that open on a five-second hook.',
+      meta:'Personal build &middot; macOS &middot; local-first',
+      body:'A local editing pipeline that cuts long video into vertical clips built around a five-second hook. FFmpeg does the work and a Node CLI drives it, so the same commands produce the same treatment every time instead of each clip being trimmed by hand.',
+      problem:'The first five seconds decide whether a clip gets watched at all, and hand-trimming footage in a GUI makes that decision slowly and inconsistently &mdash; one clip at a time, with the effects re-invented for each one.',
+      approach:'A Node CLI over FFmpeg: choose the hook window, reframe to 9:16, then apply hard-edit treatments by content type &mdash; flash, shake and punch-in on the cut, generated b-roll inserts through the Higgsfield CLI, and a local web UI for previewing the result before export.',
+      outcome:'One command turns a source file into a finished vertical clip, and a batch lands with the same treatment throughout rather than drifting clip to clip.',
+      tags:['FFmpeg','Node.js','Video','Automation','9:16']
+    },
+    {
+      id:'hammy', group:'self', shot:'harness',
+      badge:'agent runtime',
+      title:'Hammy Devy &mdash; Plugin-Based Agent Harness',
+      short:'A plugin runtime for AI agents: connectors, UI panels and sessions as plugins.',
+      meta:'Personal build &middot; daily driver',
+      body:'My customised build of an all-plugin agent harness. A kernel loads a profile of plugins, and every capability &mdash; tools, model providers, MCP servers, UI panels, session storage &mdash; is one of those plugins rather than something built into the loop.',
+      problem:'A fixed agent loop cannot take on a new tool, provider or panel without a code change, and each integration ends up with its own bespoke wiring and its own way of being configured.',
+      approach:'A Cordis kernel with plugin composition from a profile config, MCP clients for Supabase, OpenShorts and a Gmail server written from scratch (OAuth PKCE over stdio JSON-RPC, no dependencies), and UI plugins that render inside the app &mdash; including a clipping panel that drives the tool above.',
+      outcome:'New capability arrives as configuration plus one plugin, and the session layer can close a mounted session on request instead of holding its write lease until the app quits.',
+      tags:['Cordis','MCP','Agent Runtime','Node.js','Plugin Architecture']
     }
   ];
   /* Display order = flagship group, then earlier group. Numbering and the
